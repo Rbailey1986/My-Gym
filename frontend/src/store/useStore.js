@@ -7,6 +7,7 @@ import { DEMO, DEMO_SEEDED } from '../lib/demo.js'
 import { rememberDefaultLang } from '../lib/default-lang.js'
 import { guestAllowed } from '../lib/guest.js'
 import { DESKTOP } from '../lib/desktop.js'
+import { needsHomeSwap, swapToHomeExercises } from '../lib/home-migrate.js'
 import { MOBILE, initReminderSync, nativeLoad, nativeSave, onAppActive, readJsonFile, syncReminder, writeAutoBackup, writeJsonFile } from '../lib/mobile.js'
 import { initHealthSync, syncHealth } from '../lib/health-sync.js'
 import { refillIfComplete } from '../lib/rotation.js'
@@ -1904,6 +1905,8 @@ export const useStore = create((set, get) => {
           markOwed(true)
           failed({ status: 0, code: 'not-paired' }, { pending: true })
         } else get().setGuest(true)
+        // Desktop: routines from before the catalogue was cut to home exercises (lib/home-migrate.js).
+        if (DESKTOP && needsHomeSwap(get().S)) get().update(s => { swapToHomeExercises(s) })
         syncReminder(get().S)
         // Only a genuinely first launch — nothing chosen yet and nothing to lose either — offers
         // the choice. Picking local (even with no data yet) persists that choice below and this

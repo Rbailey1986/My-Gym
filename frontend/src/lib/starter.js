@@ -8,6 +8,7 @@
 import { uid } from './format.js'
 import { EXIDX } from './exercises.js'
 import { eqAvailable, ALL_EQUIPMENT } from './equipment.js'
+import { HOME_SUBS } from './home-subs.js'
 
 const PPL = [
   ['push', 'Push Day', 'barbell', [['0025', 4, 8], ['0047', 3, 10], ['0426', 3, 10], ['0334', 3, 12], ['0241', 3, 12], ['0251', 3, 10]]],
@@ -43,8 +44,14 @@ const PLANS = {
   '5x5': { routines: FIVE_BY_FIVE, schedule: [[1, '5x5-a'], [3, '5x5-b'], [5, '5x5-c']] }
 }
 
+// A build with a trimmed catalogue (the desktop one) swaps each missing exercise for its stand-in
+// from lib/home-subs.js, and drops it when there is none. A no-op everywhere else.
+const withSubs = list => list
+  .map(([id, sets, reps]) => [id in HOME_SUBS ? HOME_SUBS[id] : id, sets, reps])
+  .filter(([id]) => id)
+
 const build = routines =>
-  routines.map(([, name, emoji, list]) => ({ id: uid(), name, emoji, ex: list.map(([id, sets, reps]) => ({ id, sets, reps, weight: 0 })) }))
+  routines.map(([, name, emoji, list]) => ({ id: uid(), name, emoji, ex: withSubs(list).map(([id, sets, reps]) => ({ id, sets, reps, weight: 0 })) }))
 
 // Fresh routine objects (new ids) — [push, pull, legs]. The demo build seeds a history on
 // top of exactly these three, so this entry point keeps its shape.
@@ -101,7 +108,8 @@ export const substituteFor = (ex, equipment, taken) => {
 // that leaves it empty). Sets and reps carry over unchanged.
 const fitRoutines = (routines, equipment) => {
   let swapped = 0, dropped = 0
-  const fitted = routines.map(([key, name, emoji, list]) => {
+  const fitted = routines.map(([key, name, emoji, raw]) => {
+    const list = withSubs(raw)
     const taken = new Set(list.map(([id]) => id))
     const out = []
     for (const [id, sets, reps] of list) {

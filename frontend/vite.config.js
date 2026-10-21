@@ -111,6 +111,11 @@ const desktopAlias = process.env.VITE_DESKTOP === '1' ? [
   { find: /^@capacitor\/local-notifications$/, replacement: desktopShim('local-notifications.js') },
   { find: /^@aparajita\/capacitor-secure-storage$/, replacement: desktopShim('unavailable.js') },
   { find: /^@capacitor-mlkit\/barcode-scanning$/, replacement: desktopShim('unavailable.js') },
+  // The home-only exercise catalogue (desktop/build-catalogue.mjs): the app's, the Coach's, and
+  // the starter plans' stand-ins for what it leaves out.
+  { find: /^\.\/exercises-data\.js$/, replacement: desktopShim('generated/exercises-data.js') },
+  { find: /^\.\/library-data\.js$/, replacement: desktopShim('generated/library-data.js') },
+  { find: /^\.\/home-subs\.js$/, replacement: desktopShim('generated/home-subs.js') },
 ] : []
 
 export default defineConfig({
