@@ -100,9 +100,23 @@ const flavor = {
 const pkgVersion = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')).version
 const appVersion = process.env.APP_BUILD ? `${pkgVersion}+${process.env.APP_BUILD}` : pkgVersion
 
+// The Windows desktop build (VITE_DESKTOP=1, with VITE_MOBILE=1): the Capacitor packages are
+// swapped for src/desktop/ shims backed by the Tauri shell in desktop/src-tauri.
+const desktopShim = file => fileURLToPath(new URL('./src/desktop/' + file, import.meta.url))
+const desktopAlias = process.env.VITE_DESKTOP === '1' ? [
+  { find: /^@capacitor\/core$/, replacement: desktopShim('capacitor-core.js') },
+  { find: /^@capacitor\/filesystem$/, replacement: desktopShim('capacitor-filesystem.js') },
+  { find: /^@capacitor\/share$/, replacement: desktopShim('capacitor-share.js') },
+  { find: /^@capacitor\/app$/, replacement: desktopShim('capacitor-app.js') },
+  { find: /^@capacitor\/local-notifications$/, replacement: desktopShim('local-notifications.js') },
+  { find: /^@aparajita\/capacitor-secure-storage$/, replacement: desktopShim('unavailable.js') },
+  { find: /^@capacitor-mlkit\/barcode-scanning$/, replacement: desktopShim('unavailable.js') },
+] : []
+
 export default defineConfig({
   define: { __APP_VERSION__: JSON.stringify(appVersion) },
   plugins: [react(), umami, flavor, swStamp, catalogueMedia],
+  resolve: { alias: desktopAlias },
   base: './',
   server: {
     // The Coach's core (payload, validator, prompts, HTTP adapters) lives in ../api/coach/core

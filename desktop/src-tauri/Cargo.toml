@@ -1,0 +1,26 @@
+[package]
+name = "opengym-desktop"
+version = "1.4.1"
+description = "openGym for Windows: offline gym and body-weight tracker"
+license = "AGPL-3.0-or-later"
+edition = "2021"
+
+[lib]
+name = "opengym_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+base64 = "0.22"
+# Plain HTTP to a model on this computer only, so no TLS stack is compiled in.
+reqwest = { version = "0.12", default-features = false }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true

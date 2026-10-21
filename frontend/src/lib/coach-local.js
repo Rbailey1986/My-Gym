@@ -23,6 +23,7 @@ import openai from '../../../api/coach/core/adapters/openai.js'
 import gemini from '../../../api/coach/core/adapters/gemini.js'
 import compatible from '../../../api/coach/core/adapters/compatible.js'
 import { nativeFetch } from './capacitor-fetch.js'
+import { DESKTOP } from './desktop.js'
 import { getApiKey } from './coach-secrets.js'
 import { loadCoachDevice, saveCoachDevice } from './coach-device.js'
 import { planHash } from './coach.js'
@@ -30,7 +31,9 @@ import { todayISO } from './format.js'
 import { t, getLang } from './i18n.js'
 
 export const ADAPTERS = { anthropic, openai, gemini, compatible }
-export const LOCAL_DAILY_CAP = 10
+// The cap protects a paid account. The desktop build only talks to a model on the same
+// computer, which costs nothing per request, so it gets a ceiling nobody reaches in a day.
+export const LOCAL_DAILY_CAP = DESKTOP ? 1000 : 10
 // Five minutes is right for a cloud API and wrong for a model on somebody's laptop; the
 // OpenAI-compatible endpoint is the one that may be local, so it gets the long budget.
 export const TIMEOUT_MS = 5 * 60000

@@ -41,6 +41,7 @@ import { normalizeRepRange } from './lib/rep-range.js'
 import { isBackoff, backoffWeights } from './lib/backoff.js'
 import { isPyramid, normalizePyramid, normalizePyramidRest, normalizePyramidWeight, pyramidFromFlat, flatFromPyramid, pyramidLabel, PYRAMID_MAX, MAX_PYRAMID_SETS, PYRAMID_PRESETS } from './lib/pyramid.js'
 import { MOBILE, shareExport, shareExportBlob, printHtml } from './lib/mobile.js'
+import { DESKTOP } from './lib/desktop.js'
 import { speedUnitOf, toSpeed, fromSpeed } from './lib/speed.js'
 import { buildCompletedWorkout, sessionEnd } from './lib/finish-workout.js'
 import { refillAfter } from './lib/rotation.js'
@@ -1019,7 +1020,7 @@ function ExerciseDetail({ ex, close }) {
     {instrFor(ex).length > 0 &&<><h4 className="sec">{t('How to')}{getLang() !== 'en' && !instrTranslated(ex) && <span className="dim" style={{ textTransform: 'none', letterSpacing: 0 }}> · {t('instructions in English')}</span>}</h4><ol className="steps-list">{instrFor(ex).map((s, i) => <li key={i}>{s}</li>)}</ol></>}
     {/* The catalogue is community-edited (catalogue/README.md): a wrong muscle, a clumsy step or a
         missing translation is one tap from an issue that already names the exercise. */}
-    {!isCustomEx(ex) && !ex.missing && <a className="small dim exfix-link" target="_blank" rel="noopener"
+    {!DESKTOP && !isCustomEx(ex) && !ex.missing && <a className="small dim exfix-link" target="_blank" rel="noopener"
       href={'https://github.com/DuarteSantos8/openGym/issues/new?template=exercise.yml&exercise=' + encodeURIComponent(ex.id + ', ' + ex.n)}>
       <Icon name="pencil" /> {t('Suggest a fix for this exercise')}</a>}
   </>

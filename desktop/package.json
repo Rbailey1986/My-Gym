@@ -1,0 +1,14 @@
+{
+  "name": "opengym-desktop",
+  "private": true,
+  "version": "1.4.1",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "build:frontend": "node build-frontend.mjs",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.3"
+  }
+}

@@ -25,6 +25,7 @@
  */
 import { MEDIA_MIMES } from './media-refs.js'
 import { MOBILE } from './mobile.js'
+import { DESKTOP } from './desktop.js'
 import { idbBackend } from './media-store-idb.js'
 import { fsBackend } from './media-store-fs.js'
 
@@ -260,7 +261,7 @@ let shared = null
 /** The app's store: the phone's folder in the mobile build, IndexedDB everywhere else. Made on
  *  first use, so importing this module opens nothing. */
 export function getMediaStore() {
-  if (!shared) shared = createMediaStore(MOBILE ? fsBackend() : idbBackend())
+  if (!shared) shared = createMediaStore(MOBILE && !DESKTOP ? fsBackend() : idbBackend())
   return shared
 }
 /** Whether anything in this session has used the store (the sync at start, the editor, a

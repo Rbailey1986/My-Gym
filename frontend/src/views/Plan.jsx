@@ -18,6 +18,7 @@ import { useListReorder, moved } from '../lib/use-list-reorder.js'
 import { glyphOf, DEFAULT_GLYPH } from '../lib/glyphs.js'
 import { DEMO } from '../lib/demo.js'
 import { MOBILE } from '../lib/mobile.js'
+import { DESKTOP } from '../lib/desktop.js'
 import { coachAvailable } from '../lib/coach.js'
 import { queueOf, queueView } from '../lib/queue.js'
 import { deriveSessionName } from '../lib/session-merge.js'
@@ -148,12 +149,13 @@ export default function Plan() {
     menuSheet({
       title: t('Plan'),
       subtitle: has ? null : t('Add an exercise to a routine first. An empty plan has nothing to share.'),
+      // The desktop build leaves out sharing plans with other people: print and starter plans only.
       items: [
-        { icon: 'share', label: t('Export plan file'), sub: t('A small file a friend can import into their own openGym. Routines only, none of your workouts or weigh-ins.'), disabled: !has, onClick: exportPlanFile },
+        !DESKTOP && { icon: 'share', label: t('Export plan file'), sub: t('A small file a friend can import into their own openGym. Routines only, none of your workouts or weigh-ins.'), disabled: !has, onClick: exportPlanFile },
         { icon: 'note', label: t('Print / Save as PDF'), disabled: !has, onClick: printWholePlan },
-        { icon: 'download', label: t('Import a plan file'), onClick: () => fileRef.current?.click() },
+        !DESKTOP && { icon: 'download', label: t('Import a plan file'), onClick: () => fileRef.current?.click() },
         { icon: 'clipboard', label: t('Load starter plan'), onClick: starterPlanSheet },
-      ],
+      ].filter(Boolean),
     })
   }
   const pickFile = ev => { const f = ev.target.files[0]; ev.target.value = ''; importPlanFile(f) }

@@ -16,6 +16,7 @@
 // read many barcode kinds but only redraw QR, so a non-QR code is reported and refused there, not
 // silently stored.
 import { MOBILE } from './mobile.js'
+import { DESKTOP } from './desktop.js'
 import { normalizeFmt } from './qr.js'
 
 // A found barcode from either path → our stored shape. mlkit gives rawValue (machine-readable,
@@ -51,7 +52,7 @@ export async function scanCode() {
 // path, decode, then delete the temp file. Returns the first barcode, or null if none was found.
 export async function importCodeFromImage(file) {
   if (!file) return null
-  if (!MOBILE) return (await import('./scan-web.js')).importCodeFromImageWeb(file)
+  if (!MOBILE || DESKTOP) return (await import('./scan-web.js')).importCodeFromImageWeb(file)
   const { BarcodeScanner } = await import('@capacitor-mlkit/barcode-scanning')
   const { Filesystem, Directory } = await import('@capacitor/filesystem')
 

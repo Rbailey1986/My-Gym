@@ -22,6 +22,7 @@ import { wakeLockSupported } from '../lib/wakelock.js'
 import { t, tn, LANGS, INSTR_LANGS, EXERCISE_NAME_LANGS, baseLang, dateLocale } from '../lib/i18n.js'
 import { effectiveLang } from '../lib/default-lang.js'
 import { DEMO, REPO } from '../lib/demo.js'
+import { DESKTOP } from '../lib/desktop.js'
 import { MOBILE, isAndroid, shareExport, shareExportBlob, syncReminder } from '../lib/mobile.js'
 import { NUDGE_COPY, NUDGE_TONES, toneOf } from '../lib/nudge.js'
 import { referencedFiles } from '../lib/media-refs.js'
@@ -62,7 +63,7 @@ let lastQuery = { q: '', key: null }
 export function SettingsRoute() {
   const { page } = useParams()
   const loc = useLocation()
-  const ctx = { user: useStore(s => s.user), mobile: MOBILE }
+  const ctx = { user: useStore(s => s.user), mobile: MOBILE, desktop: DESKTOP }
   if (page && (!PAGES[page] || !pageVisible(PAGES[page].parent || page, ctx))) return <Navigate to="/settings" replace />
   if (page === 'coach') return <Navigate to="/coach/setup" replace />
   return <Settings key={page || 'root'} page={page || null} find={loc.state?.find || null} via={loc.state?.via || null} />
@@ -764,7 +765,7 @@ export default function Settings({ page = null, find = null, via = null }) {
         {/* The bar at the top that says the app is offline, kept local, or not synced (#369, #330).
             Here and not under Server & sync, which a phone kept local never shows. Switching it on
             also brings back the no-server line its × hid (#454). */}
-        {!DEMO && <Row icon="cloud" iconTint="var(--blue)" title={t('Show connection status')}
+        {!DEMO && !DESKTOP && <Row icon="cloud" iconTint="var(--blue)" title={t('Show connection status')}
           subtitle={t('Off: the bar at the top is hidden. A dot on Home still warns when syncing is stuck.')}>
           <Switch checked={S.connStatus !== false} onChange={v => update(s => { s.connStatus = v; if (v) s.connLocal = true })} />
         </Row>}
@@ -790,9 +791,10 @@ export default function Settings({ page = null, find = null, via = null }) {
         <Row icon="download" iconTint="var(--teal)" title={t('Import from another app')}
           subtitle={t('FitNotes, Strong, Hevy, or body weight from Apple Health')}
           accessory="chevron" onClick={() => importRef.current.click()} />
-        <Row icon="key" iconTint="var(--teal)" title={t('Import from Hevy')}
+        {/* Online: calls Hevy's servers with an API key. Not in the offline desktop build. */}
+        {!DESKTOP && <Row icon="key" iconTint="var(--teal)" title={t('Import from Hevy')}
           subtitle={t('Pull your history with a Hevy Pro API key')}
-          accessory="chevron" onClick={importFromHevy} />
+          accessory="chevron" onClick={importFromHevy} />}
       </Section>
       {hasMedia && <Section><MediaRow /></Section>}
       <Section>
@@ -808,7 +810,10 @@ export default function Settings({ page = null, find = null, via = null }) {
       {/* Updates. On Android the row is always there: it checks on demand and installs when a
           release is newer (checksum verified, see onUpdateRowClick). On the web the app updates
           with its server, so the row points at the APK for the phone instead. iOS has no APK. */}
-      <Section footer={MOBILE ? (android ? t('Releases are checked on GitHub. The download is verified against its checksum before the installer opens.') : null) : t('The web app updates together with your server. The Android app installs its own updates from here.')}>
+      {/* The desktop build checks nothing online: it shows the version and nothing else. */}
+      {DESKTOP ? <Section>
+        <Row icon="info" iconTint="var(--grey)" title={t('Version')} value={'v' + __APP_VERSION__} />
+      </Section> : <Section footer={MOBILE ? (android ? t('Releases are checked on GitHub. The download is verified against its checksum before the installer opens.') : null) : t('The web app updates together with your server. The Android app installs its own updates from here.')}>
         <Row icon="info" iconTint="var(--grey)" title={t('Version')} value={'v' + __APP_VERSION__} />
         {MOBILE
           ? android && <Row icon="download" iconTint="var(--green)"
@@ -819,7 +824,7 @@ export default function Settings({ page = null, find = null, via = null }) {
           : <Row icon="download" iconTint="var(--green)" title={t('Get the Android app')}
               subtitle={t('Download the APK from opengym.ch')} accessory="chevron"
               onClick={() => window.open('https://opengym.ch/#download', '_blank', 'noopener')} />}
-      </Section>
+      </Section>}
       {/* "Add to Home screen": not inside the phone app, and not once it is installed. */}
       {!MOBILE && !standalone() && <Section title={t('Tip')}>
         <Row icon="share" iconTint="var(--blue)"
@@ -829,13 +834,20 @@ export default function Settings({ page = null, find = null, via = null }) {
       {/* The version, where the support template tells people to look for it. On the phone
           build there is no address bar and no about box, so without this there is no way to tell
           which build you are running, or whether an update actually installed. */}
-      <div className="dim small sp-version">
+      {/* The desktop build keeps the licence and attribution text but links to nothing online. */}
+      {DESKTOP ? <div className="dim small sp-version">
+        openGym v{__APP_VERSION__} · {t('free & open source (AGPL v3)')}<br />
+        Desktop build of github.com/DuarteSantos8/openGym<br />
+        {/* Attribution the media licence asks for word for word (agreement §8c), so it is not translated */}
+        Exercise media © Aliaksandr Makatserchyk, Gym visual, gymvisual.com.
+        Media licensed for use in openGym only; see NOTICE.md
+      </div> : <div className="dim small sp-version">
         openGym v{__APP_VERSION__} · {t('free & open source (AGPL v3)')}<br />
         <a href="https://github.com/DuarteSantos8/openGym" target="_blank" rel="noopener">{t('Source code')}</a><br />
         {/* Attribution the media licence asks for word for word (agreement §8c), so it is not translated */}
         Exercise media © Aliaksandr Makatserchyk, <a href="https://gymvisual.com/" target="_blank" rel="noopener">Gym visual</a>, gymvisual.com.
         Media licensed for use in openGym only; see <a href="https://github.com/DuarteSantos8/openGym/blob/main/NOTICE.md" target="_blank" rel="noopener">NOTICE.md</a>
-      </div>
+      </div>}
     </>,
 
     account: () => <>
@@ -852,9 +864,9 @@ export default function Settings({ page = null, find = null, via = null }) {
       {/* account (demo and mobile builds have nothing to sign in to) */}
       {!(MOBILE && user) && <Section title={MOBILE ? t('Your data') : DEMO ? t('Demo') : t('Account')}>
         {MOBILE ? <>
-          <Row icon="lock" iconTint="var(--acc)" title={t('All data stays on this phone')} subtitle={t('No account, no cloud. Back it up anytime in Data & backup.')} />
-          <Row icon="cloud" iconTint="var(--indigo)" title={t('Connect to my server')} subtitle={t('Sync this device to your own self-hosted openGym instead.')} accessory="chevron"
-            onClick={connectServer} />
+          <Row icon="lock" iconTint="var(--acc)" title={DESKTOP ? 'All data stays on this computer' : t('All data stays on this phone')} subtitle={t('No account, no cloud. Back it up anytime in Data & backup.')} />
+          {!DESKTOP && <Row icon="cloud" iconTint="var(--indigo)" title={t('Connect to my server')} subtitle={t('Sync this device to your own self-hosted openGym instead.')} accessory="chevron"
+            onClick={connectServer} />}
           <KeptChangesRows />
         </> : DEMO ? <>
           <Row icon="info" iconTint="var(--acc)" title={t('You’re in the demo')} subtitle={t('Example data, stored only in this browser. Go wild and change anything you like.')} />
@@ -932,6 +944,7 @@ function SettingsRoot({ ctx, preview, open, user, sync, home, go }) {
       title: user.name || t('Account'),
       sub: sync && sync.status && sync.status !== 'ok' ? t('Sync needs a look') : MOBILE ? t('Synced with your server') : t('Account, devices and sync'),
     }
+    : DESKTOP ? { title: 'This computer', sub: 'All data stays on this computer' }
     : MOBILE ? { title: t('This phone'), sub: t('All data stays on this phone') }
     : { title: t('Guest'), sub: t('Your data lives on this device. Sign in to sync.') }
   const initial = user && !DEMO ? String(user.name || '?').trim().charAt(0).toUpperCase() : null

@@ -7,6 +7,7 @@ import { t } from '../lib/i18n.js'
 import { canRenderFmt } from '../lib/qr.js'
 import { scanCode, importCodeFromImage } from '../lib/scan.js'
 import { MOBILE } from '../lib/mobile.js'
+import { DESKTOP } from '../lib/desktop.js'
 import Icon from '../components/Icon.jsx'
 import QrCanvas from '../components/QrCanvas.jsx'
 import CameraScan from '../components/CameraScan.jsx'
@@ -196,7 +197,7 @@ function CardSheet({ close, card }) {
   // sheet on top of this one. Either way the value drops straight into the form so the user can
   // still name it before saving.
   const doScan = async () => {
-    if (!MOBILE) {
+    if (!MOBILE || DESKTOP) {
       useUI.getState().openSheet(closeCam => <CameraScan
         onCancel={closeCam}
         onFound={code => {

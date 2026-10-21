@@ -6,6 +6,7 @@ import { registerCustom, healCustomEx } from '../lib/exercises.js'
 import { DEMO, DEMO_SEEDED } from '../lib/demo.js'
 import { rememberDefaultLang } from '../lib/default-lang.js'
 import { guestAllowed } from '../lib/guest.js'
+import { DESKTOP } from '../lib/desktop.js'
 import { MOBILE, initReminderSync, nativeLoad, nativeSave, onAppActive, readJsonFile, syncReminder, writeAutoBackup, writeJsonFile } from '../lib/mobile.js'
 import { initHealthSync, syncHealth } from '../lib/health-sync.js'
 import { refillIfComplete } from '../lib/rotation.js'
@@ -1907,7 +1908,8 @@ export const useStore = create((set, get) => {
         // Only a genuinely first launch — nothing chosen yet and nothing to lose either — offers
         // the choice. Picking local (even with no data yet) persists that choice below and this
         // never asks again.
-        finishBoot({ needsMobileOnboarding: !remote && !hasData(get().S) })
+        // The desktop build has no server to connect to, so there is no choice to offer.
+        finishBoot({ needsMobileOnboarding: !DESKTOP && !remote && !hasData(get().S) })
         return
       }
       // Demo build (GitHub Pages): no backend at all — seed once, stay in guest mode.

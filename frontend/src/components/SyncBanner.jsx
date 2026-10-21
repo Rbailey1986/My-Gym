@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore.js'
 import { DEMO } from '../lib/demo.js'
+import { DESKTOP } from '../lib/desktop.js'
 import { t } from '../lib/i18n.js'
 import { connectionView, actionLabel, syncNowWithToast, pairAgain, connectServer, signInAgain, useOnline } from './ServerSync.jsx'
 import Icon from './Icon.jsx'
@@ -44,7 +45,8 @@ function useConnection() {
   const view = connectionView(sync, { online })
   // Signed out on the web, the sign-in screen is the whole app: it hears only that the server
   // ended the session, and that the changes are still here.
-  const show = !DEMO && !onboarding && !!view?.banner && (!!user || guest || status === 'auth') && (status !== 'pending' || waited)
+  // The desktop build has no server, so there is never a connection to report.
+  const show = !DEMO && !DESKTOP && !onboarding && !!view?.banner && (!!user || guest || status === 'auth') && (status !== 'pending' || waited)
   return { view, show, user, status }
 }
 

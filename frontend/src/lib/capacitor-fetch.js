@@ -11,7 +11,11 @@
 //
 // Only the subset the adapters use is implemented: method, headers, a JSON body, an abort
 // signal, and a response with ok/status/text()/json().
+import { DESKTOP } from './desktop.js'
+
 export async function nativeFetch(url, init = {}) {
+  // The Windows desktop build makes the call from its Rust side instead (src/desktop/tauri.js).
+  if (DESKTOP) return (await import('../desktop/tauri.js')).desktopFetch(url, init)
   let cap = null
   try { cap = await import('@capacitor/core') } catch { /* not a Capacitor build */ }
   if (!cap || !cap.Capacitor || !cap.Capacitor.isNativePlatform()) return fetch(url, init)
