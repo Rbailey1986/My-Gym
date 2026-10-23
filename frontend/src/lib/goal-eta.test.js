@@ -74,4 +74,14 @@ describe('goalProgress', () => {
     expect(g.status).toBe('on-track')
     expect(g.eta).toBe(null)
   })
+
+  it('gives the pace a target date needs, and none for a date gone by', () => {
+    const bw = series('2026-10-24', 8, 3, 80, -0.1)
+    const g = goalProgress({ bodyweight: bw, targetW: 75, targetDate: '2026-12-05' }, '2026-10-24')
+    expect(g.by).toBe('2026-12-05')
+    expect(g.neededPerWeek).toBeCloseTo(-2.9 / 6, 5)
+    const past = goalProgress({ bodyweight: bw, targetW: 75, targetDate: '2026-10-01' }, '2026-10-24')
+    expect(past.by).toBe(null)
+    expect(past.neededPerWeek).toBe(null)
+  })
 })

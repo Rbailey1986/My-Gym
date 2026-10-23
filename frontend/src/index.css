@@ -2262,3 +2262,17 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 .pr-banner .small{color:var(--label)}
 .pr-count{margin-inline-start:auto;min-width:22px;height:22px;padding:0 6px;border-radius:11px;display:inline-grid;place-items:center;
   background:var(--yellow);color:#000;font-size:13px;font-weight:700}
+
+/* --- goal sheet: the pace a target date asks for --- */
+.goal-pace{color:var(--label-2)}
+.goal-pace.warn{color:var(--orange)}
+.goal-status.on-pace{color:var(--green)}
+
+/* --- Food: targets, why, and the first setup --- */
+.food-why{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.food-why .warn{color:var(--orange)}
+.chip-day{display:inline-block;margin-inline-end:8px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;
+  background:color-mix(in srgb,var(--orange) 16%,transparent);color:var(--orange)}
+.food-setup{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:12px}
+.linklike{background:none;border:0;padding:0;color:var(--acc);font:inherit;cursor:pointer}
+.ring-num.ring-num-sm{font-size:16px}

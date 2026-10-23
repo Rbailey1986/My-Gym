@@ -428,3 +428,11 @@ test('the app\'s active equipment profile stands in when the Coach was told no e
   S.coach.profile.equipment = ['barbell'];
   assert.deepEqual(payload.build(S, { handle: handleFor('u1'), kind: 'create' }).coachProfile.equipment, ['barbell']);
 });
+
+test('the goal carries its target date when one is set, and nothing new without one', () => {
+  const opts = { handle: handleFor('uid-goal'), kind: 'review' };
+  const base = { ...sampleState(), bodyweight: [{ d: '2026-10-20', w: 80 }], targetW: 76 };
+  assert.equal(payload.build({ ...base, targetDate: '2027-01-02' }, opts).bodyweight.by, '2027-01-02');
+  assert.equal('by' in payload.build(base, opts).bodyweight, false);
+  assert.equal('by' in payload.build({ ...base, targetW: null, targetDate: '2027-01-02' }, opts).bodyweight, false);
+});

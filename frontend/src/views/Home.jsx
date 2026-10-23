@@ -12,6 +12,7 @@ import Ring from '../components/Ring.jsx'
 import { queueOf, queueView, weekTally, pinState } from '../lib/queue.js'
 import { scheduleModeOf } from '../lib/rotation.js'
 import { goalProgress } from '../lib/goal-eta.js'
+import { targetsForDay } from '../lib/nutrition-targets.js'
 import { useConnectionTrouble } from '../components/SyncBanner.jsx'
 import { Button } from '../components/ui.jsx'
 import { tappable } from '../lib/use-sheet-keyboard.js'
@@ -116,6 +117,7 @@ export default function Home() {
     : goal.status === 'flat' ? t('Holding steady')
     : t('A few more weigh-ins and a date appears here')
   const weekShare = plannedPerWeek ? doneThisWeek / plannedPerWeek : null
+  const food = targetsForDay(S, todayISO())
 
   return <div className="narrow home">
     <div className="hdr">
@@ -143,10 +145,12 @@ export default function Home() {
         <span className="dash-ring-l">{goal ? t('To goal') : t('Set a goal')}</span>
       </button>
       <button className="dash-ring" onClick={() => nav('/food')}>
+        {/* Today's target until food logging fills the ring with what was eaten. */}
         <Ring value={null} color="var(--orange)" label={t('Calories')}>
-          <div className="ring-num">–</div>
+          <div className={'ring-num' + (food ? ' ring-num-sm' : '')}>{food ? fmtNum(food.day.kcal) : '–'}</div>
+          {food && <div className="ring-unit">kcal</div>}
         </Ring>
-        <span className="dash-ring-l">{t('Calories')}</span>
+        <span className="dash-ring-l">{food ? t('Calorie target') : t('Calories')}</span>
       </button>
     </div>
 
@@ -179,6 +183,12 @@ export default function Home() {
             {goal.ratePerWeek != null && ' · ' + t('{0} a week', (goal.ratePerWeek > 0 ? '+' : '−') + amount(goal.ratePerWeek))}
           </span>}
         </div> : <div className="dim small">{t('Last weigh-in {0}', fmtDate(bw.d, true))}</div>}
+        {/* A target date: the pace it takes, beside the pace the scale shows. */}
+        {goal?.by && goal.status !== 'reached' && <div className="goal-meta small">
+          <span className={'goal-status' + (goal.ratePerWeek != null && Math.sign(goal.ratePerWeek) === Math.sign(goal.neededPerWeek) && Math.abs(goal.ratePerWeek) >= Math.abs(goal.neededPerWeek) ? ' on-pace' : '')}>
+            {t('Target {0}', fmtDate(goal.by))}</span>
+          <span className="dim">{t('needs {0} a week', (goal.neededPerWeek > 0 ? '+' : '−') + amount(goal.neededPerWeek))}</span>
+        </div>}
         <div className="chart" style={{ marginTop: 8 }}><LineChart points={bwPoints} h={120} unit={unit} goal={S.targetW} /></div>
         {/* every weigh-in, week by week with its average (Discord 'Weight') */}
         <div className="row" style={{ justifyContent: 'flex-end', marginTop: 4 }}>

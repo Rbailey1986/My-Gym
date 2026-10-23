@@ -67,6 +67,7 @@ import { workoutCardModel, layoutWorkoutCard, drawWorkoutCard, viewAspect, CARD_
 import { copyText } from './lib/clipboard.js'
 import { queueRemaining, pinState, weekTally } from './lib/queue.js'
 import { finishRecap } from './lib/finish-recap.js'
+import { weeklyRate, toKg, LB_PER_KG } from './lib/nutrition-targets.js'
 import { DAY_NOTE_TAGS, DAY_NOTE_LABEL, DAY_NOTE_ICON, dayNoteOf, dayNoteLine, canNoteDay, withDayNote } from './lib/day-notes.js'
 
 const S = () => useStore.getState().S
@@ -716,19 +717,36 @@ function GoalSheet({ close }) {
   const st = S()
   const bw = lastBW(st)
   const [v, setV] = useState(st.targetW || (bw ? bw.w : 70))
+  // Optional: the day to reach it by. With a date the Today card and the food targets work out the
+  // pace it takes (lib/nutrition-targets.js weeklyRate), held to a safe 1 % a week down.
+  const [by, setBy] = useState(st.targetDate || '')
+  const today = todayISO()
+  const rate = bw && v > 0 ? weeklyRate({ weightKg: toKg(bw.w, st.unit), targetKg: toKg(v, st.unit), targetDate: by || null, today }) : null
+  const perWeek = r => (r > 0 ? '+' : '−') + fmtNum(Math.abs(Math.round(r * (st.unit === 'lb' ? LB_PER_KG : 1) * 100) / 100)) + ' ' + st.unit
   return <>
     <h3>{t('Target weight')}</h3>
     <div className="muted small">{t('Your goal is drawn as a line through the weight charts, and gains/losses are colored by whether they move toward it.')}</div>
     <WeightInput value={v} setValue={setV} unit={st.unit} />
     <div style={{ height: 14 }} />
+    <div className="sect-t" style={{ padding: '0 2px 6px' }}>{t('Reach it by (optional)')}</div>
+    <div className="row" style={{ gap: 8 }}>
+      <input type="date" className="input grow" value={by} min={today} onChange={e => setBy(e.target.value)} aria-label={t('Reach it by (optional)')} />
+      {by && <Button size="sm" variant="ghost" onClick={() => setBy('')}>{t('Clear')}</Button>}
+    </div>
+    {rate && by && by > today && <div className={'small goal-pace' + (rate.reason === 'capped' ? ' warn' : '')} style={{ marginTop: 8 }}>
+      {rate.reason === 'capped'
+        ? t('That needs {0} a week, faster than is safe. Your food targets will aim for {1} a week, so it will take longer.', perWeek(rate.needed), perWeek(rate.kgPerWeek))
+        : rate.reason === 'date' ? t('That is {0} a week.', perWeek(rate.kgPerWeek)) : null}
+    </div>}
+    <div style={{ height: 14 }} />
     <Button variant="primary" onClick={() => {
       const n = Math.round((v || 0) * 10) / 10
       if (!n || n <= 0) { toast(t('Enter a valid weight')); return }
       if (bwTooHeavy(n, st.unit)) return
-      update(s => { s.targetW = n }); close()
+      update(s => { s.targetW = n; s.targetDate = by && by > today ? by : null }); close()
       const b = lastBW(S()); toast(t('Goal set: {0}', fmtNum(n) + ' ' + st.unit) + (b ? ' (' + t('{0} to go', fmtNum(Math.abs(n - b.w))) + ')' : ''))
     }}>{t('Save goal')}</Button>
-    {st.targetW && <><div style={{ height: 8 }} /><Button variant="danger" onClick={() => { update(s => { s.targetW = null }); close(); toast(t('Goal removed')) }}>{t('Remove goal')}</Button></>}
+    {st.targetW && <><div style={{ height: 8 }} /><Button variant="danger" onClick={() => { update(s => { s.targetW = null; s.targetDate = null }); close(); toast(t('Goal removed')) }}>{t('Remove goal')}</Button></>}
   </>
 }
 export const goalSheet = () => ui().openSheet(close => <GoalSheet close={close} />)

@@ -1,37 +1,71 @@
+import { useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Ring from '../components/Ring.jsx'
+import { Button, NumberField, Segmented } from '../components/ui.jsx'
+import { useStore } from '../store/useStore.js'
+import { useUI } from '../store/useUI.js'
 import { t } from '../lib/i18n.js'
+import { fmtNum, todayISO } from '../lib/format.js'
+import { targetsForDay, ACTIVITY } from '../lib/nutrition-targets.js'
+import { goalSheet } from '../sheets.jsx'
 
-// The Food tab: today's intake against target, the day's meals, and the shopping list. The
-// layout is in place ahead of the meal planner itself (nutrition profile, food log, AI meal plan,
-// shopping list), so each section says plainly what will fill it rather than showing made-up data.
+// The Food tab: today's targets (lib/nutrition-targets.js), the day's meals, and the shopping
+// list. Targets need a short body profile, set up here once; the meals and the list arrive with
+// the meal planner, and until then their sections say so rather than showing made-up data.
 const MEALS = [
   { key: 'breakfast', label: 'Breakfast', icon: 'sunrise' },
   { key: 'lunch', label: 'Lunch', icon: 'sun' },
   { key: 'dinner', label: 'Dinner', icon: 'moon' },
   { key: 'snacks', label: 'Snacks', icon: 'plusCircle' },
 ]
+const ACTIVITY_LABEL = {
+  sedentary: ['Mostly sitting', 'A desk job, little walking'],
+  light: ['Lightly active', 'On your feet some of the day'],
+  moderate: ['Active', 'On your feet most of the day'],
+  very: ['Very active', 'A physical job'],
+}
 
 export default function Food() {
+  const S = useStore(s => s.S)
+  const today = todayISO()
+  const tg = targetsForDay(S, today)
+  const day = tg?.day
+  const macros = [['Protein', 'var(--blue)', day?.protein], ['Carbs', 'var(--yellow)', day?.carbs], ['Fat', 'var(--pink)', day?.fat]]
+  const hasWeight = S.bodyweight.length > 0
   return <div className="narrow food">
     <div className="hdr">
       <div><h1>{t('Food')}</h1><div className="sub">{t('Meals, macros and shopping')}</div></div>
+      {S.nutrition && <button className="iconbtn" onClick={profileSheet} aria-label={t('Your body profile')} title={t('Your body profile')}><Icon name="person" /></button>}
     </div>
 
     <div className="card food-today">
       <div className="food-rings">
         <Ring value={null} color="var(--orange)" size={92} stroke={10} label={t('Calories')}>
-          <div className="ring-num">–</div><div className="ring-unit">kcal</div>
+          <div className="ring-num">{day ? fmtNum(day.kcal) : '–'}</div><div className="ring-unit">kcal</div>
         </Ring>
         <div className="food-macros">
-          {[['Protein', 'var(--blue)'], ['Carbs', 'var(--yellow)'], ['Fat', 'var(--pink)']].map(([m, c]) =>
+          {macros.map(([m, c, g]) =>
             <div key={m} className="macro">
-              <div className="row between small"><span>{t(m)}</span><span className="dim">– g</span></div>
+              <div className="row between small"><span>{t(m)}</span><span className="dim">{g != null ? fmtNum(g) : '–'} g</span></div>
               <div className="macro-bar" style={{ '--c': c }}><span style={{ width: 0 }} /></div>
             </div>)}
         </div>
       </div>
-      <div className="dim small food-note">{t('Your daily targets appear here once your nutrition profile is set up.')}</div>
+      {tg ? <div className="food-why small">
+        <div><span className="chip-day">{tg.trainingDay ? t('Training day') : t('Rest day')}</span>
+          <span className="dim">{t('Rest days {0} kcal · training days {1} kcal', fmtNum(tg.rest.kcal), fmtNum(tg.training.kcal))}</span></div>
+        <div className="dim">{whyLine(tg, S)}</div>
+        {tg.rate.reason === 'capped' && <div className="warn">{t('Your target date needs a faster loss than is safe, so this aims for the safe pace and the date will slip.')}</div>}
+        {day.floored && <div className="warn">{t('This is the lowest the app will set. Eating less than this is not something it will plan for.')}</div>}
+      </div> : <div className="food-setup">
+        <div className="dim small">{!S.nutrition
+          ? t('Four questions about you, and the app works out your daily calories and protein from your weight and goal.')
+          : t('Log your weight once and your targets appear here.')}</div>
+        {!S.nutrition && <Button variant="primary" icon="target" onClick={profileSheet}>{t('Set up your targets')}</Button>}
+      </div>}
+      {tg && S.targetW == null && hasWeight && <div className="dim small" style={{ marginTop: 8 }}>
+        {t('No weight goal yet, so these keep your weight steady.')} <button className="linklike" onClick={goalSheet}>{t('Set a goal')}</button>
+      </div>}
     </div>
 
     <h2 className="sec-title">{t('Today')}</h2>
@@ -60,3 +94,52 @@ export default function Food() {
     </div>
   </div>
 }
+
+// How the number came about, in one line: maintenance and the goal's daily gap.
+function whyLine(tg, S) {
+  const gap = tg.rest.kcal - tg.maintenance
+  const kgWeek = Math.abs(tg.rate.kgPerWeek) * (S.unit === 'lb' ? 2.20462 : 1)
+  const pace = fmtNum(Math.round(kgWeek * 100) / 100) + ' ' + S.unit
+  if (tg.rate.reason === 'hold' || Math.abs(gap) < 20) return t('About {0} kcal keeps your weight where it is.', fmtNum(tg.maintenance))
+  return gap < 0
+    ? t('About {0} kcal keeps your weight steady; {1} less a day loses {2} a week.', fmtNum(tg.maintenance), fmtNum(-gap), pace)
+    : t('About {0} kcal keeps your weight steady; {1} more a day gains {2} a week.', fmtNum(tg.maintenance), fmtNum(gap), pace)
+}
+
+function ProfileSheet({ close }) {
+  const S = useStore(s => s.S)
+  const update = useStore(s => s.update)
+  const p = S.nutrition || {}
+  const [sex, setSex] = useState(p.sex || 'male')
+  const [year, setYear] = useState(p.birthYear || null)
+  const [height, setHeight] = useState(p.heightCm || null)
+  const [activity, setActivity] = useState(p.activity || 'light')
+  const thisYear = +todayISO().slice(0, 4)
+  const ok = year >= thisYear - 100 && year <= thisYear - 14 && height >= 120 && height <= 230
+  return <>
+    <h3>{t('Your body profile')}</h3>
+    <div className="muted small" style={{ marginBottom: 12 }}>{t('Used only to work out your daily calories and protein. It stays with your profile on your own server.')}</div>
+    <div className="sect-t">{t('Sex')}</div>
+    <Segmented value={sex} onChange={setSex} options={[{ value: 'male', label: t('Male') }, { value: 'female', label: t('Female') }]} />
+    <div className="row" style={{ gap: 10, marginTop: 14 }}>
+      <label className="grow"><div className="sect-t">{t('Year of birth')}</div>
+        <NumberField className="input" decimal={false} nullable value={year ?? ''} onChange={setYear} placeholder="1986" /></label>
+      <label className="grow"><div className="sect-t">{t('Height (cm)')}</div>
+        <NumberField className="input" decimal={false} nullable value={height ?? ''} onChange={setHeight} placeholder="178" /></label>
+    </div>
+    <div className="sect-t" style={{ marginTop: 14 }}>{t('Outside your workouts, you are…')}</div>
+    <div className="list menu-list">
+      {Object.keys(ACTIVITY).map(k => <div key={k} className={'item menu-item' + (activity === k ? ' accent' : '')} role="radio" aria-checked={activity === k}
+        tabIndex={0} onClick={() => setActivity(k)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setActivity(k) }}>
+        <div className="grow"><div className="tt">{t(ACTIVITY_LABEL[k][0])}</div><div className="ss">{t(ACTIVITY_LABEL[k][1])}</div></div>
+        {activity === k && <Icon name="check" className="menu-chev" />}
+      </div>)}
+    </div>
+    <div style={{ height: 14 }} />
+    <Button variant="primary" disabled={!ok} onClick={() => {
+      update(s => { s.nutrition = { ...(s.nutrition || {}), sex, birthYear: year, heightCm: height, activity } })
+      close()
+    }}>{t('Save')}</Button>
+  </>
+}
+const profileSheet = () => useUI.getState().openSheet(close => <ProfileSheet close={close} />)

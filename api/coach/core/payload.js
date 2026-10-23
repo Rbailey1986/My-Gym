@@ -88,6 +88,9 @@ const NUMERIC = /^-?\d{1,9}(\.\d{1,6})?$/;
 const num = v => ((typeof v === 'number' && Number.isFinite(v)) || (typeof v === 'string' && NUMERIC.test(v)) ? v : undefined);
 // A date is the ISO day every screen writes; anything else is not a date.
 const day = v => (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}/.test(v) ? v.slice(0, 10) : null);
+// The day the goal weight is meant to be reached by (S.targetDate), only when one is set: a plan
+// with no deadline reads exactly as it did before the field existed.
+const goalBy = S => (S.targetW != null && day(S.targetDate) ? { by: day(S.targetDate) } : {});
 const list = v => (Array.isArray(v) ? v : []);
 // The equipment of the profile the app is filtering by, or nothing when filtering is off.
 function activeEquipment(S) {
@@ -535,7 +538,7 @@ export function build(S, opts = {}) {
       const since = new Date(on + 'T12:00:00');
       since.setDate(since.getDate() - 28);
       const dated = !!on && Number.isFinite(since.getTime());
-      p.bodyweight = { goal: num(S.targetW) ?? null, series: dated ? weighIns(S, iso(since), on) : [] };
+      p.bodyweight = { goal: num(S.targetW) ?? null, ...goalBy(S), series: dated ? weighIns(S, iso(since), on) : [] };
     } else {
       p.session = null;
       p.previous = [];
@@ -550,7 +553,7 @@ export function build(S, opts = {}) {
       workouts: workouts.map((w, i) => (i >= detailFrom ? cleanWorkout(w) : compactWorkout(w)))
     };
     p.aggregates = aggregates(S, workouts);
-    p.bodyweight = { goal: num(S.targetW) ?? null, series: weighIns(S, p.window.from, null) };
+    p.bodyweight = { goal: num(S.targetW) ?? null, ...goalBy(S), series: weighIns(S, p.window.from, null) };
     if (opts.note) p.userNote = String(opts.note).slice(0, MAX_NOTE_CHARS);
     if (opts.cohort) p.cohort = cleanCohort(opts.cohort);
     // A review names mostly what is already trained; 60 candidates is plenty for a swap.

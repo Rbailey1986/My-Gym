@@ -31,6 +31,7 @@ export function trendPerDay(bodyweight, today, days = TREND_DAYS) {
   return den ? num / den : null
 }
 
+// by / neededPerWeek: the target date, if one is set and still ahead, and the pace it needs.
 // status: 'reached' | 'on-track' (the trend heads for the target) | 'away' (it heads the other
 // way) | 'flat' (no measurable change) | 'unknown' (too few recent weigh-ins).
 export function goalProgress(S, today) {
@@ -45,7 +46,10 @@ export function goalProgress(S, today) {
     : Math.min(1, Math.max(0, (start - current) / span))
   const slope = trendPerDay(bw, today)
   const ratePerWeek = slope == null ? null : slope * 7
-  const base = { start, current, target, remaining, pct, ratePerWeek, eta: null }
+  // With a target date still ahead: the weekly change it takes to arrive on that day.
+  const by = typeof S.targetDate === 'string' && S.targetDate > today ? S.targetDate : null
+  const neededPerWeek = by ? remaining / ((dayNum(by) - dayNum(today)) / 7) : null
+  const base = { start, current, target, remaining, pct, ratePerWeek, eta: null, by, neededPerWeek }
   if (Math.abs(remaining) < 0.05) return { ...base, pct: 1, status: 'reached' }
   if (slope == null) return { ...base, status: 'unknown' }
   if (Math.abs(ratePerWeek) < 0.05) return { ...base, status: 'flat' }
