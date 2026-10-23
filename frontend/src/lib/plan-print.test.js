@@ -89,9 +89,9 @@ describe('planPrintHTML prints the exercise as it is prescribed', () => {
   })
 
   it('translates the body part and keeps it a separate word', () => {
-    _setLangState('de', { chest: 'Brust', 'Drop-set': 'Dropsatz' }, null, null)
+    _setLangState('it', { chest: 'Petto', 'Drop-set': 'Drop set' }, null, null)
     const html = planPrintHTML(S2, '', { routineId: 'r' })
-    expect(html).toContain(' <span class="part">Brust</span>')
-    expect(text(html)).toContain('Dropsatz 2×')
+    expect(html).toContain(' <span class="part">Petto</span>')
+    expect(text(html)).toContain('Drop set 2×')
   })
 })

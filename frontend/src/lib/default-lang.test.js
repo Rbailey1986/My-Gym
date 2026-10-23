@@ -5,40 +5,33 @@ import { matchLocale, autoLang } from './default-lang.js'
 
 describe('matchLocale', () => {
   it('matches the full tag first, in any case or separator', () => {
-    expect(matchLocale('pt-BR')).toBe('pt-BR')
-    expect(matchLocale('pt_br')).toBe('pt-BR')
-    expect(matchLocale(' DE-ch ')).toBe('de-CH')
+    expect(matchLocale('it')).toBe('it')
+    expect(matchLocale(' IT ')).toBe('it')
+    expect(matchLocale('en')).toBe('en')
   })
   it('falls back to the base language, and to nothing for one the app does not have', () => {
-    expect(matchLocale('de-AT')).toBe('de')
+    expect(matchLocale('it-CH')).toBe('it')
+    expect(matchLocale('it_it')).toBe('it')
     expect(matchLocale('en-US')).toBe('en')
-    expect(matchLocale('pt')).toBe('pt')
-    expect(matchLocale('nl-NL')).toBe(null)
+    expect(matchLocale('de-DE')).toBe(null)
+    expect(matchLocale('pt-BR')).toBe(null)
     expect(matchLocale('')).toBe(null)
     expect(matchLocale(undefined)).toBe(null)
-  })
-  it('reads the Traditional Chinese tags as zh-TW and the rest of Chinese as zh', () => {
-    expect(matchLocale('zh-TW')).toBe('zh-TW')
-    expect(matchLocale('zh-Hant')).toBe('zh-TW')
-    expect(matchLocale('zh-Hant-TW')).toBe('zh-TW')
-    expect(matchLocale('zh-HK')).toBe('zh-TW')
-    expect(matchLocale('zh-MO')).toBe('zh-TW')
-    expect(matchLocale('zh-CN')).toBe('zh')
-    expect(matchLocale('zh-Hans-CN')).toBe('zh')
-    expect(matchLocale('zh')).toBe('zh')
   })
 })
 
 describe('autoLang', () => {
   const fresh = { lang: 'en', langAuto: true }
   it('leaves a copy alone that chose, or that predates the mark', () => {
-    expect(autoLang({ lang: 'en' }, { default_lang: 'pt-BR' }, ['de-DE'])).toBe(null)
-    expect(autoLang({ lang: 'en', langAuto: false }, { default_lang: 'pt-BR' }, ['de-DE'])).toBe(null)
+    expect(autoLang({ lang: 'en' }, { default_lang: 'it' }, ['it-IT'])).toBe(null)
+    expect(autoLang({ lang: 'en', langAuto: false }, { default_lang: 'it' }, ['it-IT'])).toBe(null)
   })
   it('puts DEFAULT_LANG before the browser, the browser before English', () => {
-    expect(autoLang(fresh, { default_lang: 'pt-BR' }, ['de-DE'])).toBe('pt-BR')
-    expect(autoLang(fresh, {}, ['nl-NL', 'de-DE'])).toBe('de')
+    expect(autoLang(fresh, { default_lang: 'it' }, ['en-GB'])).toBe('it')
+    expect(autoLang(fresh, {}, ['nl-NL', 'it-IT'])).toBe('it')
     expect(autoLang(fresh, {}, ['nl-NL'])).toBe('en')
-    expect(autoLang(fresh, { default_lang: 'xx' }, ['fr-FR'])).toBe('fr')
+    expect(autoLang(fresh, { default_lang: 'xx' }, ['it-CH'])).toBe('it')
+    // A removed language falls through to the next one on offer.
+    expect(autoLang(fresh, { default_lang: 'pt-BR' }, ['de-DE'])).toBe('en')
   })
 })

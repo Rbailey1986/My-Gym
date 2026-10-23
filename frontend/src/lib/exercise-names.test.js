@@ -2,9 +2,8 @@ import { afterEach, describe, expect, test } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { EXDB } from './exercises-data.js'
 import V13_IDS from './catalogue-v13-ids.json' with { type: 'json' }
-import { checkName, stagedExercises } from '../../../scripts/de-name-rules.mjs'
 import {
-  EXERCISE_NAME_LANGS, _setLangState, derivePack, exerciseNameFor, exerciseNameSearchText
+  EXERCISE_NAME_LANGS, _setLangState, exerciseNameFor, exerciseNameSearchText
 } from './i18n-core.js'
 
 // Every translated-name pack, checked the same way. The packs are generated from
@@ -32,48 +31,6 @@ const FEMALE = /(?:^|[^\p{L}])female(?=$|[^\p{L}])/iu
 //   distinct: no two different v1.3 exercises share a name
 //   loanword: "burpee" is the local term too, so it shows without the English repeated
 const LANGS = {
-  // German ships as a stage: the equipment entries, without the body-weight ones and the ones
-  // awaiting native review. The naming rules live in scripts/de-name-rules.mjs, shared with
-  // the translator so a rule cannot drift between the two.
-  de: { covers: stagedExercises(legacy), check: checkName },
-  es: {
-    covers: legacy,
-    keep: [
-      [/assisted/iu, /asistid/iu],
-      [/weighted/iu, /(?:peso|lastre)/iu],
-      [MALE, /masculin/iu],
-      [FEMALE, /femenin/iu],
-      [/barbell/iu, /barra/iu],
-      [/dumbbell/iu, /mancuerna/iu],
-      [/kettlebell/iu, /kettlebell/iu],
-      [/smith/iu, /smith/iu],
-      [/stability ball/iu, /balón de estabilidad/iu],
-      [/medicine ball/iu, /balón medicinal/iu],
-      [/\bbands?\b/iu, /banda/iu],
-      [/\bcables?\b/iu, /polea/iu],
-    ],
-  },
-  fr: {
-    covers: legacy,
-    loanword: true,
-    forbid: /(?:^|[^\p{L}])(?:barbell|dumbbell|cable|stability ball|medicine ball|assisted|weighted)(?=$|[^\p{L}])/iu,
-    keep: [
-      [/assisted/iu, /assisté/iu],
-      [/weighted/iu, /lesté/iu],
-      [MALE, /masculin/iu],
-      [FEMALE, /féminin/iu],
-      [/barbell/iu, /barre/iu],
-      [/dumbbell/iu, /haltère/iu],
-      [/kettlebell/iu, /kettlebell/iu],
-      [/smith/iu, /multipower/iu],
-      [/stability ball/iu, /ballon de stabilité/iu],
-      [/exercise ball/iu, /ballon de stabilité/iu],
-      [/medicine ball/iu, /médecine-ball/iu],
-      [/cable/iu, /câble/iu],
-      [/band/iu, /élastique/iu],
-    ],
-  },
-  hu: { covers: legacy, distinct: true },
   it: {
     covers: legacy,
     loanword: true,
@@ -91,71 +48,6 @@ const LANGS = {
       [/exercise ball/iu, /fitball/iu],
       [/medicine ball/iu, /palla medica/iu],
       [/band/iu, /fascia elastica/iu],
-    ],
-  },
-  pl: {
-    covers: legacy,
-    loanword: true,
-    distinct: true,
-    forbid: /(?:^|[^\p{L}])(?:barbell|dumbbell|cable|band|stability ball|exercise ball|medicine ball|assisted|weighted)(?=$|[^\p{L}])/iu,
-    keep: [
-      [/assisted/iu, /asyst|wspomag/iu],
-      [/weighted/iu, /obciąż/iu],
-      [MALE, /mężczyzn/iu],
-      [FEMALE, /kobiet/iu],
-      [/barbell/iu, /sztang/iu],
-      [/dumbbell/iu, /hantl/iu],
-      [/kettlebell/iu, /kettlebell/iu],
-      [/smith/iu, /smitha/iu],
-      [/stability ball/iu, /pił[kc]\p{L}* gimnastyczn/iu],
-      [/exercise ball/iu, /pił[kc]\p{L}* gimnastyczn/iu],
-      [/medicine ball/iu, /pił[kc]\p{L}* lekarsk/iu],
-      [/band/iu, /gum/iu],
-      [/ez[- ]bar/iu, /łaman/iu],
-      [/bosu/iu, /bosu/iu],
-      [/trap bar/iu, /trap bar/iu],
-    ],
-  },
-  'pt-BR': {
-    covers: legacy,
-    // European Portuguese where Brazil says it differently.
-    forbid: /(?:^|[^\p{L}])(?:abdómen|anca|gémeos|ecrã|ginásio|banda|piso|omoplata|pegada inversa|pegada invertida)(?=$|[^\p{L}])/iu,
-    keep: [
-      [/assisted/iu, /assistid/iu],
-      [/weighted/iu, /(?:peso|carga|lastro|ponderad)/iu],
-      [MALE, /masculin/iu],
-      [FEMALE, /feminin/iu],
-      [/barbell/iu, /barra/iu],
-      [/dumbbell/iu, /halter/iu],
-      [/kettlebell/iu, /kettlebell/iu],
-      [/smith/iu, /smith/iu],
-      [/stability ball/iu, /bola de estabilidade/iu],
-      [/medicine ball/iu, /bola medicinal/iu],
-    ],
-  },
-  ru: {
-    covers: legacy,
-    // Cyrillic somewhere in the title: a name left in English would otherwise pass every other
-    // check while showing "barbell bench press (barbell bench press)".
-    require: /\p{Script=Cyrillic}/u,
-    // Transliterated calques the glossary rejects in favour of the term gyms actually use.
-    forbid: /(?:^|[^\p{L}])(?:керл|завиток|череполом|хруст|сит-ап|пуш-ап|пул-ап|чин-ап|кеттлбелл|ассистированн\p{L}*|проповедник|мёртвая тяга)(?=$|[^\p{L}])/iu,
-    keep: [
-      // "ez bar"/"ez barbell" is the EZ bar, and an olympic barbell is named for the bar too,
-      // so a plain "barbell" is the only one that has to say штанга.
-      [/ez[\s-]bar/iu, /ez-гриф/iu],
-      [/(?<!ez[\s-])(?<!olympic )barbell/iu, /штанг/iu],
-      [/olympic barbell/iu, /(?:олимпийск|штанг)/iu],
-      [/dumbbell/iu, /гантел/iu],
-      [/kettlebell/iu, /гир/iu],
-      [/smith/iu, /смит/iu],
-      [/trap bar/iu, /трэп-гриф/iu],
-      [/stability ball/iu, /фитбол/iu],
-      [/medicine ball/iu, /медбол/iu],
-      [/assisted/iu, /(?:поддержк|самопомощ)/iu],
-      [/weighted/iu, /отягощен/iu],
-      [MALE, /муж/iu],
-      [FEMALE, /жен/iu],
     ],
   },
 }
@@ -268,16 +160,3 @@ for (const lang of EXERCISE_NAME_LANGS) {
     }
   })
 }
-
-// de-CH derives from the German pack by replacing ß with ss, so the base pack must be the ß one
-// or the Swiss locale derives nothing. A name written with ss there would pass every other test.
-test('de-CH derives the Swiss spelling from the German pack', () => {
-  const de = packs['../exercise-names/de.js']
-  const withSharpS = Object.entries(de).filter(([, name]) => name.includes('ß'))
-  expect(withSharpS.length).toBeGreaterThan(0)
-  const swiss = derivePack('de-CH', de)
-  for (const [id, name] of withSharpS) {
-    expect(swiss[id], id).toBe(name.replaceAll('ß', 'ss'))
-    expect(swiss[id], id).not.toContain('ß')
-  }
-})

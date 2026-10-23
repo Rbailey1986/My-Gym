@@ -10,13 +10,13 @@ const COPY = {
     dayRoutineSuffix: 'today',
     dayBody: "It's on your plan. Let's go 💪",
   },
-  'pt-BR': {
-    restTitle: 'Descanso terminado 💪',
-    restBody: 'Hora da próxima série.',
-    testBody: 'Notificação de teste ✅ É assim que os alertas aparecem.',
-    dayFallbackTitle: 'Treino planejado para hoje',
-    dayRoutineSuffix: 'hoje',
-    dayBody: 'Está no seu plano. Bora treinar 💪',
+  it: {
+    restTitle: 'Recupero finito 💪',
+    restBody: 'È ora della prossima serie.',
+    testBody: 'Notifica di prova ✅ Gli avvisi appaiono così.',
+    dayFallbackTitle: 'Allenamento in programma oggi',
+    dayRoutineSuffix: 'oggi',
+    dayBody: 'È nel tuo piano. Andiamo 💪',
   },
 };
 

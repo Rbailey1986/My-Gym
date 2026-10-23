@@ -84,38 +84,38 @@ describe('matchExercise', () => {
   })
 
   it('matches translated UI terms when a language is active', () => {
-    _setLangState('pt', {
-      chest: 'peito',
-      barbell: 'barra',
-      dumbbell: 'halteres',
-      shoulders: 'ombros'
+    _setLangState('it', {
+      chest: 'petto',
+      barbell: 'bilanciere',
+      dumbbell: 'manubri',
+      shoulders: 'spalle'
     }, null)
 
-    // "peito" is the translated bp, "barra" is the translated eq
-    expect(matchExercise(benchPress, 'peito')).toBe(true)
-    expect(matchExercise(benchPress, 'barra')).toBe(true)
-    expect(matchExercise(benchPress, 'peito barra bench')).toBe(true)
-    expect(matchExercise(lateralRaise, 'halteres ombros')).toBe(true)
+    // "petto" is the translated bp, "bilanciere" is the translated eq
+    expect(matchExercise(benchPress, 'petto')).toBe(true)
+    expect(matchExercise(benchPress, 'bilanciere')).toBe(true)
+    expect(matchExercise(benchPress, 'petto bilanciere bench')).toBe(true)
+    expect(matchExercise(lateralRaise, 'manubri spalle')).toBe(true)
   })
 
-  // The pt-BR exercise-name pack (!16) renames the catalogue in the UI. Searching has to reach
-  // that name as well as the canonical English one, or the library goes dark for pt-BR profiles
-  // the moment they type what they see on screen.
+  // The Italian exercise-name pack renames the catalogue in the UI. Searching has to reach that
+  // name as well as the canonical English one, or the library goes dark for Italian profiles the
+  // moment they type what they see on screen.
   it('matches the localized exercise name as well as the English one', () => {
-    _setLangState('pt-BR', {}, null, { '0025': 'supino reto com barra' })
+    _setLangState('it', {}, null, { '0025': 'panca piana con bilanciere' })
 
-    expect(matchExercise(benchPress, 'supino')).toBe(true)
-    expect(matchExercise(benchPress, 'supino barra')).toBe(true)
+    expect(matchExercise(benchPress, 'panca')).toBe(true)
+    expect(matchExercise(benchPress, 'panca bilanciere')).toBe(true)
     expect(matchExercise(benchPress, 'bench press')).toBe(true)   // English still reaches it
-    expect(matchExercise(lateralRaise, 'supino')).toBe(false)     // untranslated entry unaffected
+    expect(matchExercise(lateralRaise, 'panca')).toBe(false)      // untranslated entry unaffected
   })
 
   it('rebuilds the cached haystack when the language changes', () => {
-    _setLangState('pt-BR', {}, null, { '0025': 'supino reto com barra' })
-    expect(matchExercise(benchPress, 'supino')).toBe(true)
+    _setLangState('it', {}, null, { '0025': 'panca piana con bilanciere' })
+    expect(matchExercise(benchPress, 'panca')).toBe(true)
 
     _setLangState('en', null, null, null)
-    expect(matchExercise(benchPress, 'supino')).toBe(false)
+    expect(matchExercise(benchPress, 'panca')).toBe(false)
     expect(matchExercise(benchPress, 'bench')).toBe(true)
   })
 })

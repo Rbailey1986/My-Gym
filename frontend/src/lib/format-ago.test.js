@@ -1,8 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { fmtAgo, fmtDaysAgo, changeCount, setsWorkCount, fmtDur, fmtDate } from './format.js'
 import { _setLangState } from './i18n-core.js'
-import ar from '../locales/ar.js'
-import uk from '../locales/uk.js'
+import it_ from '../locales/it.js'
 
 // "Last synced: …" in Settings — the platform words it, in the UI language (en-GB here).
 describe('fmtAgo', () => {
@@ -37,15 +36,14 @@ describe('setsWorkCount', () => {
     expect(setsWorkCount(4, 3)).toBe('4 sets · 3 work')
   })
 
-  it('and the packs carry it', () => {
-    _setLangState('uk', uk, null, null)
-    expect(setsWorkCount(1, 1)).toBe(uk['{0} set · {1} work'].replace('{0}', '1').replace('{1}', '1'))
-    expect(uk['{0} set · {1} work']).not.toBe(uk['{0} sets · {1} work'])
+  it('and the pack carries it', () => {
+    _setLangState('it', it_, null, null)
+    expect(setsWorkCount(1, 1)).toBe('1 serie · 1 lavoro')
+    expect(setsWorkCount(4, 3)).toBe('4 serie · 3 lavoro')
   })
 })
 
-// A session's length in the UI language. The units were Latin letters in every pack, so an
-// Arabic or Ukrainian History row read "34 min" and "1h 5m" in the middle of its own script.
+// A session's length in the UI language, with the pack's own units.
 describe('fmtDur', () => {
   afterEach(() => _setLangState('en', {}, null, null))
 
@@ -54,13 +52,10 @@ describe('fmtDur', () => {
     expect(fmtDur(175 * 60000)).toBe('2h 55m')
   })
 
-  it('uses each pack\'s own units', () => {
-    _setLangState('ar', ar, null, null)
-    expect(fmtDur(34 * 60000)).toBe('34 دقيقة')
-    expect(fmtDur(65 * 60000)).toBe('1 ساعة 5 دقيقة')
-    _setLangState('uk', uk, null, null)
-    expect(fmtDur(34 * 60000)).toBe('34 хв')
-    expect(fmtDur(65 * 60000)).toBe('1 год 5 хв')
+  it('uses the pack’s own units', () => {
+    _setLangState('it', it_, null, null)
+    expect(fmtDur(34 * 60000)).toBe('34 min')
+    expect(fmtDur(65 * 60000)).toBe('1 h 5 min')
   })
 })
 
@@ -106,9 +101,9 @@ describe('fmtDaysAgo', () => {
   })
 
   it('in the UI language, from the platform', () => {
-    _setLangState('de', {}, null, null)
-    expect(fmtDaysAgo(back(1), day)).toBe('gestern')
-    expect(fmtDaysAgo(back(3), day)).toBe('vor 3 Tagen')
-    expect(fmtDaysAgo(back(14), day)).toBe('vor 2 Wochen')
+    _setLangState('it', {}, null, null)
+    expect(fmtDaysAgo(back(1), day)).toBe('ieri')
+    expect(fmtDaysAgo(back(3), day)).toBe('3 giorni fa')
+    expect(fmtDaysAgo(back(14), day)).toBe('2 settimane fa')
   })
 })

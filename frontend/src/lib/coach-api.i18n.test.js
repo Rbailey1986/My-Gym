@@ -1,11 +1,11 @@
 // @vitest-environment happy-dom
 /* JOB_ERRORS and BYOK_ERRORS are what a lifter reads when a Coach job fails, and they were English
- * literals that never went through t(): a German or Brazilian lifter read English in the middle of
+ * literals that never went through t(): an Italian lifter read English in the middle of
  * an otherwise translated chat. They are getters over t() now. This reads every line in every
  * locale pack the way the app loads one (setLang), and pins that the text follows a language
  * picked after coach-api.js loaded, which a map translated once at load time would not.
  *
- * setLang sets the page's lang and dir (right-to-left for Arabic), so this runs with a DOM.
+ * setLang sets the page's lang and dir so this runs with a DOM.
  */
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
@@ -37,7 +37,7 @@ afterEach(async () => {
 })
 
 describe('every failure line, in every pack', () => {
-  // Every language but English and a derived locale (de-CH) ships a pack. Counted from LANGS, so
+  // Every language but English (and any derived locale) ships a pack. Counted from LANGS, so
   // a new language is read here without anyone remembering to bump a number.
   it('reads every pack', () => {
     const packLangs = Object.keys(LANGS).filter(l => l !== 'en' && !DERIVED_LOCALES[l]).sort()
@@ -62,14 +62,10 @@ describe('a language picked after coach-api.js loaded', () => {
     expect(getLang()).toBe('en')
     expect(JOB_ERRORS.unprivileged).toBe(EN.JOB_ERRORS.unprivileged)
 
-    await setLang('de')
-    expect(JOB_ERRORS.unprivileged).toBe(PACKS.de[EN.JOB_ERRORS.unprivileged])
-    expect(jobErrorText('timeout', 'gave up after 10 min')).toBe(PACKS.de[EN.JOB_ERRORS.timeout])
+    await setLang('it')
+    expect(JOB_ERRORS.unprivileged).toBe(PACKS.it[EN.JOB_ERRORS.unprivileged])
+    expect(jobErrorText('timeout', 'gave up after 10 min')).toBe(PACKS.it[EN.JOB_ERRORS.timeout])
 
-    await setLang('pt-BR')
-    expect(JOB_ERRORS.unprivileged).toBe(PACKS['pt-BR'][EN.JOB_ERRORS.unprivileged])
-    expect(jobErrorText('meteor')).toBe(PACKS['pt-BR'][EN.JOB_ERRORS.internal])
-    expect(jobErrorText('meteor')).not.toBe(PACKS.pt[EN.JOB_ERRORS.internal])   // Brazil's own line, not Portugal's
 
     await setLang('en')
     expect(JOB_ERRORS.unprivileged).toBe(EN.JOB_ERRORS.unprivileged)
@@ -79,11 +75,11 @@ describe('a language picked after coach-api.js loaded', () => {
   it('reaches the own-key phone lines, with the provider detail still attached', async () => {
     mocks.MOBILE = true
     mocks.coachLocal = { mode: 'byok' }
-    await setLang('fr')
-    expect(jobErrorText('provider', 'quota exceeded')).toBe(PACKS.fr[EN.BYOK_ERRORS.provider] + '\nquota exceeded')
+    await setLang('it')
+    expect(jobErrorText('provider', 'quota exceeded')).toBe(PACKS.it[EN.BYOK_ERRORS.provider] + '\nquota exceeded')
     // A class the phone has no line of its own for falls back to the shared one, translated too.
-    expect(jobErrorText('restart')).toBe(PACKS.fr[EN.JOB_ERRORS.restart])
-    expect(jobErrorText(undefined)).toBe(PACKS.fr[EN.BYOK_ERRORS.internal])
+    expect(jobErrorText('restart')).toBe(PACKS.it[EN.JOB_ERRORS.restart])
+    expect(jobErrorText(undefined)).toBe(PACKS.it[EN.BYOK_ERRORS.internal])
   })
 })
 

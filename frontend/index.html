@@ -8,14 +8,11 @@
   // https://host/gym loads this page but "./assets/…" resolves against the parent. Add the slash.
   var p = location.pathname;
   if (p.length > 1 && p.slice(-1) !== '/' && !/\.[a-z0-9]+$/i.test(p)) location.replace(p + '/' + location.search + location.hash);
-  // Set direction before first paint so an Arabic profile never flashes as LTR.
-  // The app re-applies this on every language change (lib/i18n.js setLang).
-  // i18n-core RTL_LANGS is the runtime source of truth — keep this list in sync.
+  // The page language before first paint: English, or Italian when the profile picked it
+  // (i18n-core LANGS). Both read left to right; the app re-applies it in lib/i18n.js setLang.
   try {
     var s = JSON.parse(localStorage.getItem('gym_state_v1') || '{}');
-    var l = s.lang || ((navigator.language || '').slice(0, 2) === 'ar' ? 'ar' : 'en');
-    document.documentElement.lang = l;
-    document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = s.lang === 'it' ? 'it' : 'en';
   } catch (e) {}
 </script>
 <title>openGym</title>

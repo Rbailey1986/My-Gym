@@ -3,7 +3,6 @@ import { canMoveActiveWorkoutUnit, moveActiveWorkoutUnit, canMoveActiveWorkoutEn
 import { supersetFlowStep } from './supersetFlow.js'
 import { supersetUnits } from './history.js'
 import { LANGS, DERIVED_LOCALES } from './i18n-core.js'
-import { PT_BR_OVERRIDES } from '../locales/pt-BR.js'
 
 const entry = (id, extra = {}) => ({
   id,
@@ -174,8 +173,7 @@ describe('active workout member move (the exercise ⋯ menu)', () => {
 
 describe('active workout move locale coverage', () => {
   const packs = import.meta.glob('../locales/*.js', { eager: true, import: 'default' })
-  // English is the source language and has no pack. Derived locales (de-CH) have none either:
-  // they transform their base language's pack at load time, and are checked separately below.
+  // English is the source language and has no pack, nor would a derived locale.
   const localeCodes = Object.keys(LANGS).filter(code => code !== 'en' && !DERIVED_LOCALES[code])
 
   it('defines both visible move labels in every current locale pack', () => {
@@ -189,7 +187,5 @@ describe('active workout move locale coverage', () => {
         expect(pack[key].trim(), `${code} has a blank ${key}`).not.toBe('')
       }
     }
-    expect(Object.hasOwn(PT_BR_OVERRIDES, 'Move up')).toBe(true)
-    expect(Object.hasOwn(PT_BR_OVERRIDES, 'Move down')).toBe(true)
   })
 })

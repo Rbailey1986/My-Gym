@@ -1,8 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { exerciseNameText } from './format.js'
 import { _setLangState } from './i18n-core.js'
-import de from '../exercise-names/de.js'
-import es from '../exercise-names/es.js'
+import itNames from '../exercise-names/it.js'
 
 // A toast, a dialog title, the timed-set label and the Stats picker show an exercise name as
 // plain text, with no element to carry the CSS title-casing. They have to come out cased the way
@@ -18,13 +17,8 @@ describe('exerciseNameText', () => {
   })
 
   it('title-cases a name from a lower-case pack, the English one in parentheses included', () => {
-    _setLangState('es', {}, null, es)
-    expect(exerciseNameText(bench)).toBe('Press De Banca Con Barra (Barbell Bench Press)')
-  })
-
-  it('leaves German as the pack writes it', () => {
-    _setLangState('de', {}, null, de, false)
-    expect(exerciseNameText(bench)).toBe('Bankdrücken mit Langhantel')
+    _setLangState('it', {}, null, itNames)
+    expect(exerciseNameText(bench)).toBe('Panca Piana Con Bilanciere (Barbell Bench Press)')
   })
 })
 
