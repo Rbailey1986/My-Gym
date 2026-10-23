@@ -12,7 +12,9 @@ import { clearCfAccess } from './cf-access.js'
 
 // Accepts what someone actually types: bare host, no scheme, trailing slash, stray whitespace.
 // Defaults to https:// (self-hosting docs already push for HTTPS; the one exception, localhost,
-// still parses fine without a scheme). Returns null for anything that isn't a usable URL at all.
+// still parses fine without a scheme). A path is kept, minus its trailing slash, for a server
+// behind a proxy that mounts it under a subpath (https://host/gym); query and hash are dropped.
+// Returns null for anything that isn't a usable URL at all.
 export function normalizeServerUrl(raw) {
   const s = String(raw || '').trim()
   if (!s) return null
@@ -20,7 +22,7 @@ export function normalizeServerUrl(raw) {
   try {
     const u = new URL(withScheme)
     if (!u.hostname) return null
-    return u.origin
+    return u.origin + u.pathname.replace(/\/+$/, '')
   } catch (e) { return null }
 }
 

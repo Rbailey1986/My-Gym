@@ -14,9 +14,14 @@ describe('normalizeServerUrl', () => {
     expect(normalizeServerUrl('https://gym.example.com')).toBe('https://gym.example.com')
   })
 
-  it('trims whitespace and a trailing path/slash down to the origin', () => {
+  it('trims whitespace and a trailing slash', () => {
     expect(normalizeServerUrl('  gym.example.com/  ')).toBe('https://gym.example.com')
-    expect(normalizeServerUrl('https://gym.example.com/some/path')).toBe('https://gym.example.com')
+  })
+
+  it('keeps a subpath mount, without its trailing slash, query or hash', () => {
+    expect(normalizeServerUrl('https://host.ts.net/gym')).toBe('https://host.ts.net/gym')
+    expect(normalizeServerUrl('host.ts.net/gym/')).toBe('https://host.ts.net/gym')
+    expect(normalizeServerUrl('https://gym.example.com/some/path?x=1#home')).toBe('https://gym.example.com/some/path')
   })
 
   it('rejects empty or unusable input', () => {
