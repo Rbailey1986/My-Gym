@@ -4,7 +4,7 @@ import { useUI } from './store/useUI.js'
 import { EXDB, EXIDX, BODYPARTS, isCardio, isBodyweightEq, allExercises, equipmentOf, byCategory, smOf, searchExercises, similarExercises, exOr, isAssisted, betterWeight, beatsWeight, isCustomEx } from './lib/exercises.js'
 import { activeProfile, exAvailable, ALL_EQUIPMENT, newProfile, profileEquipment, ACC_V } from './lib/equipment.js'
 import { fmtDate, fmtDateRange, fmtNum, fmtPlate, exerciseNameText, fmtVol, fmtDur, durPart, todayISO, isoOf, uid, exCount, routineCount, setsWorkCount, DAYN, DAYS, weekOrder, weekStartOf, weekDayOffset, MONTHS_LONG, ACCENTS } from './lib/format.js'
-import { lastEntryFor, bestWeightFor, bestWeightForEntry, buildSets, effectiveRoutineIds, workoutDay, workoutVolume, setsDone, setsDoneActive, setUnitsTotal, lastBW, sessionSections, setLabel, defaultConfig, cleanupSg, modeOf, effortOf, EFFORT, capEffort, stepEffort, isBw, isPerSide, sideReps, workSetsDone, applyIntensifierPlan, MAX_PLANNED_WARMUPS, NOTE_MAX } from './lib/history.js'
+import { lastEntryFor, bestWeightFor, bestWeightForEntry, buildSets, effectiveRoutineIds, workoutDay, workoutVolume, setsDone, setsDoneActive, setUnitsTotal, lastBW, sessionSections, setLabel, defaultConfig, cleanupSg, modeOf, effortOf, EFFORT, capEffort, stepEffort, isBw, isPerSide, sideReps, workSetsDone, applyIntensifierPlan, MAX_PLANNED_WARMUPS, NOTE_MAX, streakWeeks } from './lib/history.js'
 import { usesBar, defaultBarWeight, hasBarOverride, isNoBar } from './lib/bar.js'
 import { PLATE_SIZES, pairsOf, ownsPlates, withPlatePairs, withStandardPlates, withLoadKind, loadKindFor, baseWeightFor, dropGrid } from './lib/plates.js'
 import { toScale, rirOf, EFFORT_PRESETS, effortColor } from './lib/effort.js'
@@ -65,7 +65,8 @@ import { weeklyWeights } from './lib/bodyweight.js'
 import { workoutText } from './lib/workout-text.js'
 import { workoutCardModel, layoutWorkoutCard, drawWorkoutCard, viewAspect, CARD_FONT } from './lib/workout-card.js'
 import { copyText } from './lib/clipboard.js'
-import { queueRemaining, pinState } from './lib/queue.js'
+import { queueRemaining, pinState, weekTally } from './lib/queue.js'
+import { finishRecap } from './lib/finish-recap.js'
 import { DAY_NOTE_TAGS, DAY_NOTE_LABEL, DAY_NOTE_ICON, dayNoteOf, dayNoteLine, canNoteDay, withDayNote } from './lib/day-notes.js'
 
 const S = () => useStore.getState().S
@@ -3308,19 +3309,37 @@ function CardioDone({ st, w }) {
 
 function FinishSummary({ w, prs, e1prs = [], close }) {
   const st = useStore(s => s.S)
+  // Where the session sits: against the last time this routine was trained (lib/finish-recap.js),
+  // in this week's count, and in the streak. All read after the workout was saved.
+  const recap = finishRecap(st.workouts, w)
+  const { done: weekDone, planned: weekPlanned } = weekTally(st, w.d || todayISO())
+  const streak = streakWeeks(st)
+  const nameOf = e => (EXIDX[e.id] ? exerciseNameFor(EXIDX[e.id]) : (e.n || e.id))
+  const share = () => ui().openSheet(c2 => <ShareWorkoutImage w={w} nameOf={nameOf} close={c2} />)
+  const records = prs.length + e1prs.length
+  const pct = p => (p > 0 ? '+' : '−') + Math.round(Math.abs(p) * 100) + '%'
   return <div style={{ textAlign: 'center', padding: '8px 0' }}>
-    <div style={{ fontSize: 44, display: 'flex', justifyContent: 'center', color: 'var(--acc)' }}><Icon name="trophy" /></div>
-    <h3 style={{ margin: '8px 0' }}>{t('Workout complete!')}</h3>
+    <div style={{ fontSize: 44, display: 'flex', justifyContent: 'center', color: records ? 'var(--yellow)' : 'var(--acc)' }}><Icon name="trophy" /></div>
+    <h3 style={{ margin: '8px 0 4px' }}>{t('Workout complete!')}</h3>
+    <div className="finish-chips">
+      {weekPlanned > 0 ? <span className={'chip-stat' + (weekDone >= weekPlanned ? ' up' : '')}>{weekDone >= weekPlanned
+        ? t('Week’s plan done · {0}/{1}', weekDone, weekPlanned) : t('{0} of {1} this week', weekDone, weekPlanned)}</span>
+        : <span className="chip-stat">{t('This week: {0}', weekDone)}</span>}
+      {streak > 0 && <span className="chip-stat"><Icon name="flame" style={{ color: 'var(--orange)' }} />{t('{0} week streak', streak)}</span>}
+      {recap?.volPct != null && Math.abs(recap.volPct) >= 0.005 && <span className={'chip-stat ' + (recap.volPct > 0 ? 'up' : 'down')}>
+        <Icon name={recap.volPct > 0 ? 'arrowUp' : 'arrowDown'} />{t('Volume {0} vs last time', pct(recap.volPct))}</span>}
+    </div>
+    {records > 0 && <div className="pr-banner">
+      <div className="pr-banner-t"><Icon name="trophy" />{records === 1 ? t('New personal record') : t('New personal records')}<span className="pr-count">{records}</span></div>
+      {prs.map(id => <div key={id} className="small row" style={{ gap: 5 }}>{t('New PR:')} <span className={exerciseNameClass(EXIDX[id])}>{EXIDX[id] ? exerciseNameFor(EXIDX[id]) : id}</span></div>)}
+      {e1prs.map(p => <div key={p.id} className="small row" style={{ gap: 5 }}>{t('Best estimated 1RM:')} <span className={exerciseNameClass(EXIDX[p.id])}>{EXIDX[p.id] ? exerciseNameFor(EXIDX[p.id]) : p.id}</span> · {fmtNum(p.est)} {st.unit}</div>)}
+    </div>}
     <div className="tiles" style={{ textAlign: 'start' }}>
       <div className="tile"><div className="l">{t('Duration')}</div><div className="v" style={{ fontSize: '1.1rem' }}>{fmtDur(w.end - w.start)}</div></div>
       <div className="tile"><div className="l">{t('Volume')}</div><div className="v" style={{ fontSize: '1.1rem' }}>{fmtVol(w.vol, st.unit)}</div></div>
       <div className="tile"><div className="l">{t('Sets')}</div><div className="v" style={{ fontSize: '1.1rem' }}>{setsWorkCount(setsDone(w), workSetsDone(w))}</div></div>
       <div className="tile"><div className="l">{t('PRs')}</div><div className="v" style={{ fontSize: 20 }}>{prs.length || '–'}</div></div>
     </div>
-    {(prs.length > 0 || e1prs.length > 0) && <div style={{ textAlign: 'start', marginBottom: 12 }}>
-      {prs.map(id => <div key={id} className="small accent row" style={{ gap: 5 }}><Icon name="trophy" style={{ fontSize: 13 }} />{t('New PR:')} <span className={exerciseNameClass(EXIDX[id])}>{EXIDX[id] ? exerciseNameFor(EXIDX[id]) : id}</span></div>)}
-      {e1prs.map(p => <div key={p.id} className="small accent row" style={{ gap: 5 }}><Icon name="chartLine" style={{ fontSize: 13 }} />{t('Best estimated 1RM:')} <span className={exerciseNameClass(EXIDX[p.id])}>{EXIDX[p.id] ? exerciseNameFor(EXIDX[p.id]) : p.id}</span> · {fmtNum(p.est)} {st.unit}</div>)}
-    </div>}
     <h4 className="sec" style={{ textAlign: 'start' }}>{t('What you just trained')}</h4>
     <BodyMap load={loadOfWorkouts([w])} body={st.body} />
     <div style={{ height: 14 }} />
@@ -3329,7 +3348,10 @@ function FinishSummary({ w, prs, e1prs = [], close }) {
     {/* The moment for a progress photo or the clip of a set: the workout is already saved, so
         what is added here goes straight onto its record. */}
     <div style={{ textAlign: 'start' }}><WorkoutMediaSection w={w} hint /></div>
-    <Button variant="primary" onClick={() => closeThenNav(close, '/home')}>{t('Nice!')}</Button>
+    <div className="row" style={{ gap: 8 }}>
+      <Button icon="share" onClick={share}>{t('Share')}</Button>
+      <Button variant="primary" style={{ flex: 1 }} onClick={() => closeThenNav(close, '/home')}>{t('Nice!')}</Button>
+    </div>
   </div>
 }
 export function finishWorkout() {

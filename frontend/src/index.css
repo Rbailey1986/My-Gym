@@ -2237,3 +2237,28 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
   .home-col>.sec-title:first-child{margin-top:0}
   .home .dash-pair{grid-template-columns:1fr 1fr}
 }
+
+/* --- rest timer: a ring round the countdown, and the next set above the row --- */
+#timer.rest{flex-wrap:wrap;row-gap:8px}
+#timer.rest .bar{visibility:hidden}
+#timer.rest .tclock{flex-direction:row;align-items:center;gap:8px;padding:0}
+#timer.rest .ring .t{font-size:16px;letter-spacing:-.02em}
+#timer.rest .tclock .lbl{width:auto;min-width:0;margin-top:0}
+#timer.rest.paused .ring{opacity:.5}
+#timer.rest.ready .ring circle:last-child{stroke:var(--green)}
+
+#timer .upnext{flex:1 0 100%;order:-1;font-size:13px;color:var(--label-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#timer .upnext-l{font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--acc)}
+
+/* --- finish summary: where the session sits, and its records --- */
+.finish-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 14px}
+.chip-stat{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:999px;background:var(--surface-2);font-size:13px;font-weight:500;color:var(--label-2)}
+.chip-stat .icn{font-size:13px}
+.chip-stat.up{color:var(--green);background:color-mix(in srgb,var(--green) 14%,transparent)}
+.chip-stat.down{color:var(--label-2)}
+.pr-banner{text-align:start;margin:0 0 14px;padding:12px 14px;border-radius:var(--r);
+  background:color-mix(in srgb,var(--yellow) 12%,transparent);box-shadow:inset 0 0 0 var(--hair) color-mix(in srgb,var(--yellow) 45%,transparent)}
+.pr-banner-t{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--yellow);margin-bottom:4px}
+.pr-banner .small{color:var(--label)}
+.pr-count{margin-inline-start:auto;min-width:22px;height:22px;padding:0 6px;border-radius:11px;display:inline-grid;place-items:center;
+  background:var(--yellow);color:#000;font-size:13px;font-weight:700}

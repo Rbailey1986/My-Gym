@@ -5,6 +5,13 @@ import { REST_MAX } from '../lib/duration.js'
 import { durationSheet } from './DurationWheel.jsx'
 import { Button } from './ui.jsx'
 import Icon from './Icon.jsx'
+import Ring from './Ring.jsx'
+import { useStore } from '../store/useStore.js'
+import { upNext } from '../lib/up-next.js'
+import { setLabel } from '../lib/history.js'
+import { exOr } from '../lib/exercises.js'
+import { exerciseNameFor, exerciseNameClass } from '../lib/i18n.js'
+import { speedUnitOf } from '../lib/speed.js'
 
 const clock = sec => Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0')
 
@@ -81,6 +88,9 @@ export default function RestTimer() {
   const { addRest, stopRest, pauseRest, resumeRest, finishWorkEarly, stopWork } = useUI()
   const on = work || timer
   const actsRef = useRef(null)
+  // What the rest is for: the next set (lib/up-next.js), named under the clock's row.
+  const S = useStore(s => s.S)
+  const next = timer && !work && S.active ? upNext(S.active) : null
   const skipFits = useSkipFits(actsRef, [!!timer && !work, t('Skip'), t('Dismiss')])
   // The page keeps room at its bottom for the bar (index.css body.resting), so the last set and
   // the Finish button can scroll clear of it.
@@ -112,12 +122,24 @@ export default function RestTimer() {
   // its two faces (data-alt, a hidden line in index.css): the row never reflows when the rest
   // turns Ready, so a thumb on +15 never lands on −15.
   const label = timer.kind === 'switch' ? t('Switch sides') : timer.paused ? t('Paused') : t('Rest')
+  const nextEntry = next && S.active.entries[next.idx]
+  const nextEx = next && exOr(next.id)
+  const nextRest = next && [
+    next.warmup ? t('Warm-up') : t('set {0} of {1}', next.setNo, next.of),
+    setLabel(next.id, next.set, nextEntry.target, speedUnitOf(S)),
+  ].filter(Boolean).join(' · ')
   return (
-    <div id="timer" className={'rest' + (timer.paused ? ' paused' : '') + (timer.kind === 'switch' ? ' switch' : '') + (timer.ready ? ' ready' : '')}>
+    <div id="timer" className={'rest' + (timer.paused ? ' paused' : '') + (timer.kind === 'switch' ? ' switch' : '') + (timer.ready ? ' ready' : '') + (next ? ' has-next' : '')}>
+      {/* The bar stays for the work countdown's look and for anything reading it; a rest shows
+          its progress as the ring round the clock instead (index.css hides the bar there). */}
       <div className="bar" aria-hidden="true"><i style={{ width: pct + '%' }} /></div>
+      {next && <div className="upnext"><span className="upnext-l">{t('Up next')}</span> <span className={exerciseNameClass(nextEx)}>{exerciseNameFor(nextEx)}</span> · <bdi>{nextRest}</bdi></div>}
       <button type="button" className="tclock" onClick={adjustRestSheet}
         aria-label={(timer.ready ? t('Ready') : clock(timer.left)) + '. ' + t('Change the time left')}>
-        <span className="t" role={timer.ready ? 'status' : undefined} data-alt={timer.ready ? '0:00' : t('Ready')}>{timer.ready ? t('Ready') : clock(timer.left)}</span>
+        {/* The countdown sits inside its ring, which fills as the rest runs out. */}
+        <Ring value={timer.ready ? 1 : 1 - pct / 100} size={58} stroke={4} color={timer.kind === 'switch' ? 'var(--orange)' : 'var(--acc)'}>
+          <span className="t" role={timer.ready ? 'status' : undefined} data-alt={timer.ready ? '0:00' : t('Ready')}>{timer.ready ? t('Ready') : clock(timer.left)}</span>
+        </Ring>
         <span className="lbl">{label}<Icon name="chevronDown" /></span>
       </button>
       <div className="acts" ref={actsRef}>
