@@ -412,7 +412,7 @@ h4.sec{
    fade on the <svg> instead of in the stroke colour flattens the icon first and
    fades it as one shape — and it does that for every icon, not just this one. */
 #tabbar button .icn{font-size:25px;--icon-stroke:1.65;color:var(--label)}
-#tabbar button.on{color:var(--acc)}
+#tabbar button.on{color:var(--tab-c,var(--acc))}
 #tabbar button.on .icn{--icon-stroke:2;color:inherit;opacity:1}
 /* A connection problem while the banner is switched off (Settings → Show connection status):
    a dot on the Home tab and on the Settings gear. */
@@ -2198,3 +2198,42 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 .food .list .item.disabled{opacity:1;cursor:default}
 .food .list .item.disabled .ss{color:var(--label-3)}
 .food-soon{margin-top:12px}
+
+/* --- area colours (lib/areas.js) ---
+   Today and Train use the account's accent. Food and Progress swap it for their own, so a
+   screen's buttons, switches and highlights say where you are. The derived tokens are restated
+   because :root computed them from the accent it had there. */
+#app[data-area="food"]{
+  --acc:var(--orange); --acc-2:#c76b00; --on-acc:#000;
+  --acc-soft:color-mix(in srgb,var(--orange) 16%,transparent);
+  --acc-line:color-mix(in srgb,var(--orange) 38%,transparent);
+}
+#app[data-area="progress"]{
+  --acc:var(--blue); --acc-2:#0060df; --on-acc:#fff;
+  --acc-soft:color-mix(in srgb,var(--blue) 16%,transparent);
+  --acc-line:color-mix(in srgb,var(--blue) 38%,transparent);
+}
+
+/* --- bigger numbers on the Progress tiles --- */
+.tile .v{font-size:32px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tile .v.v-sm{font-size:24px}
+
+/* --- Progress with nothing in it yet --- */
+.progress-empty{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:20px}
+.progress-empty .lrow-i{width:40px;height:40px;font-size:20px}
+.progress-empty .ttl{font-size:20px;font-weight:600}
+
+/* --- Plan: a rest day is one slim line --- */
+.item.plan-day.is-rest{padding-top:8px;padding-bottom:8px;min-height:0}
+.item.plan-day.is-rest .lrow-i{width:26px;height:26px;font-size:14px}
+.item.plan-day.is-rest .tt{color:var(--label-2);font-size:15px}
+.item.plan-day.is-rest .chev{color:var(--label-3)}
+
+/* --- Today on a wide screen: two columns --- */
+.home-cols{display:block}
+@media (min-width:1000px){
+  .narrow.home{max-width:1080px}
+  .home-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+  .home-col>.sec-title:first-child{margin-top:0}
+  .home .dash-pair{grid-template-columns:1fr 1fr}
+}

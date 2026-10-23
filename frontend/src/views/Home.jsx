@@ -123,6 +123,10 @@ export default function Home() {
       <button className="iconbtn" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
     </div>
 
+    {/* Two columns on a wide screen (index.css .home-cols): how it is going on the left, the day
+        on the right. One column, in this order, everywhere else. */}
+    <div className="home-cols">
+    <div className="home-col">
     {/* The three rings. Each one opens where its number comes from. */}
     <div className="card dash-rings">
       <button className="dash-ring" onClick={() => calendarSheet()}>
@@ -185,6 +189,9 @@ export default function Home() {
         : t("No weigh-ins yet. Log your weight to start the curve (we also ask before every workout).")}</div>}
     </div>}
 
+    </div>
+
+    <div className="home-col">
     <h2 className="sec-title">{t('Today')}</h2>
     <div className="card">
       {/* A coach week runs by order, not by weekday, so its progress row stands in for the
@@ -282,6 +289,8 @@ export default function Home() {
           </div>
         </div>
       )}
+    </div>
+    </div>
     </div>
   </div>
 }

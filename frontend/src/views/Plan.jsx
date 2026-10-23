@@ -261,15 +261,16 @@ function Schedule({ S, update, nav, mode }) {
   const dayRoutines = d => [].concat(S.week[d] || []).map(routineOf).filter(Boolean)
   // One weekday: what is on it at a glance, and a tap to change it (dayAssignSheet picks one
   // routine, several for a combined day, or a rest day).
+  // A rest day is a slim one-line row with a plus, so the training days carry the week.
   const dayRow = (d, rs = dayRoutines(d)) => {
-    return <div key={d} className="item plan-day" data-day={d} aria-label={t(DAYN[d])} {...tappable(() => dayAssignSheet(d))}>
+    return <div key={d} className={'item plan-day' + (rs.length ? '' : ' is-rest')} data-day={d} aria-label={t(DAYN[d])} {...tappable(() => dayAssignSheet(d))}>
       <span className={'plan-day-n' + (d === todayDow ? ' today' : '')} aria-hidden="true">{t(DAYS[d])}</span>
       <span className={'lrow-i' + (rs.length ? '' : ' rest')}><Icon name={rs.length ? glyphOf(rs[0].emoji) : 'moon'} /></span>
       <div className="grow">
         <div className="tt">{rs.length ? deriveSessionName(rs.map(r => r.name)) : t('Rest day')}</div>
-        <div className="ss">{rs.length === 1 ? exCount(rs[0].ex.length) : rs.length ? routineCount(rs.length) : t('Tap to plan something')}</div>
+        {rs.length > 0 && <div className="ss">{rs.length === 1 ? exCount(rs[0].ex.length) : routineCount(rs.length)}</div>}
       </div>
-      <Icon name="chevronRight" className="chev" />
+      <Icon name={rs.length ? 'chevronRight' : 'plus'} className="chev" />
     </div>
   }
   // Beside a loop, a weekday shows only what it adds to it: a routine that is in the loop already

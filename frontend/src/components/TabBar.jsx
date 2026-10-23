@@ -7,14 +7,16 @@ import Icon from './Icon.jsx'
 import Elapsed from './Elapsed.jsx'
 import { useConnectionTrouble } from './SyncBanner.jsx'
 import { menuSheet, bwSheet } from '../sheets.jsx'
+import { areaOf, AREA_TINT } from '../lib/areas.js'
 
 // Module scope, not TabBar's render body. Declared inside it, `Tab` was a new function on every
 // render, so React saw a different component type each time and threw the button away and built a
 // fresh one — on a bar that is fixed on screen, and once a second for the whole of a rest. The
 // state it took with it is the DOM node itself: focus, the :active tint, any in-flight transition.
-function Tab({ active, icon, label, onClick, dot }) {
+function Tab({ active, icon, label, onClick, dot, tint }) {
   return (
-    <button className={active ? 'on' : ''} onClick={onClick} aria-label={dot ? label + ', ' + t('Connection problem') : undefined}>
+    <button className={active ? 'on' : ''} onClick={onClick} aria-label={dot ? label + ', ' + t('Connection problem') : undefined}
+      style={tint ? { '--tab-c': tint } : undefined}>
       <span className="tab-ic"><Icon name={icon} />{dot && <span className="tab-dot" aria-hidden="true" />}</span><span>{label}</span>
     </button>
   )
@@ -29,11 +31,10 @@ export default function TabBar({ onStart }) {
   const trouble = useConnectionTrouble()
   if (!user && !isGuest) return null
   const cur = loc.pathname.split('/')[1] || 'home'
-  // Five areas: Today, Train (plan, routines and the exercise library), Food, Progress (stats and
-  // everything recorded over time). Settings opens from Today's header, so it lights Today.
-  const AREA = { home: 'home', settings: 'home', checkin: 'home', plan: 'train', library: 'train', muscles: 'train', coach: 'train',
-    food: 'food', stats: 'progress', history: 'progress', 'structural-balance': 'progress', measurements: 'progress', 'progress-photos': 'progress' }
-  const on = k => AREA[cur] === k
+  // Five areas (lib/areas.js): Today, Train (plan, routines and the exercise library), Food,
+  // Progress (stats and everything recorded over time).
+  const area = areaOf(loc.pathname)
+  const on = k => area === k
 
   const running = !!S.active && cur !== 'workout' && !S.active.editingWorkoutId && !S.active.backfill && S.active.start > 0
   const startWorkout = () => {
@@ -75,8 +76,8 @@ export default function TabBar({ onStart }) {
         {running ? <span className="tab-time"><Elapsed start={S.active.start} /></span>
           : <span>{S.active ? (cur === 'workout' ? t('Workout') : S.active.editingWorkoutId ? t('Edit workout') : t('Resume')) : t('Add')}</span>}
       </button>
-      <Tab active={on('food')} icon="utensils" label={t('Food')} onClick={() => nav('/food')} />
-      <Tab active={on('progress')} icon="chart" label={t('Progress')} onClick={() => nav('/stats')} />
+      <Tab active={on('food')} icon="utensils" label={t('Food')} tint={AREA_TINT.food} onClick={() => nav('/food')} />
+      <Tab active={on('progress')} icon="chart" label={t('Progress')} tint={AREA_TINT.progress} onClick={() => nav('/stats')} />
     </nav>
   )
 }

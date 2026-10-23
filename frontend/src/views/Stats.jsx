@@ -636,23 +636,34 @@ export default function Stats() {
     <div className="hdr"><div><h1>{t('Progress')}</h1><div className="sub">{t('Stats, weight & history')}</div></div>
       <button className="iconbtn" onClick={() => nav('/history')} aria-label={t('History')}><Icon name="history" /></button></div>
 
-    <div className="tiles">
-      <div className="tile"><div className="l"><Icon name="dumbbell" />{t('Workouts')}</div><div className="v">{workouts.length}</div></div>
-      <div className="tile"><div className="l"><Icon name="calendar" />{t('This month')}</div><div className="v">{monthW}</div></div>
-      <div className="tile"><div className="l"><Icon name="flame" />{t('Week streak')}</div><div className="v">{streakWeeks(S)}</div></div>
-      <div className="tile"><div className="l"><Icon name="scale" />{t('Weight 30d')}</div><div className="v" style={{ fontSize: 22, color: bwDelta30 === null ? 'inherit' : bwDeltaColor(bwDelta30, (lastBW(S) || {}).w || 0) }}>{bwDelta30 === null ? '–' : (bwDelta30 > 0 ? '+' : '') + fmtNum(bwDelta30) + ' ' + S.unit}</div></div>
+    {/* A new profile has nothing to count yet: one card that says how the page fills up, instead
+        of four zero tiles over an empty year. */}
+    {!workouts.length && !S.bodyweight.length ? <div className="card progress-empty">
+      <span className="lrow-i" style={{ background: 'var(--blue)' }}><Icon name="chartLine" /></span>
+      <div className="ttl">{t('Your progress starts here')}</div>
+      <div className="muted small">{t('Finish a workout or log your weight and this page fills with your streak, your activity over the year and a curve for every lift.')}</div>
+      <div className="row" style={{ gap: 8, marginTop: 4 }}>
+        <Button variant="primary" icon="play" onClick={() => nav('/workout')}>{t('Start a workout')}</Button>
+        <Button icon="scale" onClick={() => bwSheet()}>{t('Log body weight')}</Button>
+      </div>
+    </div> : <>
+      <div className="tiles">
+        <div className="tile"><div className="l"><Icon name="dumbbell" />{t('Workouts')}</div><div className="v">{workouts.length}</div></div>
+        <div className="tile"><div className="l"><Icon name="calendar" />{t('This month')}</div><div className="v">{monthW}</div></div>
+        <div className="tile"><div className="l"><Icon name="flame" />{t('Week streak')}</div><div className="v">{streakWeeks(S)}</div></div>
+        <div className="tile"><div className="l"><Icon name="scale" />{t('Weight 30d')}</div><div className="v v-sm" style={{ color: bwDelta30 === null ? 'inherit' : bwDeltaColor(bwDelta30, (lastBW(S) || {}).w || 0) }}>{bwDelta30 === null ? '–' : (bwDelta30 > 0 ? '+' : '') + fmtNum(bwDelta30) + ' ' + S.unit}</div></div>
+      </div>
 
-    </div>
-
-    <div className="card">
-      <h2>{t('Activity (last 12 months)')}</h2>
-      <Heatmap
-        S={S}
-        metric={S.heatmapMetric === 'vol' ? 'vol' : 'time'}
-        onMetricChange={metric => useStore.getState().update(s => { s.heatmapMetric = metric })}
-        onDay={iso => { const ws = workouts.filter(w => workoutDay(w) === iso); if (ws.length === 1) workoutDetailSheet(ws[0]); else if (ws.length) calendarSheet(iso); else dayOverrideSheet(iso) }}
-      />
-    </div>
+      <div className="card">
+        <h2>{t('Activity (last 12 months)')}</h2>
+        <Heatmap
+          S={S}
+          metric={S.heatmapMetric === 'vol' ? 'vol' : 'time'}
+          onMetricChange={metric => useStore.getState().update(s => { s.heatmapMetric = metric })}
+          onDay={iso => { const ws = workouts.filter(w => workoutDay(w) === iso); if (ws.length === 1) workoutDetailSheet(ws[0]); else if (ws.length) calendarSheet(iso); else dayOverrideSheet(iso) }}
+        />
+      </div>
+    </>}
 
     {(workouts.length > 0 || Object.keys(loadOfWeeklyPlan(S)).length > 0) && <MuscleBalance S={S} />}
     {S.routines.length > 0 && <WeeklyPlanVolume S={S} />}
@@ -680,7 +691,7 @@ export default function Stats() {
         <div className="row between bw-head" style={{ marginBottom: 8 }}>
           <h2 style={{ margin: 0 }}>{t('Body weight')}</h2>
           <div className="row" style={{ gap: 8 }}>
-            <Button size="sm" icon="target" style={S.targetW ? { color: 'var(--yellow)' } : undefined} onClick={goalSheet}>{S.targetW ? fmtNum(S.targetW) : t('Goal')}</Button>
+            <Button size="sm" icon="target" style={S.targetW ? { color: 'var(--blue)' } : undefined} onClick={goalSheet}>{S.targetW ? fmtNum(S.targetW) : t('Goal')}</Button>
             <Button size="sm" icon="plus" onClick={() => bwSheet()}>{t('Log')}</Button>
           </div>
         </div>

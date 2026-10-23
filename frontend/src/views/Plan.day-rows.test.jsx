@@ -70,11 +70,12 @@ describe('Plan — the weekday rows', () => {
     expect(dayAssignSheet).toHaveBeenCalledWith(1)
   })
 
-  it('an empty day is a rest day that asks to be planned, and opens the same picker', () => {
+  it('an empty day is a slim rest-day row with a plus, and opens the same picker', () => {
     mount()
     const tuesday = day('Tuesday')
     expect(tuesday.textContent).toContain('Rest day')
-    expect(tuesday.textContent).toContain('Tap to plan something')
+    expect(tuesday.classList.contains('is-rest')).toBe(true)
+    expect(tuesday.querySelector('.chev').getAttribute('data-icon')).toBe('plus')
     act(() => tuesday.click())
     expect(dayAssignSheet).toHaveBeenCalledWith(2)
   })
