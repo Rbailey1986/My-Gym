@@ -633,7 +633,7 @@ export default function Stats() {
   if (showMax) exOpts.push({ value: 'max', label: t('Max reps') })
 
   return <>
-    <div className="hdr"><div><h1>{t('Stats')}</h1><div className="sub">{t('Progress & history')}</div></div>
+    <div className="hdr"><div><h1>{t('Progress')}</h1><div className="sub">{t('Stats, weight & history')}</div></div>
       <button className="iconbtn" onClick={() => nav('/history')} aria-label={t('History')}><Icon name="history" /></button></div>
 
     <div className="tiles">

@@ -2135,3 +2135,66 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 [dir="rtl"] *{letter-spacing:0}
 .exfix-link{display:inline-flex;align-items:center;gap:5px;margin:14px 0 4px;color:var(--label-3);text-decoration:none}
 .list .similar-label{margin:16px 2px 6px;grid-column:1/-1}
+
+/* ============================================================ redesign -- */
+/* Today dashboard, Food tab and the shared bits they use (components/Ring.jsx). */
+
+/* --- progress ring --- */
+.ring{position:relative;flex:none;display:inline-grid;place-items:center}
+.ring svg{display:block}
+.ring-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.ring-num{font-size:20px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ring-of{font-size:13px;font-weight:500;color:var(--label-2);margin-inline-start:1px}
+.ring-unit{font-size:11px;color:var(--label-2);margin-top:3px}
+
+/* --- section titles between cards --- */
+.sec-title{font-size:20px;font-weight:600;letter-spacing:-.018em;margin:22px 2px 10px}
+
+/* --- labels used in cards outside the today row --- */
+.card .lbl2,.meals-row .lbl2{font-size:11px;font-weight:500;letter-spacing:.03em;text-transform:uppercase;color:var(--label-3)}
+.card .ttl{font-weight:500;font-size:17px;line-height:1.25;letter-spacing:-.012em;margin-top:2px}
+.card .ss{color:var(--label-2);font-size:13px;margin-top:2px}
+
+/* --- the three rings --- */
+.dash-rings{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:18px 10px 14px}
+.dash-ring{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;color:inherit;padding:4px 0;border-radius:var(--r);cursor:pointer}
+.dash-ring:active{background:var(--surface-2)}
+.dash-ring-l{font-size:13px;color:var(--label-2);font-weight:500}
+
+/* --- goal: now → target, then where it is heading --- */
+.goal-line{display:flex;align-items:center;gap:10px;margin-top:2px}
+.goal-now,.goal-target{display:flex;align-items:baseline;gap:4px}
+.goal-num{font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.goal-target .goal-num{color:var(--blue)}
+.goal-unit{font-size:15px;color:var(--label-2)}
+.goal-arrow{font-size:18px;color:var(--label-3)}
+.goal-delta{gap:2px;font-weight:500;margin-inline-start:6px;align-self:center}
+.goal-meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px}
+.goal-status{font-weight:500;color:var(--label)}
+.goal-status[data-status="on-track"],.goal-status[data-status="reached"]{color:var(--green)}
+.goal-status[data-status="away"]{color:var(--orange)}
+
+/* --- the meals row under today's workout, same shape as the today row --- */
+.meals-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:8px;padding:12px 14px;border-radius:var(--r);background:var(--surface-2);cursor:pointer;
+  transition:background var(--fast)
+}
+.meals-row:active{background:var(--surface-3)}
+.meals-row .ttl{font-weight:500;font-size:17px;line-height:1.25;margin-top:2px;color:var(--label-2)}
+
+/* --- streak and check-in side by side; one alone takes the row --- */
+.dash-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dash-pair>.card{margin-bottom:12px;min-width:0}
+.dash-pair>.card:only-child{grid-column:1 / -1}
+@media (max-width:380px){.dash-pair{grid-template-columns:1fr}}
+
+/* --- Food --- */
+.food-rings{display:flex;align-items:center;gap:18px}
+.food-macros{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
+.macro-bar{height:6px;border-radius:3px;background:color-mix(in srgb,var(--c) 18%,transparent);margin-top:5px;overflow:hidden}
+.macro-bar>span{display:block;height:100%;background:var(--c);border-radius:3px}
+.food-note{margin-top:12px}
+.food .list .item.disabled{opacity:1;cursor:default}
+.food .list .item.disabled .ss{color:var(--label-3)}
+.food-soon{margin-top:12px}

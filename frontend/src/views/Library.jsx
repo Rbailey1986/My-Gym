@@ -11,7 +11,8 @@ import { Thumb } from '../components/Media.jsx'
 import { exerciseDetailSheet, addToRoutineSheet, customExSheet } from '../sheets.jsx'
 import Icon from '../components/Icon.jsx'
 import ExerciseViewToggle from '../components/ExerciseViewToggle.jsx'
-import { Button } from '../components/ui.jsx'
+import { Button, Segmented } from '../components/ui.jsx'
+import { PLAN_VIEW_KEY, TRAIN_VIEWS } from '../lib/train-views.js'
 import { tappable, useRevealActiveChip } from '../lib/use-sheet-keyboard.js'
 import { useAutoMore } from '../lib/use-auto-more.js'
 import { isFav, sortFavouritesFirst, sortYoursFirst, usageOf } from '../lib/favourites.js'
@@ -68,12 +69,18 @@ export default function Library() {
   }
 
   return <>
-    <div className="hdr lib-hdr"><div><h1>{t('Exercises')}</h1></div>
+    <div className="hdr lib-hdr"><div><h1>{t('Train')}</h1></div>
       <Button size="sm" variant="tinted" icon="figureStrength" onClick={() => nav('/muscles')}>{t('By muscle')}</Button>
       <div className="sub lib-count">{ownCount
         ? tn('{1} animated exercises + 1 of your own', '{1} animated exercises + {0} of your own', ownCount, EXDB.length)
         : t('{0} exercises with animations', EXDB.length)}</div>
     </div>
+    {/* Part of the Train tab: the same three views as Plan, Exercises lit. */}
+    <Segmented className="plan-views" value="exercises" options={TRAIN_VIEWS()} onChange={v => {
+      if (v === 'exercises') return
+      try { localStorage.setItem(PLAN_VIEW_KEY, v) } catch { /* private mode: Plan opens on its default */ }
+      nav('/plan')
+    }} />
     <div className="search-row" style={{ marginBottom: 10 }}><div className={'search' + (narrowed ? ' has-count' : '') + (q ? ' has-clear' : '')}><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
       <input className="input" placeholder={t('Search…')} value={q} onChange={e => { setQ(e.target.value); setShown(40) }} />
       {narrowed && <span className="search-count" role="status" aria-label={exCount(f.length)}>{fmtNum(f.length)}</span>}

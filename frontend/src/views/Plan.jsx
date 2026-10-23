@@ -27,11 +27,13 @@ import {
   scheduleModeOf, queueRecovery, rotationIds, saveRotation, startNewPass, startPass, stopPass,
   chooseRotation, chooseFixedWeek,
 } from '../lib/rotation.js'
+import { PLAN_VIEW_KEY, TRAIN_VIEWS } from '../lib/train-views.js'
 
 // Plan has two views (v1.3.11): Schedule (how you train, and when) and Routines (what you
-// train). The last one you looked at comes back: a per-device convenience, never synced, so it
-// lives in this browser's storage and not in S.
-export const PLAN_VIEW_KEY = 'gym_plan_view'
+// train), and sits in the Train tab beside the exercise Library. The last one you looked at
+// comes back: a per-device convenience, never synced, so it lives in this browser's storage and
+// not in S.
+export { PLAN_VIEW_KEY }
 const readView = () => {
   try { return localStorage.getItem(PLAN_VIEW_KEY) === 'routines' ? 'routines' : 'schedule' } catch { return 'schedule' }
 }
@@ -164,15 +166,17 @@ export default function Plan() {
 
   return <div className="narrow plan">
     <div className="hdr">
-      <div><h1>{t('Plan')}</h1><div className="sub">{mode === 'rotation' ? t('Your routines in a loop') : t('Your weekly routine')}</div></div>
+      <div><h1>{t('Train')}</h1><div className="sub">{mode === 'rotation' ? t('Your routines in a loop') : t('Your weekly routine')}</div></div>
       <div className="hdr-actions">
         {showCoach && <Button size="sm" variant="tinted" icon="sparkles" onClick={() => nav('/coach')}>{t('Coach')}</Button>}
         <button className="iconbtn" onClick={openMenu} aria-label={t('Plan options')} title={t('Plan options')}><Icon name="share" /></button>
       </div>
     </div>
     <input ref={fileRef} type="file" accept="application/json,.json" onChange={pickFile} hidden />
-    <Segmented className="plan-views" value={view} onChange={setView}
-      options={[{ value: 'schedule', label: t('Schedule') }, { value: 'routines', label: t('Routines') }]} />
+    {/* Train holds the plan and the exercise library: Exercises is a third view here that opens
+        the Library, which shows the same control (views/Library.jsx). */}
+    <Segmented className="plan-views" value={view} onChange={v => v === 'exercises' ? nav('/library') : setView(v)}
+      options={TRAIN_VIEWS()} />
     {view === 'routines'
       ? <Routines S={S} update={update} nav={nav} />
       : <Schedule S={S} update={update} nav={nav} mode={mode} />}
@@ -368,10 +372,10 @@ function Schedule({ S, update, nav, mode }) {
       </>}
     </div>}
 
-    {/* Weekly muscle volume is analysis: it moved to Stats, next to Muscle balance. Stats only
+    {/* Weekly muscle volume is analysis: it moved to Stats (now Progress), next to Muscle balance. Stats only
         shows that card once there is a routine, so the link waits for one too. */}
     {S.routines.length > 0 && <Section className="plan-link">
-      <Row icon="chart" iconTint="var(--indigo)" title={t('Weekly muscle volume')} subtitle={t('Now in Stats, next to Muscle balance')}
+      <Row icon="chart" iconTint="var(--indigo)" title={t('Weekly muscle volume')} subtitle={t('Now in Progress, next to Muscle balance')}
         accessory="chevron" onClick={() => nav('/stats?focus=weekly-volume')} />
     </Section>}
   </>
