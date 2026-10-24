@@ -115,4 +115,35 @@ describe('pausing the rest timer', () => {
     vi.advanceTimersByTime(30000)
     expect(done).toHaveBeenCalledExactlyOnceWith(30, { chimed: true })
   })
+
+  it('holds the work/hold countdown while paused and finishes on resume', () => {
+    const done = vi.fn()
+    useUI.getState().startWork(30, 'Plank', done)
+    vi.advanceTimersByTime(10000)
+    expect(useUI.getState().work.left).toBe(20)
+
+    useUI.getState().pauseWork()
+    expect(useUI.getState().work).toMatchObject({ left: 20, paused: true })
+    vi.advanceTimersByTime(20000)
+    expect(useUI.getState().work.left).toBe(20)
+
+    useUI.getState().resumeWork()
+    expect(useUI.getState().work.paused).toBe(false)
+    vi.advanceTimersByTime(19000)
+    expect(useUI.getState().work.left).toBe(1)
+    vi.advanceTimersByTime(1000)
+    expect(done).toHaveBeenCalledTimes(1)
+  })
+
+  it('finishWorkEarly while work is paused correctly calculates held seconds', () => {
+    const done = vi.fn()
+    useUI.getState().startWork(45, 'Plank', done)
+    vi.advanceTimersByTime(15000)
+    useUI.getState().pauseWork()
+    expect(useUI.getState().work.left).toBe(30)
+
+    useUI.getState().finishWorkEarly()
+    expect(done).toHaveBeenCalledWith(15)
+    expect(useUI.getState().work).toBeNull()
+  })
 })

@@ -73,7 +73,7 @@ export default function TabBar({ onStart }) {
       <button className={'start' + (S.active ? ' rec' : '') + (S.active && cur === 'workout' ? ' on' : '')} onClick={quickAdd}
         aria-label={running ? t('Resume') : undefined}>
         <span className="cir"><Icon name={S.active ? 'play' : 'plus'} /></span>
-        {running ? <span className="tab-time"><Elapsed start={S.active.start} /></span>
+        {running ? <span className="tab-time"><Elapsed start={S.active.start} pausedAt={S.active.pausedAt} /></span>
           : <span>{S.active ? (cur === 'workout' ? t('Workout') : S.active.editingWorkoutId ? t('Edit workout') : t('Resume')) : t('Add')}</span>}
       </button>
       <Tab active={on('food')} icon="utensils" label={t('Food')} tint={AREA_TINT.food} onClick={() => nav('/food')} />

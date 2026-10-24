@@ -3406,6 +3406,7 @@ function doFinishWorkout() {
   const st = S()
   const A = st.active
   if (!A) return
+  if (A.pausedAt) { A.start += Date.now() - A.pausedAt; delete A.pausedAt }
   const past = !!A.backfill
   const prs = []
   const e1prs = []

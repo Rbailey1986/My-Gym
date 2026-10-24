@@ -22,6 +22,8 @@ export default {
   'Home': 'Home',
   'Start': 'Inizia',
   'Resume': 'Riprendi',
+  'Pause workout': 'Pausa allenamento',
+  'Resume workout': 'Riprendi allenamento',
   'Stats': 'Statistiche',
   'Exercises': 'Esercizi',
   'By muscle': 'Per muscolo',

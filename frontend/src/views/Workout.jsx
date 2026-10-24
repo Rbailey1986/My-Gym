@@ -1421,6 +1421,17 @@ function ActiveWorkout() {
     title: t('Discard workout?'), message: t('The sets you logged in this session will be lost.'), confirmText: t('Discard'), danger: true,
     onConfirm: () => { update(s => { s.active = null }); stopRest(); stopWork(); nav('/home') },
   })
+  const togglePauseWorkout = () => {
+    update(s => {
+      if (!s.active) return
+      if (s.active.pausedAt) {
+        s.active.start += Date.now() - s.active.pausedAt
+        delete s.active.pausedAt
+      } else {
+        s.active.pausedAt = Date.now()
+      }
+    })
+  }
   // The header ⋯, in groups: the settings you change at the gym first (their own sheet, the same
   // values as Settings), then what to add, what to change about this workout, and Discard last.
   // Layout here stays this session's own (s.active.workoutView); the settings sheet's Layout is
@@ -1437,6 +1448,7 @@ function ActiveWorkout() {
         !editing && { icon: 'clipboard', label: t('Add routine'), sub: t('Bring another routine into this session'), onClick: addRoutineToSessionSheet },
       ] },
       { title: t('This workout'), items: [
+        !editing && !A.backfill && { icon: A.pausedAt ? 'play' : 'pause', label: A.pausedAt ? t('Resume workout') : t('Pause workout'), onClick: togglePauseWorkout },
         A.backfill && A.entries.length > 0 && { icon: 'checkCircle', label: t('Mark all sets done'), onClick: markAllDone },
         { icon: 'pencil', label: t('Rename workout'), onClick: renameWorkoutSheet },
         { icon: 'layout', label: t('Layout'), sub: LAYOUT_LABEL[workoutView] || LAYOUT_LABEL.cards, onClick: openLayoutMenu },
@@ -1915,7 +1927,7 @@ function ActiveWorkout() {
       {editing
         ? <button className="iconbtn" aria-label={t('Close editor')} title={t('Close editor')} onClick={() => exitWorkoutEdit()}><Icon name="xmark" /></button>
         : <button className="iconbtn" aria-label={t('Minimize')} title={t('Minimize')} onClick={() => nav('/home')}><Icon name="chevronDown" /></button>}
-      <div className="whdr-mid"><div className="whdr-name">{A.name}</div><div className="sub">{(A.backfill || editing) ? fmtDate(A.d, true) : <Elapsed start={A.start} />} · {t('{0} sets', done + '/' + total)}</div></div>
+      <div className="whdr-mid"><div className="whdr-name">{A.name}</div><div className="sub">{(A.backfill || editing) ? fmtDate(A.d, true) : <><Elapsed start={A.start} pausedAt={A.pausedAt} />{A.pausedAt ? ' · ' + t('Paused') : ''}</>} · {t('{0} sets', done + '/' + total)}</div></div>
       <button className="iconbtn" aria-label={t('Workout options')} title={t('Workout options')} onClick={openViewMenu}><Icon name="more" /></button>
       <button className="btn primary pill whdr-finish" aria-label={editing ? t('Save changes') : undefined}
         onClick={() => (editing ? finishWorkout() : finishWorkoutSheet({ onDiscard: discardWorkout }))}>{editing ? t('Save') : t('Finish')}</button>

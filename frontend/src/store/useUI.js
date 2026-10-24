@@ -414,11 +414,26 @@ export const useUI = create((set, get) => ({
     const wk = get().work
     if (!wk) return
     const startedAt = wk.endsAt - wk.total * 1000
-    const elapsed = Math.max(1, Math.min(wk.total + (wk.overtime ? MAX_WORK_OVERTIME_SEC : 0), Math.round((Date.now() - startedAt) / 1000)))
+    const elapsed = wk.paused
+      ? Math.max(1, wk.total - wk.left)
+      : Math.max(1, Math.min(wk.total + (wk.overtime ? MAX_WORK_OVERTIME_SEC : 0), Math.round((Date.now() - startedAt) / 1000)))
     const done = workDone || ownerDone(wk)
     vibrate(30)
     get().stopWork()
     if (done) done(elapsed)
+  },
+  pauseWork() {
+    const wk = get().work
+    if (!wk || wk.paused) return
+    stopWorkTicking()
+    set({ work: { ...wk, paused: true } })
+  },
+  resumeWork() {
+    const wk = get().work
+    if (!wk || !wk.paused) return
+    const endsAt = Date.now() + Math.max(0, wk.left) * 1000
+    set({ work: { ...wk, endsAt, paused: false } })
+    runWork(set, get)
   },
   // A rest is starting while a hold runs that is not the one being ticked — a set finished on
   // another row, or on another exercise, which the List layout puts one tap away. The hold cannot

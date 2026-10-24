@@ -241,16 +241,31 @@ async fn local_http(
 // media://still/1234.webp and media://clip/1234.mp4 (http://media.localhost/... in WebView2),
 // from the exercise-media folder installed next to the app. Only those two folders, only
 // file names of the catalogue's own shape.
-fn serve_media(app: &AppHandle, path: &str) -> Response<Cow<'static, [u8]>> {
+fn serve_media(app: &AppHandle, req: &tauri::http::Request<Vec<u8>>) -> Response<Cow<'static, [u8]>> {
     let not_found = || {
         Response::builder()
             .status(StatusCode::NOT_FOUND)
-            .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+
             .body(Cow::Borrowed(&[][..]))
             .unwrap()
     };
-    let path = path.trim_start_matches('/');
-    let Some((folder, name)) = path.split_once('/') else { return not_found() };
+    let uri = req.uri();
+    let path = uri.path().trim_start_matches('/');
+    let (folder, name) = if let Some((f, n)) = path.split_once('/') {
+        if f == "still" || f == "clip" {
+            (f, n)
+        } else {
+            return not_found();
+        }
+    } else if let Some(host) = uri.host() {
+        if host == "still" || host == "clip" {
+            (host, path)
+        } else {
+            return not_found();
+        }
+    } else {
+        return not_found();
+    };
     let (allowed, mime) = match (folder, name.rsplit_once('.').map(|(_, e)| e)) {
         ("still", Some("webp")) => (true, "image/webp"),
         ("clip", Some("mp4")) => (true, "video/mp4"),
@@ -261,21 +276,49 @@ fn serve_media(app: &AppHandle, path: &str) -> Response<Cow<'static, [u8]>> {
         return not_found();
     }
     let Ok(res_dir) = app.path().resource_dir() else { return not_found() };
-    match fs::read(res_dir.join("exercise-media").join(folder).join(name)) {
-        Ok(bytes) => Response::builder()
-            .header(header::CONTENT_TYPE, mime)
-            .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
-            .header(header::CACHE_CONTROL, "max-age=31536000, immutable")
-            .body(Cow::Owned(bytes))
-            .unwrap(),
-        Err(_) => not_found(),
+    let file_path = res_dir.join("exercise-media").join(folder).join(name);
+    let bytes = match fs::read(file_path) {
+        Ok(b) => b,
+        Err(_) => return not_found(),
+    };
+
+    let total = bytes.len();
+    if let Some(range_val) = req.headers().get(header::RANGE).and_then(|v| v.to_str().ok()) {
+        if let Some(spec) = range_val.strip_prefix("bytes=") {
+            let parts: Vec<&str> = spec.split('-').collect();
+            let start = parts.first().and_then(|s| s.parse::<usize>().ok()).unwrap_or(0);
+            let end = parts.get(1).and_then(|s| s.parse::<usize>().ok()).unwrap_or(total.saturating_sub(1));
+            let end = end.min(total.saturating_sub(1));
+            if start <= end && start < total {
+                let slice = bytes[start..=end].to_vec();
+                return Response::builder()
+                    .status(StatusCode::PARTIAL_CONTENT)
+                    .header(header::CONTENT_TYPE, mime)
+                    .header(header::ACCEPT_RANGES, "bytes")
+                    .header(header::CONTENT_RANGE, format!("bytes {start}-{end}/{total}"))
+                    .header(header::CONTENT_LENGTH, slice.len().to_string())
+                    .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+                    .body(Cow::Owned(slice))
+                    .unwrap();
+            }
+        }
     }
+
+    Response::builder()
+        .status(StatusCode::OK)
+        .header(header::CONTENT_TYPE, mime)
+        .header(header::ACCEPT_RANGES, "bytes")
+        .header(header::CONTENT_LENGTH, total.to_string())
+        .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+        .header(header::CACHE_CONTROL, "max-age=31536000, immutable")
+        .body(Cow::Owned(bytes))
+        .unwrap()
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .register_uri_scheme_protocol("media", |ctx, request| serve_media(ctx.app_handle(), request.uri().path()))
+        .register_uri_scheme_protocol("media", |ctx, request| serve_media(ctx.app_handle(), &request))
         .invoke_handler(tauri::generate_handler![
             fs_read,
             fs_write,

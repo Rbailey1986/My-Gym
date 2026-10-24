@@ -85,7 +85,7 @@ function useSkipFits(actsRef, deps) {
 export default function RestTimer() {
   const timer = useUI(s => s.timer)
   const work = useUI(s => s.work)
-  const { addRest, stopRest, pauseRest, resumeRest, finishWorkEarly, stopWork } = useUI()
+  const { addRest, stopRest, pauseRest, resumeRest, finishWorkEarly, stopWork, pauseWork, resumeWork } = useUI()
   const on = work || timer
   const actsRef = useRef(null)
   // What the rest is for: the next set (lib/up-next.js), named under the clock's row.
@@ -102,14 +102,17 @@ export default function RestTimer() {
   const pct = Math.max(0, Math.min(100, (on.left / on.total) * 100))
 
   if (work) return (
-    <div id="timer" className="working">
+    <div id="timer" className={'working' + (work.paused ? ' paused' : '')}>
       <div className="bar" aria-hidden="true"><i style={{ width: pct + '%' }} /></div>
       <div className="tclock">
         <span className="t">{work.left <= 0 && work.overtime ? '+' + clock(-work.left) : clock(work.left)}</span>
-        {work.label && <span className="lbl">{work.label}</span>}
+        <span className="lbl">{work.paused ? t('Paused') : (work.label || t('Rest'))}</span>
       </div>
       <div className="acts">
         <Button size="sm" onClick={stopWork}>{t('Cancel')}</Button>
+        <Button size="sm" className="pause" icon={work.paused ? 'play' : 'pause'}
+          aria-label={t(work.paused ? 'Resume' : 'Pause')} aria-pressed={!!work.paused}
+          onClick={work.paused ? resumeWork : pauseWork} />
         <Button size="sm" variant="primary" icon="check" onClick={finishWorkEarly}>{t('Done')}</Button>
       </div>
     </div>

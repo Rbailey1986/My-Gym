@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef } from 'react'
 import { useStore } from '../store/useStore.js'
 import { BODYPARTS, allExercises, equipmentOf, searchExercises } from '../lib/exercises.js'
 import { activeProfile, exAvailable } from '../lib/equipment.js'
@@ -11,7 +11,7 @@ import { Thumb } from './Media.jsx'
 import Icon from './Icon.jsx'
 import ExerciseViewToggle from './ExerciseViewToggle.jsx'
 import { Button } from './ui.jsx'
-import { tappable } from '../lib/use-sheet-keyboard.js'
+import { useSheetKeyboard, tappable } from '../lib/use-sheet-keyboard.js'
 import { useAutoMore } from '../lib/use-auto-more.js'
 import { isFav, sortFavouritesFirst } from '../lib/favourites.js'
 
@@ -25,6 +25,8 @@ export default function MuscleExplorer({ onPick, onDetail, onPlan }) {
   const [eq, setEq] = useState('')
   const [shown, setShown] = useState(40)
   const [showAll, setShowAll] = useState(false)   // ignore the active equipment profile for this session
+  const searchRef = useRef(null)
+  const onSearchFocus = useSheetKeyboard(searchRef)
   const moreRef = useAutoMore(() => setShown(s => s + 40))
   // Same rule as the Library and the picker: the active equipment profile narrows the catalogue
   // (and the per-muscle counts) unless the user asks for everything.
@@ -73,11 +75,11 @@ export default function MuscleExplorer({ onPick, onDetail, onPlan }) {
         <h4 className="sec" style={{ margin: 0 }}>{t('Exercises for {0}', t(MUSCLE_NAME[selected]))}</h4>
         <Button size="sm" variant="ghost" onClick={() => pick(selected)}>{t('Clear selection')}</Button>
       </div>
-      <div className="search-row" style={{ marginBottom: 10 }}><div className={'search' + (narrowed ? ' has-count' : '') + (q ? ' has-clear' : '')}><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
-        <input className="input" placeholder={t('Search…')} value={q} onChange={e => { setQ(e.target.value); setShown(40) }} />
+      <div className="picker-search"><div className="search-row"><div className={'search' + (narrowed ? ' has-count' : '') + (q ? ' has-clear' : '')}><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input ref={searchRef} className="input" placeholder={t('Search…')} value={q} onFocus={onSearchFocus} onChange={e => { setQ(e.target.value); setShown(40) }} />
         {narrowed && <span className="search-count" role="status" aria-label={exCount(exercises.length)}>{fmtNum(exercises.length)}</span>}
         {q && <button className="clear" onClick={() => { setQ(''); setShown(40) }} aria-label={t('Clear')}><Icon name="xmark" /></button>}
-      </div><ExerciseViewToggle /></div>
+      </div><ExerciseViewToggle /></div></div>
       {/* Changing body part keeps the equipment filter (issue #71, same rule as Library): the
           eqOn fallback above drops it only for this view if the new body part has nothing under
           it, without forgetting the choice. "All" clears it, since it spans every body part. */}

@@ -109,4 +109,13 @@ describe('MuscleExplorer search: the × and live count the Library has (#338)', 
     expect(count()).toBeTruthy()
     expect(clear()).toBeNull()
   })
+
+  it('renders search inside .picker-search for keyboard-aware sheet layout', () => {
+    const host = render()
+    act(() => { muscleChip(host, 'Biceps').click() })
+    const pickerSearch = host.querySelector('.picker-search')
+    expect(pickerSearch).toBeTruthy()
+    const input = pickerSearch.querySelector('input')
+    expect(input).toBeTruthy()
+  })
 })
