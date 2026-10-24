@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Icon from '../components/Icon.jsx'
 import Ring from '../components/Ring.jsx'
 import { Button, NumberField, Segmented, TextArea, TextField } from '../components/ui.jsx'
@@ -30,13 +30,22 @@ import {
   aiDaysFromRecipes,
   aiDayFromRecipes,
 } from '../lib/meal-plan.js'
+import {
+  buildShoppingList,
+  toggleItemChecked,
+  toggleItemInCupboard,
+  clearCheckedState,
+  formatQuantity,
+  AISLE_KEYS,
+  AISLE_LABELS,
+} from '../lib/shopping-list.js'
 import { requestMealRecipes } from '../lib/coach-api.js'
 import { tappable } from '../lib/use-sheet-keyboard.js'
 import { goalSheet } from '../sheets.jsx'
 
 // The Food tab: today's targets (lib/nutrition-targets.js + lib/adaptive-targets.js), per-meal food
 // logging (lib/food-log.js), the AI/smart weekly meal planner with recipe macro recalculation
-// (lib/meal-plan.js), food table search and portion calculator (lib/foods.js), and the shopping list.
+// (lib/meal-plan.js), food table search and portion calculator (lib/foods.js), cook mode, and the shopping list.
 const MEALS = [
   { key: 'breakfast', label: 'Breakfast', icon: 'sunrise' },
   { key: 'lunch', label: 'Lunch', icon: 'sun' },
@@ -87,6 +96,12 @@ export default function Food() {
       : planDates[0] || today
   const plannedDay = S.mealPlan?.days?.[activePlanIso] || null
   const planMealKeys = activeMealKeys(S.foodPrefs)
+
+  const shopList = buildShoppingList(S.mealPlan, {
+    existingState: S.shoppingListState || {},
+    customItems: S.shoppingListCustom || [],
+    lang: getLang(),
+  })
 
   const handleGenerateWeek = async (useCoach = false) => {
     const lang = getLang()
@@ -143,60 +158,72 @@ export default function Food() {
     }
   }
 
-  return <div className="narrow food">
-    <div className="hdr">
-      <div><h1>{t('Food')}</h1><div className="sub">{t('Meals, macros and shopping')}</div></div>
-      {S.nutrition && <button className="iconbtn" onClick={profileSheet} aria-label={t('Your body profile')} title={t('Your body profile')}><Icon name="person" /></button>}
+  return <div className="view food-view">
+    <div className="view-h">
+      <div className="title-row">
+        <div>
+          <h1 className="title">{t('Food')}</h1>
+          <p className="sub">{day ? `${fmtNum(day.kcal)} kcal · ${day.protein} g ${t('Protein')}` : t('Calories and macros')}</p>
+        </div>
+        <button className="iconbtn" onClick={profileSheet} aria-label={t('Your body profile')} title={t('Your body profile')}><Icon name="personCircle" /></button>
+      </div>
     </div>
 
-    <div className="card food-today">
-      <div className="food-rings">
-        <Ring value={day && eaten.count ? eaten.kcal / day.kcal : null} color="var(--orange)" size={92} stroke={10} label={t('Calories')}>
-          <div className="ring-num">{eaten.count ? fmtNum(eaten.kcal) : day ? fmtNum(day.kcal) : '–'}</div>
-          <div className="ring-unit">{eaten.count && day ? `/ ${fmtNum(day.kcal)} kcal` : 'kcal'}</div>
-        </Ring>
-        <div className="food-macros">
-          {macros.map(([m, c, got, target]) => {
-            const pct = target && eaten.count ? Math.min(100, Math.round((got / target) * 100)) : 0
-            return <div key={m} className="macro">
-              <div className="row between small">
-                <span>{t(m)}</span>
-                <span className="dim">{eaten.count ? `${fmtNum(got)}${target != null ? ' / ' + fmtNum(target) : ''} g` : `${target != null ? fmtNum(target) : '–'} g`}</span>
-              </div>
-              <div className="macro-bar" style={{ '--c': c }}><span style={{ width: pct ? pct + '%' : 0 }} /></div>
-            </div>
-          })}
+    {!day && <div className="card food-soon">
+      <div className="ttl">{t('Daily calorie target')}</div>
+      <div className="muted small" style={{ marginTop: 4 }}>
+        {t('Set your birth year, height, sex and daily activity to calculate how many calories keep you where you are, and what deficit hits your goal.')}
+      </div>
+      <div className="row" style={{ gap: 8, marginTop: 10 }}>
+        <Button variant="primary" onClick={profileSheet}>{t('Set body profile')}</Button>
+        {!hasWeight && <Button onClick={goalSheet}>{t('Set a weight goal')}</Button>}
+      </div>
+    </div>}
+
+    {day && <div className="card food-card" style={{ marginBottom: 14 }}>
+      <div className="row between" style={{ gap: 12 }}>
+        <div className="grow">
+          <div className="food-badge">{tg?.trainingDay ? t('Training day') : t('Rest day')}</div>
+          <div className="food-knum">{fmtNum(eaten.kcal)}</div>
+          <div className="food-ktot">{t('{0} kcal left of {1}', fmtNum(Math.max(0, day.kcal - eaten.kcal)), fmtNum(day.kcal))}</div>
+          <div className="food-why small dim">{adj ? adaptiveLine(adj) : whyLine(tg, S)}</div>
+        </div>
+        <div style={{ width: 88, height: 88, flexShrink: 0, position: 'relative' }}>
+          <Ring
+            size={88}
+            stroke={8}
+            rings={[{ value: eaten.kcal, max: day.kcal, color: eaten.kcal > day.kcal ? 'var(--pink)' : 'var(--orange)' }]}
+          />
+          <div className="ring-icon-center" style={{ color: 'var(--orange)' }}><Icon name="flame" /></div>
         </div>
       </div>
-      {tg ? <div className="food-why small">
-        <div><span className="chip-day">{tg.trainingDay ? t('Training day') : t('Rest day')}</span>
-          <span className="dim">{t('Rest days {0} kcal · training days {1} kcal', fmtNum(tg.rest.kcal), fmtNum(tg.training.kcal))}</span></div>
-        <div className="dim">{whyLine(tg, S)}</div>
-        {tg.adaptive && tg.adaptive.status !== 'insufficient' && <div className="dim">{adaptiveLine(tg.adaptive)}</div>}
-        {tg.rate.reason === 'capped' && <div className="warn">{t('Your target date needs a faster loss than is safe, so this aims for the safe pace and the date will slip.')}</div>}
-        {day.floored && <div className="warn">{t('This is the lowest the app will set. Eating less than this is not something it will plan for.')}</div>}
-      </div> : <div className="food-setup">
-        <div className="dim small">{!S.nutrition
-          ? t('Four questions about you, and the app works out your daily calories and protein from your weight and goal.')
-          : t('Log your weight once and your targets appear here.')}</div>
-        {!S.nutrition && <Button variant="primary" icon="target" onClick={profileSheet}>{t('Set up your targets')}</Button>}
-      </div>}
-      {tg && S.targetW == null && hasWeight && <div className="dim small" style={{ marginTop: 8 }}>
-        {t('No weight goal yet, so these keep your weight steady.')} <button className="linklike" onClick={goalSheet}>{t('Set a goal')}</button>
-      </div>}
+      <div className="food-macros">
+        {macros.map(([label, color, v, max]) => {
+          const pct = max ? Math.min(100, Math.round((v / max) * 100)) : 0
+          return <div key={label} className="food-m">
+            <div className="row between small">
+              <span className="food-mlbl">{t(label)}</span>
+              <span className="food-mval">{`${fmtNum(v)} / ${fmtNum(max || 0)} g`}</span>
+            </div>
+            <div className="food-mbar"><div className="food-mfill" style={{ width: `${pct}%`, background: color }} /></div>
+          </div>
+        })}
+      </div>
+    </div>}
+
+    <div className="row between" style={{ marginTop: 14, marginBottom: 8 }}>
+      <h2 className="sec-title" style={{ margin: 0 }}>{t('Log food')}</h2>
+      <span className="dim small">{t('Today')}</span>
     </div>
 
-    <h2 className="sec-title">{t('Today')}</h2>
-    <div className="list">
+    <div className="list" style={{ marginBottom: 14 }}>
       {MEALS.map(m => {
-        const items = log[m.key]
+        const items = log[m.key] || []
         const mt = eaten.byMeal[m.key]
-        const planned = plannedMealFor(S, today, m.key)
         const sub = items.length
-          ? `${fmtNum(mt.kcal)} kcal · ${items.map(i => i.name).join(', ')}`
-          : planned
-            ? t('Planned: {0} ({1} kcal)', planned.title || planned.name, fmtNum(planned.kcal || 0))
-            : t('Nothing logged yet')
+          ? `${items.length} ${items.length === 1 ? t('item') : t('items')} · ${fmtNum(mt.kcal)} kcal`
+          : t('Nothing logged yet')
+        const planned = plannedMealFor(S, today, m.key)
         return <div key={m.key} className="item" {...tappable(() => mealSheet(today, m.key))}>
           <span className="lrow-i" style={{ background: 'color-mix(in srgb,var(--orange) 22%,transparent)', color: 'var(--orange)' }}><Icon name={m.icon} /></span>
           <div className="grow"><div className="tt">{t(m.label)}</div><div className="ss">{sub}</div></div>
@@ -262,6 +289,10 @@ export default function Food() {
             </div>
             <button className="iconbtn" onClick={e => {
               e.stopPropagation()
+              cookModeSheet(rec)
+            }} aria-label={t('Cook mode')} title={t('Cook mode')}><Icon name="flame" /></button>
+            <button className="iconbtn" onClick={e => {
+              e.stopPropagation()
               update(s => { swapPlannedMeal(s, activePlanIso, mealKey, { lang: getLang() }) })
             }} aria-label={t('Swap meal')} title={t('Swap meal')}><Icon name="swap" /></button>
             <Icon name="chevronRight" className="chev" />
@@ -276,6 +307,32 @@ export default function Food() {
         <Button icon="heart" onClick={prefsSheet}>{S.foodPrefs ? t('Edit food preferences') : t('Set food preferences')}</Button>
       </div>
     </div>}
+
+    <div className="card" {...tappable(shoppingListSheet)} style={{ cursor: 'pointer', marginBottom: 14 }}>
+      <div className="row between">
+        <div className="row" style={{ gap: 10 }}>
+          <span className="lrow-i" style={{ background: 'var(--orange)' }}><Icon name="cart" /></span>
+          <div>
+            <div className="ttl" style={{ fontWeight: 600 }}>{t('Shopping list')}</div>
+            <div className="ss">{shopList.stats.totalItems > 0
+              ? (shopList.stats.toBuyCount === 0
+                ? t('All items in cupboard')
+                : t('{0} of {1} items bought', fmtNum(shopList.stats.checkedCount), fmtNum(shopList.stats.toBuyCount)))
+              : t('Built from your meal plan, grouped by aisle.')}
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{ gap: 6 }}>
+          {shopList.stats.toBuyCount > 0 && <span className="chip-day">{`${shopList.stats.progressPct}%`}</span>}
+          <Icon name="chevronRight" className="chev" />
+        </div>
+      </div>
+      {shopList.stats.toBuyCount > 0 && (
+        <div style={{ marginTop: 10, height: 4, background: 'var(--card-sub)', borderRadius: 2, overflow: 'hidden' }}>
+          <div style={{ width: `${shopList.stats.progressPct}%`, height: '100%', background: 'var(--orange)', transition: 'width 0.2s' }} />
+        </div>
+      )}
+    </div>
 
     <h2 className="sec-title">{t('Food table')}</h2>
     <div className="search-row" style={{ marginBottom: 10 }}>
@@ -296,16 +353,6 @@ export default function Food() {
       </div>)}
       {hits.length === 0 && <div className="empty"><div className="ico"><Icon name="magnifier" /></div>{t('No match')}</div>}
     </div>}
-
-    <div className="card food-soon">
-      <div className="row" style={{ gap: 10 }}>
-        <span className="lrow-i" style={{ background: 'var(--orange)' }}><Icon name="cart" /></span>
-        <div className="grow">
-          <div className="ttl">{t('Shopping list')}</div>
-          <div className="ss">{t('Built from your meal plan, grouped by aisle.')}</div>
-        </div>
-      </div>
-    </div>
   </div>
 }
 
@@ -403,7 +450,8 @@ function RecipeSheet({ iso, mealKey, close }) {
     </>}
 
     <div className="row" style={{ gap: 8, marginBottom: 8 }}>
-      <Button variant="primary" icon="check" onClick={() => {
+      <Button variant="primary" icon="flame" onClick={() => cookModeSheet(planned)}>{t('Cook mode')}</Button>
+      <Button icon="check" onClick={() => {
         update(s => { eatPlannedMeal(s, iso, mealKey) })
         close()
       }}>{t('Ate this')}</Button>
@@ -413,6 +461,240 @@ function RecipeSheet({ iso, mealKey, close }) {
   </>
 }
 export const recipeSheet = (iso, mealKey) => useUI.getState().openSheet(close => <RecipeSheet iso={iso} mealKey={mealKey} close={close} />)
+
+function CookModeSheet({ planned, close }) {
+  const [checkedIngs, setCheckedIngs] = useState({})
+  const [checkedSteps, setCheckedSteps] = useState({})
+  const [timerSec, setTimerSec] = useState((planned.cookMin || 20) * 60)
+  const [timerRunning, setTimerRunning] = useState(false)
+
+  useEffect(() => {
+    let interval = null
+    if (timerRunning && timerSec > 0) {
+      interval = setInterval(() => {
+        setTimerSec(s => Math.max(0, s - 1))
+      }, 1000)
+    } else if (timerSec === 0) {
+      setTimerRunning(false)
+    }
+    return () => clearInterval(interval)
+  }, [timerRunning, timerSec])
+
+  const toggleIng = idx => setCheckedIngs(p => ({ ...p, [idx]: !p[idx] }))
+  const toggleStep = idx => setCheckedSteps(p => ({ ...p, [idx]: !p[idx] }))
+
+  const fmtTimer = s => {
+    const mins = Math.floor(s / 60)
+    const secs = s % 60
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`
+  }
+
+  const ings = planned.ingredients || []
+  const steps = planned.steps || []
+  const ingsDone = ings.filter((_, i) => checkedIngs[i]).length
+  const stepsDone = steps.filter((_, i) => checkedSteps[i]).length
+
+  return <>
+    <div className="row between" style={{ marginBottom: 8 }}>
+      <div>
+        <h3 style={{ margin: 0 }}>{planned.title}</h3>
+        <div className="dim small" style={{ marginTop: 2 }}>{t('Cook mode')} · {t('{0} min', planned.cookMin || 20)}</div>
+      </div>
+      <Button size="sm" variant="tinted" onClick={close}>{t('Done cooking')}</Button>
+    </div>
+
+    {/* Built-in cooking timer card */}
+    <div className="card" style={{ marginBottom: 12, textAlign: 'center', padding: '14px 10px' }}>
+      <div className="muted small" style={{ marginBottom: 4 }}>{t('Cooking timer')}</div>
+      <div style={{ fontSize: 36, fontWeight: 700, fontFamily: 'monospace', letterSpacing: 1, color: timerSec === 0 ? 'var(--orange)' : 'var(--fg)' }}>
+        {timerSec === 0 ? t('Timer finished!') : fmtTimer(timerSec)}
+      </div>
+      <div className="row center" style={{ gap: 8, marginTop: 8 }}>
+        <Button size="sm" variant={timerRunning ? 'tinted' : 'primary'} icon={timerRunning ? 'pause' : 'play'} onClick={() => setTimerRunning(!timerRunning)}>
+          {timerRunning ? t('Pause') : t('Start')}
+        </Button>
+        <Button size="sm" icon="reset" onClick={() => { setTimerRunning(false); setTimerSec((planned.cookMin || 20) * 60) }}>
+          {t('Reset')}
+        </Button>
+      </div>
+    </div>
+
+    {/* Ingredients Prep Checklist */}
+    {ings.length > 0 && <>
+      <div className="row between" style={{ marginBottom: 6 }}>
+        <div className="sect-t" style={{ margin: 0 }}>{t('Prep checklist')}</div>
+        <span className="dim small">{`${ingsDone}/${ings.length}`}</span>
+      </div>
+      <div className="list" style={{ marginBottom: 14 }}>
+        {ings.map((ing, i) => {
+          const isDone = !!checkedIngs[i]
+          const portionText = planned.partner && ing.partnerAmount > 0
+            ? t('You: {0} {1} · {2}: {3} {1} · Cook total: {4} {1}', fmtNum(ing.amount), t(ing.unit), planned.partner.name, fmtNum(ing.partnerAmount), fmtNum(ing.totalAmount))
+            : `${fmtNum(ing.amount)} ${t(ing.unit)}`
+          return <div key={i} className="item" {...tappable(() => toggleIng(i))}>
+            <span className="lrow-i" style={{ background: isDone ? 'var(--green)' : 'var(--card-sub)', color: isDone ? '#fff' : 'var(--fg-dim)' }}>
+              <Icon name={isDone ? 'check' : 'circle'} />
+            </span>
+            <div className="grow" style={{ textDecoration: isDone ? 'line-through' : 'none', opacity: isDone ? 0.6 : 1 }}>
+              <div className="tt">{ing.name}</div>
+              <div className="ss">{portionText}</div>
+            </div>
+          </div>
+        })}
+      </div>
+    </>}
+
+    {/* Cooking steps checklist */}
+    {steps.length > 0 && <>
+      <div className="row between" style={{ marginBottom: 6 }}>
+        <div className="sect-t" style={{ margin: 0 }}>{t('Cooking steps')}</div>
+        <span className="dim small">{`${stepsDone}/${steps.length}`}</span>
+      </div>
+      <div className="list" style={{ marginBottom: 14 }}>
+        {steps.map((st, i) => {
+          const isDone = !!checkedSteps[i]
+          return <div key={i} className="item" {...tappable(() => toggleStep(i))}>
+            <span className="lrow-i" style={{ background: isDone ? 'var(--green)' : 'color-mix(in srgb,var(--orange) 20%,transparent)', color: isDone ? '#fff' : 'var(--orange)', fontWeight: 700 }}>
+              {isDone ? <Icon name="check" /> : (i + 1)}
+            </span>
+            <div className="grow" style={{ textDecoration: isDone ? 'line-through' : 'none', opacity: isDone ? 0.6 : 1 }}>
+              <div className="ss" style={{ color: 'var(--fg)' }}>{st}</div>
+            </div>
+          </div>
+        })}
+      </div>
+    </>}
+  </>
+}
+export const cookModeSheet = planned => useUI.getState().openSheet(close => <CookModeSheet planned={planned} close={close} />)
+
+function ShoppingListSheet({ close }) {
+  const S = useStore(s => s.S)
+  const update = useStore(s => s.update)
+  const [newItemName, setNewItemName] = useState('')
+  const [newItemAisle, setNewItemAisle] = useState('produce')
+  const lang = getLang()
+
+  const list = buildShoppingList(S.mealPlan, {
+    existingState: S.shoppingListState || {},
+    customItems: S.shoppingListCustom || [],
+    lang,
+  })
+
+  const handleToggleCheck = itemId => {
+    update(s => {
+      s.shoppingListState = toggleItemChecked(s.shoppingListState || {}, itemId)
+    })
+  }
+
+  const handleToggleCupboard = (e, itemId) => {
+    e.stopPropagation()
+    update(s => {
+      s.shoppingListState = toggleItemInCupboard(s.shoppingListState || {}, itemId)
+    })
+  }
+
+  const handleClearChecked = () => {
+    update(s => {
+      s.shoppingListState = clearCheckedState(s.shoppingListState || {})
+    })
+  }
+
+  const handleAddCustom = () => {
+    const name = newItemName.trim()
+    if (!name) return
+    const custom = {
+      id: 'custom-' + Date.now().toString(36),
+      name,
+      aisle: newItemAisle,
+      amount: 1,
+      unit: '',
+    }
+    update(s => {
+      s.shoppingListCustom = [...(s.shoppingListCustom || []), custom]
+    })
+    setNewItemName('')
+  }
+
+  return <>
+    <div className="row between" style={{ marginBottom: 6 }}>
+      <h3 style={{ margin: 0 }}>{t('Shopping list')}</h3>
+      <Button size="sm" onClick={close}>{t('Done')}</Button>
+    </div>
+
+    {/* Progress Bar & Stats */}
+    <div className="card" style={{ marginBottom: 12 }}>
+      <div className="row between small" style={{ marginBottom: 6 }}>
+        <span>{list.stats.toBuyCount === 0 && list.stats.totalItems > 0
+          ? t('All items in cupboard')
+          : t('{0} of {1} items bought', fmtNum(list.stats.checkedCount), fmtNum(list.stats.toBuyCount))}
+        </span>
+        <strong>{`${list.stats.progressPct}%`}</strong>
+      </div>
+      <div style={{ height: 6, background: 'var(--card-sub)', borderRadius: 3, overflow: 'hidden' }}>
+        <div style={{ width: `${list.stats.progressPct}%`, height: '100%', background: 'var(--orange)', transition: 'width 0.2s' }} />
+      </div>
+    </div>
+
+    {/* Empty state */}
+    {list.items.length === 0 && <div className="empty" style={{ margin: '20px 0' }}>
+      <div className="ico"><Icon name="cart" /></div>
+      <div>{t('No shopping items yet. Plan your week to generate a shopping list.')}</div>
+    </div>}
+
+    {/* Aisle Groups */}
+    {AISLE_KEYS.map(aisleKey => {
+      const aisleItems = list.byAisle[aisleKey] || []
+      if (!aisleItems.length) return null
+      const aisleLabel = (AISLE_LABELS[lang] && AISLE_LABELS[lang][aisleKey]) || AISLE_LABELS.en[aisleKey]
+      return <div key={aisleKey} style={{ marginBottom: 14 }}>
+        <div className="row between" style={{ marginBottom: 6 }}>
+          <div className="sect-t" style={{ margin: 0 }}>{t(aisleLabel)}</div>
+          <span className="dim small">{aisleItems.length}</span>
+        </div>
+        <div className="list">
+          {aisleItems.map(item => {
+            const isChecked = item.checked
+            const inCupboard = item.inCupboard
+            const qtyStr = formatQuantity(item.amount, item.unit)
+            return <div key={item.id} className="item" {...tappable(() => handleToggleCheck(item.id))} style={{ opacity: inCupboard ? 0.45 : isChecked ? 0.65 : 1 }}>
+              <span className="lrow-i" style={{ background: isChecked ? 'var(--orange)' : 'var(--card-sub)', color: isChecked ? '#fff' : 'var(--fg-dim)' }}>
+                <Icon name={isChecked ? 'check' : 'circle'} />
+              </span>
+              <div className="grow" style={{ textDecoration: isChecked ? 'line-through' : 'none' }}>
+                <div className="tt">{item.displayName}</div>
+                <div className="ss">
+                  {qtyStr ? `${qtyStr} · ` : ''}
+                  {inCupboard ? t('In cupboard') : item.sources.join(', ')}
+                </div>
+              </div>
+              <button className={'iconbtn' + (inCupboard ? ' active' : '')} onClick={e => handleToggleCupboard(e, item.id)} aria-label={t('In cupboard')} title={t('In cupboard')}>
+                <Icon name="folder" />
+              </button>
+            </div>
+          })}
+        </div>
+      </div>
+    })}
+
+    {/* Add Custom Item */}
+    <div className="card" style={{ marginTop: 14, marginBottom: 12 }}>
+      <div className="muted small" style={{ marginBottom: 6 }}>{t('Add custom item')}</div>
+      <div className="row" style={{ gap: 6 }}>
+        <input className="input grow" placeholder={t('Item name…')} value={newItemName} onChange={e => setNewItemName(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAddCustom()} />
+        <select className="input" value={newItemAisle} onChange={e => setNewItemAisle(e.target.value)} style={{ maxWidth: 130 }}>
+          {AISLE_KEYS.map(k => <option key={k} value={k}>{(AISLE_LABELS[lang] && AISLE_LABELS[lang][k]) || AISLE_LABELS.en[k]}</option>)}
+        </select>
+        <Button size="sm" variant="tinted" icon="plus" onClick={handleAddCustom}>{t('Add')}</Button>
+      </div>
+    </div>
+
+    {list.stats.checkedCount > 0 && <div className="row center" style={{ marginBottom: 10 }}>
+      <Button size="sm" icon="trash" onClick={handleClearChecked}>{t('Clear checked')}</Button>
+    </div>}
+  </>
+}
+export const shoppingListSheet = () => useUI.getState().openSheet(close => <ShoppingListSheet close={close} />)
 
 function MealSheet({ iso, mealKey, close }) {
   const S = useStore(s => s.S)
