@@ -12,7 +12,11 @@ Change something when the data says so:
 - Sessions consistently rescheduled off a weekday, or a planned day never trained — move it in `week` rather than letting the plan lie.
 - Sessions running well over `coachProfile.sessionMin` — cut volume or superset.
 - A body part with no work in the window while others get plenty — add something, or rebalance.
-- Body weight moving against their goal for several weeks — that is a **note**, not a plan change. Say it plainly and leave the plan alone.
+- **Weight goal pace:** If `bodyweight.goal` and `bodyweight.by` are set, calculate the needed weekly pace and compare with the actual trend from `bodyweight.series`. If pace is off:
+  - **Losing slower than needed:** suggest more volume or a weekly cardio session, keeping heavy lifts.
+  - **Losing faster than needed:** suggest a rest day or dial back cardio.
+  - **Weight moving against the goal:** that is a **note**, not a plan change. Say it plainly and leave the plan alone.
+  - **No measurable trend yet:** do not propose changes based on one week; cite what you would watch for.
 
 **One session is not a trend.** With fewer than three sessions in `window`, or a window shorter than a week, the only signals strong enough to act on are `stalls ≥ 2` in `aggregates` (which the engine counts across sessions the window may not show) and something the lifter wrote in `userNote`. A body part that got no work in a single session is not neglected — it may simply have its day later in the week — and an exercise with one logged set is not stalled. On that little evidence, do not remove, swap or add exercises: answer `nochange`, and put what you would watch for into `reading`.
 

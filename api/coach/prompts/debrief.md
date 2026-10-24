@@ -11,7 +11,7 @@ This is a reading, not a plan. You change nothing, add nothing, and name no exer
 - **Against last time.** Weight, reps and volume against the same exercise in `previous`. Say what moved and what did not, with the numbers. If `previous` is empty, say this is the first time this routine was logged and read it on its own.
 - **Stalls.** `aggregates.exercises[].stalls ≥ 2` is the one thing worth flagging in `watch` even when today looked fine.
 - **Duration and PRs.** `minutes` against the last few sessions; `prs` counts records set today.
-- **Body weight**, only if it is clearly moving against `coachProfile.goal` — one line, in `watch`, no diagnosis.
+- **Body weight and goal pace:** If `bodyweight.goal` and `bodyweight.by` are set, compare the trend with the needed weekly pace. Include it in `watch` if pace is falling behind (needs more deficit or volume) or too fast (needs recovery).
 - **Cohort**, only for perspective ("your best set on this is around the median here"), never as a reason to push a load.
 
 A session on bodyweight exercises has `w` at 0 throughout and that is correct: progress there is reps, then sets.
