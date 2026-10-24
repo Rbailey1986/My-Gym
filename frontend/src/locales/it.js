@@ -2372,4 +2372,9 @@ export default {
   'Recent': 'Recenti',
   'Meal': 'Pasto',
   'Log food': 'Registra alimento',
+  // --- adaptive calorie adjustment ---
+  'Weekly check: nudged {0} kcal a day from your last 2 weeks of weigh-ins and food logs.': 'Controllo settimanale: {0} kcal al giorno in base alle ultime 2 settimane di pesate e diario.',
+  'Weekly check: nudged +{0} kcal a day from your last 2 weeks of weigh-ins and food logs.': 'Controllo settimanale: +{0} kcal al giorno in base alle ultime 2 settimane di pesate e diario.',
+  'Weekly check: targets stay as planned — recent weight changes match what was logged.': 'Controllo settimanale: gli obiettivi restano invariati — il peso segue quanto registrato.',
+  'Weekly check: right on pace over the last 2 weeks.': 'Controllo settimanale: perfettamente in linea nelle ultime 2 settimane.',
 }

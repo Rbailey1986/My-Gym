@@ -13,6 +13,7 @@ import { queueOf, queueView, weekTally, pinState } from '../lib/queue.js'
 import { scheduleModeOf } from '../lib/rotation.js'
 import { goalProgress } from '../lib/goal-eta.js'
 import { targetsForDay } from '../lib/nutrition-targets.js'
+import { adaptiveAdjustment } from '../lib/adaptive-targets.js'
 import { dayTotals } from '../lib/food-log.js'
 import { useConnectionTrouble } from '../components/SyncBanner.jsx'
 import { Button } from '../components/ui.jsx'
@@ -118,7 +119,9 @@ export default function Home() {
     : goal.status === 'flat' ? t('Holding steady')
     : t('A few more weigh-ins and a date appears here')
   const weekShare = plannedPerWeek ? doneThisWeek / plannedPerWeek : null
-  const food = targetsForDay(S, todayISO())
+  const baseFood = targetsForDay(S, todayISO())
+  const adjFood = adaptiveAdjustment(S, todayISO(), baseFood)
+  const food = adjFood ? { ...baseFood, rest: adjFood.rest, training: adjFood.training, day: adjFood.day } : baseFood
   const eaten = dayTotals(S, todayISO())
 
   return <div className="narrow home">

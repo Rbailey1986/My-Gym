@@ -7,6 +7,7 @@ import { useUI } from '../store/useUI.js'
 import { t } from '../lib/i18n.js'
 import { fmtNum, todayISO } from '../lib/format.js'
 import { targetsForDay, ACTIVITY } from '../lib/nutrition-targets.js'
+import { adaptiveAdjustment } from '../lib/adaptive-targets.js'
 import { searchFoods, macrosFor, pieceGrams } from '../lib/foods.js'
 import {
   dayLog,
@@ -52,7 +53,9 @@ export default function Food() {
   const update = useStore(s => s.update)
   const [q, setQ] = useState('')
   const today = todayISO()
-  const tg = targetsForDay(S, today)
+  const baseTg = targetsForDay(S, today)
+  const adj = adaptiveAdjustment(S, today, baseTg)
+  const tg = adj ? { ...baseTg, rest: adj.rest, training: adj.training, day: adj.day, adaptive: adj } : baseTg
   const day = tg?.day
   const eaten = dayTotals(S, today)
   const log = dayLog(S, today)
@@ -92,6 +95,7 @@ export default function Food() {
         <div><span className="chip-day">{tg.trainingDay ? t('Training day') : t('Rest day')}</span>
           <span className="dim">{t('Rest days {0} kcal · training days {1} kcal', fmtNum(tg.rest.kcal), fmtNum(tg.training.kcal))}</span></div>
         <div className="dim">{whyLine(tg, S)}</div>
+        {tg.adaptive && tg.adaptive.status !== 'insufficient' && <div className="dim">{adaptiveLine(tg.adaptive)}</div>}
         {tg.rate.reason === 'capped' && <div className="warn">{t('Your target date needs a faster loss than is safe, so this aims for the safe pace and the date will slip.')}</div>}
         {day.floored && <div className="warn">{t('This is the lowest the app will set. Eating less than this is not something it will plan for.')}</div>}
       </div> : <div className="food-setup">
@@ -168,6 +172,13 @@ export default function Food() {
 }
 
 // How the number came about, in one line: maintenance and the goal's daily gap.
+function adaptiveLine(adj) {
+  if (adj.status === 'nudge-down') return t('Weekly check: nudged {0} kcal a day from your last 2 weeks of weigh-ins and food logs.', fmtNum(adj.nudgeKcal))
+  if (adj.status === 'nudge-up') return t('Weekly check: nudged +{0} kcal a day from your last 2 weeks of weigh-ins and food logs.', fmtNum(adj.nudgeKcal))
+  if (adj.status === 'adherence') return t('Weekly check: targets stay as planned — recent weight changes match what was logged.')
+  return t('Weekly check: right on pace over the last 2 weeks.')
+}
+
 function whyLine(tg, S) {
   const gap = tg.rest.kcal - tg.maintenance
   const kgWeek = Math.abs(tg.rate.kgPerWeek) * (S.unit === 'lb' ? 2.20462 : 1)

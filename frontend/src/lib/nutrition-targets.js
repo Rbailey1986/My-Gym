@@ -29,7 +29,7 @@ const MAX_LOSS = 0.01     // of body weight per week
 const MAX_GAIN = 0.005
 const DEFAULT_LOSS = 0.005
 const DEFAULT_GAIN = 0.0025
-const FLOOR = { male: 1500, female: 1200 }
+export const FLOOR = { male: 1500, female: 1200 }
 
 const dayNum = iso => Math.round(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) / DAY)
 export const toKg = (w, unit) => (unit === 'lb' ? w / LB_PER_KG : w)
