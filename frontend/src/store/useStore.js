@@ -88,7 +88,7 @@ const gainedWorkoutMedia = (prev, next) => {
 }
 export const DEF = {
   unit: 'kg', restSec: 90, restPauseSec: 15, sound: true, soundOnSilent: false, vibrateOnSilent: false, timerFlash: false, timedSetOvertime: false, keepAwake: true, lang: 'en',
-  theme: 'dark', accent: 'lime', body: 'male', targetW: null,
+  theme: 'dark', accent: 'coral', body: 'male', targetW: null,
   // The goal's date (ISO, or null for no deadline) and the body profile daily food targets are
   // worked out from (lib/nutrition-targets.js): { sex, birthYear, heightCm, activity }, null until
   // it is set up on the Food tab.

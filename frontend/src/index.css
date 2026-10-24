@@ -17,60 +17,71 @@
    ========================================================================== */
 
 /* ---------------------------------------------------------------- tokens -- */
-:root {
-  /* surfaces — dark is the default */
-  --bg:        #000000;
-  --bg-el:     #0e0e10;   /* elevated backdrop (sheets, bars) */
-  --surface:   #1c1c1e;   /* card / grouped-list fill */
-  --surface-2: #2c2c2e;   /* pressed + nested fill */
-  --surface-3: #3a3a3c;   /* controls (segmented track, switch off) */
+:root,
+:root[data-theme="dark"],
+:root[data-theme="wellness-dark"] {
+  /* surfaces — warm espresso obsidian */
+  --bg:        #141312;
+  --bg-el:     #1B1A18;   /* elevated backdrop (sheets, bars) */
+  --surface:   #1E1D1B;   /* card / grouped-list fill */
+  --surface-2: #282624;   /* pressed + nested fill */
+  --surface-3: #363330;   /* controls (segmented track, switch off) */
 
-  /* text */
-  --label:     #ffffff;
-  --label-2:   rgba(235,235,245,.60);
-  --label-3:   rgba(235,235,245,.32);
-  --label-4:   rgba(235,235,245,.18);
+  /* text — soft cream contrast */
+  --label:     #FAF7F2;
+  --label-2:   rgba(250, 247, 242, 0.65);
+  --label-3:   rgba(250, 247, 242, 0.35);
+  --label-4:   rgba(250, 247, 242, 0.18);
 
   /* lines */
-  --sep:       rgba(84,84,88,.60);
-  --sep-op:    rgba(84,84,88,.34);   /* for edges sitting over blur */
+  --sep:       rgba(250, 247, 242, 0.10);
+  --sep-op:    rgba(250, 247, 242, 0.06);
   --hair:      .5px;
 
-  /* system palette (iOS dark values) */
-  --blue:#0a84ff; --green:#30d158; --red:#ff453a; --orange:#ff9f0a;
-  --yellow:#ffd60a; --teal:#40c8e0; --indigo:#5e5ce6; --pink:#ff375f;
-  --purple:#bf5af2; --mint:#63e6e2; --brown:#ac8e68; --grey:#8e8e93;
+  /* system palette */
+  --blue:      #2D7FF9;   /* electric blue for charts and progress */
+  --green:     #34D399;
+  --red:       #FF6F59;
+  --orange:    #FF6F59;   /* coral */
+  --yellow:    #FBBF24;
+  --teal:      #2DD4BF;
+  --indigo:    #6366F1;
+  --pink:      #FF6F59;
+  --purple:    #A855F7;
+  --mint:      #2DD4BF;
+  --brown:     #B45309;
+  --grey:      #9CA3AF;
 
-  /* accent (per-account, synced) */
-  --acc:  var(--green);
-  --acc-2:#248a3d;
-  --on-acc:#000000;
-  --acc-soft: color-mix(in srgb, var(--acc) 16%, transparent);
-  --acc-line: color-mix(in srgb, var(--acc) 38%, transparent);
+  /* accent (default coral) */
+  --acc:       #FF6F59;
+  --acc-2:     #E85A45;
+  --on-acc:    #ffffff;
+  --acc-soft:  rgba(255, 111, 89, 0.16);
+  --acc-line:  rgba(255, 111, 89, 0.40);
 
   /* geometry */
-  --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:22px; --r-card:14px;
-  --pad:16px;
+  --r-sm:      8px;
+  --r:         10px;
+  --r-lg:      12px;
+  --r-xl:      20px;
+  --r-card:    12px;
+  --pad:       16px;
   --icon-stroke:1.7;
 
   /* motion */
-  --ease:cubic-bezier(.32,.72,0,1);
-  --fast:140ms; --med:220ms;
+  --ease:      cubic-bezier(.32,.72,0,1);
+  --fast:      140ms;
+  --med:       220ms;
 
-  /* The system bars the page is drawn under. env() is all a browser and the iOS app give; the
-     Android WebView reports only the camera cutout there, and on Android 15, which draws the app
-     under the status and navigation bars, the app passes the bars themselves as --native-sat and
-     --native-sab (MainActivity.java). The larger one wins, so a WebView that learns to report
-     the bars does not count them twice. */
-  --sab:max(env(safe-area-inset-bottom,0px),var(--native-sab,0px));
-  --sat:max(env(safe-area-inset-top,0px),var(--native-sat,0px));
-  /* height of the connection indicator under the status bar, 0 while there is none — set by
-     components/SyncBanner.jsx. Whatever starts at the top of the screen starts below it. */
-  --conn:0px;
+  --sab:       max(env(safe-area-inset-bottom,0px),var(--native-sab,0px));
+  --sat:       max(env(safe-area-inset-top,0px),var(--native-sat,0px));
+  --conn:      0px;
 }
 
-/* Modern Wellness theme: soft cream (#FAF7F2), coral accent (#FF6F59), electric blue charts (#2D7FF9) */
-:root[data-theme="wellness"] {
+/* Modern Wellness theme: Light mode */
+:root[data-theme="light"],
+:root[data-theme="wellness"],
+:root[data-theme="wellness-light"] {
   --bg:        #FAF7F2;
   --bg-el:     #F4EFE6;
   --surface:   #FFFFFF;
@@ -91,7 +102,12 @@
   --orange:    #FF6F59;   /* coral */
   --yellow:    #F4B740;
   --teal:      #2A9D8F;
+  --indigo:    #5856d6;
   --pink:      #FF6F59;
+  --purple:    #8944ab;
+  --mint:      #00c7be;
+  --brown:     #a2845e;
+  --grey:      #8e8e93;
 
   --acc:       #FF6F59;
   --acc-2:     #E85A45;
@@ -105,55 +121,77 @@
   --r-card:    12px;
 }
 
-:root[data-theme="wellness"] .card {
+.card {
+  border-radius: var(--r-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+:root .card,
+:root[data-theme="dark"] .card,
+:root[data-theme="wellness-dark"] .card {
   background: var(--surface);
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(90, 80, 70, 0.05);
+  border: 1px solid rgba(250, 247, 242, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.40);
+}
+
+:root[data-theme="light"] .card,
+:root[data-theme="wellness"] .card,
+:root[data-theme="wellness-light"] .card {
+  background: var(--surface);
   border: 1px solid rgba(220, 210, 200, 0.55);
+  box-shadow: 0 2px 10px rgba(90, 80, 70, 0.05);
 }
 
-:root[data-theme="wellness"] .btn.primary {
-  background: #FF6F59;
-  color: #ffffff;
-  border-radius: 10px;
+:root #tabbar,
+:root[data-theme="dark"] #tabbar,
+:root[data-theme="wellness-dark"] #tabbar {
+  background: rgba(20, 19, 18, 0.94);
+  border-top: 1px solid rgba(250, 247, 242, 0.08);
 }
 
-:root[data-theme="wellness"] #tabbar {
+:root[data-theme="light"] #tabbar,
+:root[data-theme="wellness"] #tabbar,
+:root[data-theme="wellness-light"] #tabbar {
   background: rgba(250, 247, 242, 0.94);
   border-top: 1px solid rgba(90, 80, 70, 0.10);
 }
 
-:root[data-theme="wellness"] .sheet {
+:root .sheet,
+:root[data-theme="dark"] .sheet,
+:root[data-theme="wellness-dark"] .sheet {
+  background: var(--bg);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid rgba(250, 247, 242, 0.08);
+}
+
+:root[data-theme="light"] .sheet,
+:root[data-theme="wellness"] .sheet,
+:root[data-theme="wellness-light"] .sheet {
   background: var(--bg);
   border-radius: 20px 20px 0 0;
 }
 
-:root[data-theme="wellness"] .modal, :root[data-theme="wellness"] .center {
+:root .modal, :root .center,
+:root[data-theme="dark"] .modal, :root[data-theme="dark"] .center,
+:root[data-theme="wellness-dark"] .modal, :root[data-theme="wellness-dark"] .center {
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid rgba(250, 247, 242, 0.08);
+}
+
+:root[data-theme="light"] .modal, :root[data-theme="light"] .center,
+:root[data-theme="wellness"] .modal, :root[data-theme="wellness"] .center,
+:root[data-theme="wellness-light"] .modal, :root[data-theme="wellness-light"] .center {
   border-radius: 14px;
   background: #FFFFFF;
 }
 
-:root[data-theme="light"] {
-  --bg:        #f2f2f7;
-  --bg-el:     #f7f7fa;
-  --surface:   #ffffff;
-  --surface-2: #ececef;
-  --surface-3: #e3e3e8;
-
-  --label:     #000000;
-  --label-2:   rgba(60,60,67,.60);
-  --label-3:   rgba(60,60,67,.30);
-  --label-4:   rgba(60,60,67,.16);
-
-  --sep:       rgba(60,60,67,.29);
-  --sep-op:    rgba(60,60,67,.20);
-
-  --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#ff9500;
-  --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
-  --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#8e8e93;
-  --acc-2:#248a3d;
-  --on-acc:#ffffff;
+.btn.primary {
+  background: var(--acc);
+  color: var(--on-acc);
+  border-radius: 10px;
 }
+
 
 /* accents — Apple's system colours, so a recolour never looks off-system */
 :root[data-accent="lime"]  { --acc:var(--green);  --acc-2:#248a3d; --on-acc:#000 }

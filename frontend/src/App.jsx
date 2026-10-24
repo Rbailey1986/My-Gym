@@ -57,7 +57,7 @@ const scrollPositions = new Map()
 bindUI(useUI)   // lets the shared controls open sheets without importing the store at module scope
 
 // theme === 'system' follows the OS/browser preference instead of a fixed choice.
-const resolveTheme = theme => theme === 'light' || theme === 'dark' || theme === 'wellness'
+const resolveTheme = theme => theme === 'light' || theme === 'dark' || theme === 'wellness' || theme === 'wellness-dark' || theme === 'wellness-light'
   ? theme
   : (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
 
@@ -65,9 +65,10 @@ function applyPrefs(theme, accent) {
   const de = document.documentElement
   de.dataset.theme = resolveTheme(theme)
   applyAccent(de, accent, de.dataset.theme)
+  const isLight = de.dataset.theme === 'light' || de.dataset.theme === 'wellness' || de.dataset.theme === 'wellness-light'
   const meta = document.querySelector('meta[name="theme-color"]')
-  if (meta) meta.content = de.dataset.theme === 'wellness' ? '#FAF7F2' : de.dataset.theme === 'light' ? '#f2f2f7' : '#000000'
-  if (MOBILE) setSystemBarsLight(de.dataset.theme === 'light' || de.dataset.theme === 'wellness')
+  if (meta) meta.content = isLight ? '#FAF7F2' : '#141312'
+  if (MOBILE) setSystemBarsLight(isLight)
 }
 
 function Shell() {
