@@ -17,11 +17,14 @@ function csv(file) {
   return body.filter(r => r.length === head.length).map(r => Object.fromEntries(head.map((h, i) => [h, r[i]])))
 }
 const n = v => v === '' || v == null ? undefined : Math.round(+v * 100) / 100
+// CREA writes "tr" (traces, left blank in crea.csv) where a macro is ~0 g, e.g. carbs in eggs or Parmigiano.
+const z = (v, r) => n(v) ?? (r.kcal !== '' && (r.protein !== '' || r.fat !== '' || r.carbs !== '') && r.category !== 'Bevande alcoliche' ? 0 : undefined)
+const cleanEn = s => s?.replace(/\s+(?:Porzione|Numero Campioni|Codice Langual)\b[\s\S]*/i, '').replace(/^\||\|$/g, '').trim() || undefined
 const entry = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined && v !== ''))
 
 const foods = [
-  ...csv('crea.csv').map(r => entry({ id: 'it-' + r.code, n: r.name, en: r.english, cat: r.category, src: 'it', pt: n(r.portion), k: n(r.kcal), p: n(r.protein), f: n(r.fat), c: n(r.carbs), s: n(r.sugars), fi: n(r.fibre), na: n(r.sodium) })),
-  ...csv('cofid.csv').map(r => entry({ id: 'uk-' + r.code, n: r.name, src: 'uk', k: n(r.kcal), p: n(r.protein), f: n(r.fat), sf: n(r.satfat), c: n(r.carbs), s: n(r.sugars), fi: n(r.fibre), na: n(r.sodium) })),
+  ...csv('crea.csv').map(r => entry({ id: 'it-' + r.code, n: r.name, en: cleanEn(r.english), cat: r.category, src: 'it', pt: n(r.portion), k: n(r.kcal), p: z(r.protein, r), f: z(r.fat, r), c: z(r.carbs, r), s: n(r.sugars), fi: n(r.fibre), na: n(r.sodium) })),
+  ...csv('cofid.csv').map(r => entry({ id: 'uk-' + r.code, n: r.name, src: 'uk', k: n(r.kcal), p: z(r.protein, r), f: z(r.fat, r), sf: n(r.satfat), c: z(r.carbs, r), s: n(r.sugars), fi: n(r.fibre), na: n(r.sodium) })),
 ].filter(x => x.k != null && x.p != null && x.f != null && x.c != null)
 
 writeFileSync(new URL('../src/lib/foods-data.js', import.meta.url),

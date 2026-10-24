@@ -2351,4 +2351,17 @@ export default {
   'Normal': 'Normale',
   'Relaxed': 'Largo',
   'Meals a day': 'Pasti al giorno',
+  // --- food table & portions ---
+  'Food table': 'Tabella alimenti',
+  'Search foods…': 'Cerca alimenti…',
+  '{0} kcal · {1} g protein · {2} g carbs · {3} g fat · per 100 g': '{0} kcal · {1} g proteine · {2} g carboidrati · {3} g grassi · per 100 g',
+  'Amount': 'Quantità',
+  'pieces': 'pezzi',
+  'cup': 'tazza',
+  'tbsp': 'cucchiaio',
+  'tsp': 'cucchiaino',
+  '1 piece ≈ {0} g · {1} g total': '1 pezzo ≈ {0} g · {1} g in totale',
+  '{0} g': '{0} g',
+  'Fibre': 'Fibre',
+  'Sugars': 'Zuccheri',
 }

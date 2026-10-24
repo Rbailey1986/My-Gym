@@ -7,11 +7,12 @@ import { useUI } from '../store/useUI.js'
 import { t } from '../lib/i18n.js'
 import { fmtNum, todayISO } from '../lib/format.js'
 import { targetsForDay, ACTIVITY } from '../lib/nutrition-targets.js'
+import { searchFoods, macrosFor, pieceGrams } from '../lib/foods.js'
+import { tappable } from '../lib/use-sheet-keyboard.js'
 import { goalSheet } from '../sheets.jsx'
 
-// The Food tab: today's targets (lib/nutrition-targets.js), the day's meals, and the shopping
-// list. Targets need a short body profile, set up here once; the meals and the list arrive with
-// the meal planner, and until then their sections say so rather than showing made-up data.
+// The Food tab: today's targets (lib/nutrition-targets.js), the day's meals, food search and
+// portion calculator (lib/foods.js), and the shopping list.
 const MEALS = [
   { key: 'breakfast', label: 'Breakfast', icon: 'sunrise' },
   { key: 'lunch', label: 'Lunch', icon: 'sun' },
@@ -24,14 +25,24 @@ const ACTIVITY_LABEL = {
   moderate: ['Active', 'On your feet most of the day'],
   very: ['Very active', 'A physical job'],
 }
+const FOOD_UNITS = [
+  ['g', 'g'],
+  ['ml', 'ml'],
+  ['pieces', 'pieces'],
+  ['cup', 'cup'],
+  ['tbsp', 'tbsp'],
+  ['tsp', 'tsp'],
+]
 
 export default function Food() {
   const S = useStore(s => s.S)
+  const [q, setQ] = useState('')
   const today = todayISO()
   const tg = targetsForDay(S, today)
   const day = tg?.day
   const macros = [['Protein', 'var(--blue)', day?.protein], ['Carbs', 'var(--yellow)', day?.carbs], ['Fat', 'var(--pink)', day?.fat]]
   const hasWeight = S.bodyweight.length > 0
+  const hits = q.trim() ? searchFoods(q, 25) : []
   return <div className="narrow food">
     <div className="hdr">
       <div><h1>{t('Food')}</h1><div className="sub">{t('Meals, macros and shopping')}</div></div>
@@ -77,6 +88,26 @@ export default function Food() {
       </div>)}
     </div>
 
+    <h2 className="sec-title">{t('Food table')}</h2>
+    <div className="search-row" style={{ marginBottom: 10 }}>
+      <div className={'search' + (q.trim() ? ' has-count' : '') + (q ? ' has-clear' : '')}>
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input className="input" placeholder={t('Search foods…')} value={q} onChange={e => setQ(e.target.value)} />
+        {q.trim() && <span className="search-count" role="status">{fmtNum(hits.length)}</span>}
+        {q && <button className="clear" onClick={() => setQ('')} aria-label={t('Clear')}><Icon name="xmark" /></button>}
+      </div>
+    </div>
+    {q.trim() && <div className="list" style={{ marginBottom: 12 }}>
+      {hits.map(f => <div key={f.id} className="item" {...tappable(() => foodSheet(f))}>
+        <div className="grow">
+          <div className="tt">{f.n}</div>
+          <div className="ss">{t('{0} kcal · {1} g protein · {2} g carbs · {3} g fat · per 100 g', fmtNum(Math.round(f.k)), fmtNum(f.p), fmtNum(f.c), fmtNum(f.f))}</div>
+        </div>
+        <Icon name="chevronRight" className="chev" />
+      </div>)}
+      {hits.length === 0 && <div className="empty"><div className="ico"><Icon name="magnifier" /></div>{t('No match')}</div>}
+    </div>}
+
     <div className="card food-soon">
       <div className="row" style={{ gap: 10 }}>
         <span className="lrow-i" style={{ background: 'var(--orange)' }}><Icon name="cart" /></span>
@@ -106,6 +137,45 @@ function whyLine(tg, S) {
     ? t('About {0} kcal keeps your weight steady; {1} less a day loses {2} a week.', fmtNum(tg.maintenance), fmtNum(-gap), pace)
     : t('About {0} kcal keeps your weight steady; {1} more a day gains {2} a week.', fmtNum(tg.maintenance), fmtNum(gap), pace)
 }
+
+function FoodSheet({ food, close }) {
+  const [amount, setAmount] = useState(food.pt || 100)
+  const [unit, setUnit] = useState('g')
+  const changeUnit = next => {
+    if ((next === 'pieces' || next === 'cup' || next === 'tbsp' || next === 'tsp') && (unit === 'g' || unit === 'ml')) setAmount(1)
+    else if ((next === 'g' || next === 'ml') && unit !== 'g' && unit !== 'ml') setAmount(food.pt || 100)
+    setUnit(next)
+  }
+  const m = macrosFor(food, amount ?? 0, unit) || { kcal: 0, protein: 0, carbs: 0, fat: 0, grams: 0 }
+  return <>
+    <h3>{food.n}</h3>
+    {food.en && food.en !== food.n && <div className="muted small" style={{ marginBottom: 10 }}>{food.en}</div>}
+    <div className="sect-t">{t('Amount')}</div>
+    <NumberField className="input" value={amount ?? ''} onChange={setAmount} placeholder="100" />
+    <div style={{ marginTop: 10 }}>
+      <Segmented value={unit} onChange={changeUnit} options={FOOD_UNITS.map(([value, label]) => ({ value, label: t(label) }))} />
+    </div>
+    {unit !== 'g' && <div className="muted small" style={{ marginTop: 6 }}>
+      {unit === 'pieces'
+        ? t('1 piece ≈ {0} g · {1} g total', fmtNum(pieceGrams(food)), fmtNum(m.grams))
+        : t('{0} g', fmtNum(m.grams))}
+    </div>}
+    <div className="card" style={{ marginTop: 14 }}>
+      <div className="row between" style={{ marginBottom: 8 }}>
+        <span>{t('Calories')}</span>
+        <strong>{fmtNum(Math.round(m.kcal))} kcal</strong>
+      </div>
+      <div className="row between small"><span>{t('Protein')}</span><span>{fmtNum(m.protein)} g</span></div>
+      <div className="row between small" style={{ marginTop: 4 }}><span>{t('Carbs')}</span><span>{fmtNum(m.carbs)} g</span></div>
+      <div className="row between small" style={{ marginTop: 4 }}><span>{t('Fat')}</span><span>{fmtNum(m.fat)} g</span></div>
+      {m.fibre != null && <div className="row between small dim" style={{ marginTop: 4 }}><span>{t('Fibre')}</span><span>{fmtNum(m.fibre)} g</span></div>}
+      {m.sugars != null && <div className="row between small dim" style={{ marginTop: 4 }}><span>{t('Sugars')}</span><span>{fmtNum(m.sugars)} g</span></div>}
+    </div>
+    <div style={{ height: 14 }} />
+    <Button variant="primary" onClick={close}>{t('Done')}</Button>
+  </>
+}
+export const foodSheet = food => useUI.getState().openSheet(close => <FoodSheet food={food} close={close} />)
 
 function ProfileSheet({ close }) {
   const S = useStore(s => s.S)
