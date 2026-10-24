@@ -1,0 +1,833 @@
+code,name,english,category,edible,portion,kcal,protein,fat,carbs,sugars,fibre,sodium
+000020,"Farro perlato, crudo","Emmer, grain","Cereali e derivati",100,80,353,14.6,2.4,69.3,2.4,6.5,10
+000025,"Farro perlato, cotto, bollito","Emmer, grain, boiled in water, no salt, drained","Cereali e derivati",100,185,178,6.2,1,37.3,0.9,2.1,1
+000030,"Frumento duro","Durum wheat, grain","Cereali e derivati",100,80,332,13.0,2.9,62.5,3.2,9.8,
+000040,"Frumento tenero","Soft wheat, grain","Cereali e derivati",100,80,336,12.3,2.6,65.2,3.3,9.7,
+000045,"Couscous, crudo","Couscous, raw","Cereali e derivati",100,80,361,13.7,1.1,76.5,2.7,4.5,10
+000046,"Couscous, cotto","Couscous, cooked","Cereali e derivati",100,185,179,3.6,1.1,39.7,1.3,2.7,96
+000050,"Grano saraceno","Buckwheat, grain","Cereali e derivati",100,80,329,12.4,3.3,61.2,,10,1
+000060,"Mais","Sweet corn, grain","Cereali e derivati",100,80,357,9.2,3.8,75.1,2.5,2,35
+000070,"Mais, dolce, in scatola, sgocciolato","Sweet corn, grain, canned","Cereali e derivati",100,30,105,3.4,1.3,20.5,5.3,1.4,270
+000075,"Polenta, cruda","Polenta, raw","Cereali e derivati",100,70,323,8.0,0.7,72.7,0.6,6.2,5
+000076,"Polenta, cotta","Polenta, cooked Numero Campioni 4","Cereali e derivati",100,340,73,0.9,0.04,17.8,0.2,0.9,91
+000080,"Miglio","Millet, grain","Cereali e derivati",100,80,343,11.8,3.9,64.9,,8.5,5
+000081,"Miglio, decorticato","Millet, decorticated, grain","Cereali e derivati",100,80,342,11.0,4.2,67.8,4.9,3.1,1
+000090,"Orzo perlato","Pearled barley, grain","Cereali e derivati",100,80,346,9.4,1.5,73.7,1.5,9.2,3
+000095,"Orzo perlato, cotto, bollito","Pearled barley, grain, boiled in water, no salt, drained","Cereali e derivati",100,215,118,2.6,0.6,26.4,1.2,1.8,2
+000096,"Quinoa, cruda","Quinoa, raw Numero Campioni 3","Cereali e derivati",100,80,376,15.4,8.1,57.8,5.3,12.2,
+000097,"Quinoa, cotta, bollita","Quinoa, boiled in water, no salt, drained","Cereali e derivati",100,250,140,4.8,2.5,24.3,3.1,3.6,4
+000100,"Riso, brillato","Rice polished, raw","Cereali e derivati",100,80,334,6.7,0.4,80.4,0.2,1,5
+000105,"Riso, brillato, cotto, bollito","Rice polished, boiled in distilled water, no salt, drained","Cereali e derivati",100,260,100,2.0,0.1,24.2,0.1,0.2,1
+000110,"Riso, integrale","Rice, whole, raw","Cereali e derivati",100,80,341,7.5,1.9,77.4,1.2,1.9,9
+000115,"Riso, integrale, cotto, bollito","Rice, whole, boiled in distilled water, no salt, drained","Cereali e derivati",100,250,113,2.5,0.6,25.5,0.4,0.8,3
+000120,"Riso, parboiled","Parboiled rice, raw","Cereali e derivati",100,80,338,7.4,0.3,81.3,0.3,0.5,9
+000125,"Riso, parboiled, cotto, bollito","Parboiled rice, boiled in distilled water, no salt, drained","Cereali e derivati",100,236,97,2.1,0.1,23.3,0.2,0.3,4
+000130,"Riso Basmati, crudo","Basmati rice, raw Numero Campioni 3","Cereali e derivati",100,80,367,9.0,1.9,82.9,1.1,1.3,
+000135,"Riso Basmati, cotto, bollito","Basmati rice, boiled in water, no salt, drained","Cereali e derivati",100,240,113,3.0,0.6,25.2,0.7,0.7,2
+000140,"Riso Venere, crudo","Venere rice, raw Numero Campioni 3","Cereali e derivati",100,80,355,7.8,1.3,80.4,2.2,5.1,
+000145,"Riso Venere, cotto, bollito","Venere rice, boiled in water, no salt, drained","Cereali e derivati",100,170,160,3.5,0.3,36.9,1.6,2.4,2
+000150,"Crusca di frumento","Wheat bran","Cereali e derivati",100,30,290,14.1,5.5,26.6,3.8,42.4,28
+000200,"Farina d'avena","Flour, oat","Cereali e derivati",100,100,378,12.6,7.1,66.3,1.2,7.6,33
+000210,"Farina d'orzo","Flour, barley","Cereali e derivati",100,100,333,10.6,1.9,68.4,0.8,8.5,4
+000220,"Farina di frumento, tipo 00","Flour, wheat, type 00","Cereali e derivati",100,100,323,11.0,0.7,71.6,1.7,2.2,3
+000230,"Farina di frumento, tipo 0","Flour, wheat, type 0","Cereali e derivati",100,100,321,11.5,1.0,69.5,1.8,2.9,2
+000240,"Farina di frumento, integrale","Flour, wheat wholemeal","Cereali e derivati",100,100,313,11.9,1.9,61.8,2.1,8.4,3
+000250,"Farina di frumento, duro","Flour, durum wheat","Cereali e derivati",100,100,330,12.9,2.8,63.2,3.2,8.0,
+000260,"Farina di mais","Flour, corn","Cereali e derivati",100,100,341,8.7,2.7,73.5,1.5,3.1,1
+000270,"Farina di riso","Flour, rice","Cereali e derivati",100,100,332,7.3,0.5,79.1,,1,4
+000280,"Farina di segale","Flour, rye","Cereali e derivati",100,100,342,11.7,2.0,67.8,0.1,11.3,
+000290,"Farina di soia","Flour, soybean","Legumi",100,100,469,36.8,23.5,23.4,11.2,11.2,9
+000300,"Mais, amido","Corn, starch","Cereali e derivati",100,100,328,0.3,,87.0,1.5,0,0
+000310,"Semola","Durum wheat flour (semola)","Cereali e derivati",100,100,346,11.5,0.5,76.9,1.9,3.6,12
+000320,"Farina di manioca","Tapioca (manioc flour)","Cereali e derivati",100,100,332,0.6,0.2,87.2,,0.4,4
+000330,"Germe di frumento","Wheat germ","Cereali e derivati",100,30,378,26.0,10,43.5,,10.5,3
+000500,"Pane al malto","Malted bread","Cereali e derivati",100,50,278,8.3,2.4,56.6,26.1,5.5,280
+000510,"Pane di segale","Rye bread","Cereali e derivati",100,50,228,8.3,1.7,45.4,1.8,4.6,580
+000530,"Pane bianco","Bread, flour type 0","Cereali e derivati",100,50,268,8.1,0.5,59.5,2,3.8,293
+000540,"Pane di tipo semintegrale","Bread, flour type 1","Cereali e derivati",100,50,239,8.3,0.3,52.0,2.2,4.2,
+000550,"Pane di tipo integrale","Wholemeal bread","Cereali e derivati",100,50,224,8.5,1.3,44.1,2,6.5,511
+000560,"Pane formato rosetta","Bread, flour type 00, rosetta","Cereali e derivati",100,50,275,9.0,1.9,57.6,7.5,3.1,317
+000570,"Pangrattato","Bread crumbs","Cereali e derivati",100,100,357,10.1,2.1,77.8,5,3.2,400
+000580,"Panini al latte","Bread rolls, with milk","Cereali e derivati",100,50,298,9.0,8.7,48.1,2.7,1.9,460
+000590,"Panini all'olio","Bread rolls, with oil","Cereali e derivati",100,50,288,7.7,5.8,52.6,4,3.7,
+000600,"Pane azzimo","Bread, unleavened","Cereali e derivati",100,50,365,10.7,1.0,81.7,1.9,3.5,
+000700,"Pizza bianca","Pizza, white","Cereali e derivati",100,50,306,7.9,5.9,57.9,2.1,2.3,789
+000710,"Pizza con pomodoro","Pizza, with tomato","Cereali e derivati",100,50,248,7.6,6.6,40.7,2.9,2.7,280
+000720,"Pizza con pomodoro e mozzarella","Pizza, with tomato and mozzarella","Cereali e derivati",100,50,255,12.1,7.6,35.5,2.5,2.5,775
+000800,"Pasta di semola","Pasta, durum wheat flour, raw","Cereali e derivati",100,80,341,13.5,1.2,72.7,2.2,1.7,4
+000805,"Pasta di semola, cotta, bollita","Pasta, durum wheat flour, boiled in distilled water, no salt","Cereali e derivati",100,200,175,6.9,0.6,37.3,1.1,0.9,2
+000850,"Pasta di semola, integrale","Pasta, wholemeal durum wheat, raw","Cereali e derivati",100,80,330,13.3,2.2,64.8,3.0,7.1,11
+000855,"Pasta di semola, integrale, cotta, bollita","Pasta, wholemeal durum wheat, boiled in distilled water, no salt","Cereali e derivati",100,180,182,7.4,1.2,36.0,1.7,3.5,6
+000870,"Pasta all'uovo, secca","Egg pasta, dried, raw","Cereali e derivati",100,70,346,13.0,2.4,71.0,2,3.2,17
+000871,"Pasta all'uovo, secca, cotta, bollita","Egg pasta, dried, boiled in distilled water, no salt","Cereali e derivati",100,210,123,4.6,0.8,25.5,0.17,1.1,18
+000875,"Ravioli, crudi, freschi","Ravioli, pasta stuffed with spinach and ricotta, fresh","Cereali e derivati",100,125,265,10.6,7.3,40.7,1.8,2.2,
+000876,"Ravioli, cotti","Ravioli, pasta stuffed with spinach and ricotta, cooked","Cereali e derivati",100,175,177,7.2,4.6,27.5,1.4,1.6,
+000880,"Tortellini, freschi","Tortellini, fresh","Cereali e derivati",100,125,302,12.2,7.1,49.9,1.3,1.2,
+000885,"Tortellini, freschi, cotti","Tortellini, fresh, cooked","Cereali e derivati",100,150,158,6.4,3.7,26.0,0.7,0.6,
+000890,"Tortellini, secchi","Tortellini, dried","Cereali e derivati",100,100,379,15.7,10.8,57.6,1.5,1.6,
+000900,"Biscotti, frollini","""|Biscuits """"Frollini"""", shortbread|""","Cereali e derivati",100,30,426,7.2,13.8,71.7,22,1.9,223
+000910,"Biscotti, integrali","Biscuits, wholemeal","Cereali e derivati",100,30,419,7.8,12.3,70.8,28.8,6,225
+000950,"Biscotti, secchi","Biscuits, dried","Cereali e derivati",100,30,404,6.6,7.9,80.4,18.5,2.6,410
+000960,"Biscotti, alla soia","Biscuits with soybean","Cereali e derivati",100,30,375,11.5,6.1,70.8,6.2,4.5,180
+000970,"Biscotti, integrali, con soia","Biscuits with soybean, wholemeal","Cereali e derivati",100,30,464,11.5,20.4,60.4,1.1,3.8,180
+000990,"Biscotti, wafers","Biscuits, wafer","Cereali e derivati",100,30,452,7.1,15,76.2,26.7,1.6,70
+001000,"Crackers, al formaggio","Crackers with cheese","Cereali e derivati",100,30,498,10.1,25.5,59.2,5.5,2.8,688
+001010,"Crackers, alla soia","Crackers with soybean","Cereali e derivati",100,30,421,13.1,11.7,67.7,6.3,4.9,
+001020,"Crackers, salati","Crackers, salted","Cereali e derivati",100,30,386,9.4,10,67.5,,2.8,
+001030,"Crackers, integrali","Crackers, wholemeal","Cereali e derivati",100,30,402,12.0,11.4,61.7,2.1,10.0,703
+001500,"Fette biscottate","Rusks","Cereali e derivati",100,30,387,11.3,6,75.0,2.2,3.5,
+001510,"Fette biscottate, integrali","Rusks, wholemeal","Cereali e derivati",100,30,394,14.2,10,63.0,1.1,5.4,
+002000,"Grissini","Breadsticks","Cereali e derivati",100,30,421,11.3,13.9,65.1,2.2,3.5,
+002500,"Cornetti","Brioches","Cereali e derivati",100,50,403,7.2,18.3,54.7,10.6,2.1,350
+002510,"Croissants","Croissants","Cereali e derivati",100,50,362,8.3,20.3,38.0,1.1,1.6,390
+003000,"Bastoncini di crusca di frumento","Bran wheat, small sticks","Cereali e derivati",100,30,301,14.0,3.2,38.4,10.8,35.9,614
+003020,"Corn flakes","Corn flakes","Cereali e derivati",100,30,367,6.6,0.8,87.4,10.4,2.8,500
+003030,"Fiocchi d'avena","Oat bran flakes","Cereali e derivati",100,30,367,8.0,7.5,66.8,0.6,8.3,
+003040,"Muesli","Muesli","Cereali e derivati",100,30,374,9.7,6.0,71.7,26.2,6.4,380
+003050,"Riso, soffiato, da prima colazione","Puffed Rice, breakfast cereal","Cereali e derivati",100,30,354,6.0,1.0,85.1,9,1,1
+004000,"Ceci, secchi","Chickpeas, dried, raw","Legumi",100,50,343,20.9,6.3,46.9,3.7,13.6,6
+004005,"Ceci, secchi, cotti, bolliti","Chickpeas, dried, boiled without salt, drained","Legumi",100,290,132,7.0,2.4,18.9,1.3,5.8,5
+004010,"Ceci, in scatola, scolati","Chickpeas, canned, drained, raw","Legumi",100,150,111,6.7,2.3,13.9,1,5.7,311
+004100,"Fagioli","Beans, dried, raw","Legumi",100,50,326,23.6,2.0,47.5,3.5,17.5,4
+004105,"Fagioli, cotti, bolliti","Beans, dried, boiled in distilled water, no salt, drained","Legumi",100,120,117,7.9,0.7,17.0,1.2,7.8,
+004110,"Fagioli, Borlotti, freschi","Beans, Borlotti, fresh, raw","Legumi",52,150,143,10.2,0.8,22.7,1.2,4.8,2
+004115,"Fagioli, Borlotti, freschi, cotti, bolliti","Beans, Borlotti, fresh, boiled in distilled water, no salt, drained","Legumi",100,150,78,5.7,0.5,11.2,0.5,4.2,
+004120,"Fagioli, Borlotti, secchi","Beans, Borlotti, dried, raw","Legumi",100,50,312,20.2,2.0,47.7,3.5,17.3,3
+004125,"Fagioli, Borlotti, secchi, cotti, bolliti","Beans, Borlotti, dried, boiled in distilled water, no salt, drained","Legumi",100,150,106,6.9,0.4,16.4,1,6.9,2
+004130,"Fagioli, Borlotti, in scatola, scolati","Beans, Borlotti, canned, drained","Legumi",100,150,102,6.7,0.5,15.9,1,5.5,294
+004200,"Fagioli, Cannellini, secchi","Beans, Cannellini, dried, raw","Legumi",100,50,314,23.4,1.6,45.5,2.9,17.6,5
+004205,"Fagioli, Cannellini, secchi, cotti, bolliti","Beans, Cannellini, dried, boiled in distilled water, no salt, drained","Legumi",100,150,107,8.0,0.4,14.9,0.6,7.8,2
+004210,"Fagioli, Cannellini in scatola, scolati","Beans, Cannellini, canned, drained","Legumi",100,150,86,6.0,0.6,12.5,0.3,4.8,431
+004220,"Fagioli dall'occhio, secchi","Cowpeas, dried","Legumi",100,50,318,22.4,1.4,50.9,4,12.7,14
+004305,"Fagiolini a corallo, cotti, bolliti","Italian flat bean, boiled in distilled water, no salt, drained","Legumi",100,150,31,1.7,0.1,4.6,2.1,2.9,
+004310,"Fagiolini, freschi","Green beans, fresh, raw","Legumi",95,200,24,2.1,0.1,2.4,2.4,2.9,2
+004325,"Fagiolini, surgelati, cotti, bolliti","Green beans, frozen, boiled in distilled water, no salt, drained","Legumi",100,200,31,1.7,0.1,4.6,2.1,2.9,8
+004400,"Fave, fresche","Broad beans, raw","Legumi",26,150,51,5.2,0.4,4.5,2.2,5,17
+004406,"Fave, fresche, cotte, in padella","Broad beans, pan-fried without fat and salt","Legumi",100,150,61,6.1,0.5,5.3,2.6,5.9,20
+004410,"Fave, secche","Broad beans, dried, raw","Legumi",100,50,331,21.3,2.1,52.8,4.5,14.7,
+004420,"Fave, secche, sgusciate, crude","Broad beans, dried, shelled, raw","Legumi",100,50,343,25.2,3,53.6,4.9,7,
+004425,"Fave, secche, sgusciate, cotte, bollite","Broad beans, dried, shelled, boiled in distilled water, no salt, drained","Legumi",100,150,146,11.0,1.3,22.4,2.1,3,
+004500,"Lenticchie, secche","Lentils, dried, raw","Legumi",100,50,319,22.7,1,51.1,1.8,13.8,8
+004505,"Lenticchie, secche, cotte, bollite","Lentils, dried, boiled in distilled water, no salt, drained","Legumi",100,150,109,6.9,0.4,16.3,0.7,8.3,2
+004510,"Lenticchie, in scatola, scolate","Lentils, canned, drained","Legumi",100,150,91,5.0,0.5,15.4,0.7,4.2,357
+004600,"Lupini, ammollati","Lupines, dried, rehydrated","Legumi",76,150,119,16.4,2.4,7.1,0.5,2.8,
+004700,"Piselli, freschi","Green peas, fresh, raw","Legumi",31,150,64,5.5,0.6,6.5,4,6.3,1
+004706,"Piselli, freschi, cotti, in padella","Green peans, fresh, baked in pan, no salt, no fat added","Legumi",100,150,104,9.7,1.0,11.5,7,6.4,
+004710,"Piselli, secchi","Green peas, dried","Legumi",100,50,317,21.7,2.0,48.2,2.9,15.7,38
+004720,"Piselli, in scatola, scolati","Green peas, canned, drained","Legumi",100,150,78,5.3,0.6,11.1,3.9,5.1,242
+004730,"Piselli, surgelati","Green peas, frozen","Legumi",100,150,61,5.4,0.3,6.5,4,6.3,129
+004900,"Soia, secca","Soy, dried","Legumi",100,50,430,36.9,19.1,23.2,11,11.9,4
+004910,"Soia, isolato proteico","Soy, protein isolate","Legumi",100,10,369,86.5,0.7,4.5,,,
+005000,"Aglio","Garlic, raw","Verdure e ortaggi",75,5,53,8.4,0.8,1.0,1.0,4.3,4
+005001,"Aglio Rosso di Castelliri","Red Castelliri garlic","Verdure e ortaggi",95,5,52,8.9,0.5,1.02,1.02,3.8,4
+005002,"Aglio Rosso di Procerno","Red Procerno garlic","Verdure e ortaggi",94,4,57,8.9,0.9,1.0,1.02,4.6,5
+005003,"Aglio Rosso di Sulmona","Red Sulmona garlic","Verdure e ortaggi",96,3,58,8.7,1.3,1.0,0.97,4.0,5
+005004,"Aglio Bianco Piacentino","White Piacentino garlic","Verdure e ortaggi",94,3,47,7.2,0.6,0.9,0.94,4.7,3
+005010,"Agretti, crudi","Garden cress, fresh, raw","Verdure e ortaggi",97,200,22,1.8,0.2,2.2,2.2,2.3,
+005025,"Agretti, cotti, bolliti","Garden cress, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,25,2.1,0.2,2.6,2.6,2.7,
+005030,"Asparagi di bosco, crudi","Asparagus, wild, raw","Verdure e ortaggi",57,200,40,4.6,0.2,4.0,4,2.2,5
+005040,"Asparagi di campo, crudi","Asparagus, coltivated, raw","Verdure e ortaggi",87,200,33,3.6,0.2,3.3,3.3,2.0,1
+005045,"Asparagi di campo, cotti, bolliti","Asparagus, coltivated, boiled in distilled water, no salt, drained","Verdure e ortaggi",85,200,34,3.8,0.2,3.4,3.4,2.1,1
+005050,"Asparagi di serra, crudi","Asparagus, greenhouse, raw","Verdure e ortaggi",52,200,28,3.0,0.1,3.0,3,2.1,1
+005060,"Barbabietole rosse, crude","Red Beet, raw","Verdure e ortaggi",82,200,25,1.1,,4.0,4,2.6,84
+005065,"Barbabietole rosse, cotte, bollite","Red Beet, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,43,2.1,,7.8,7.8,2.6,
+005080,"Bieta, cruda","Beet, raw","Verdure e ortaggi",82,200,15,1.3,0.1,1.8,1.8,1.2,10
+005084,"Bieta, cotta, al microonde","Beet, cooked by microwave","Verdure e ortaggi",100,200,15,1.3,0.1,1.8,1.8,1.2,
+005085,"Bieta, cotta, bollita","Beet, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,18,1.5,0.1,2.1,2.1,1.4,8
+005090,"Broccoletti di rapa, crudi","Turnip-Tops, raw","Verdure e ortaggi",60,200,28,2.9,0.3,2.0,2,2.9,8
+005095,"Broccoletti di rapa, cotti, bolliti","Turnip-Tops, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,29,3.1,0.3,2.1,2.1,3.1,6
+005105,"Broccolo a testa, cotto, bollito","Broccoli, head, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,34,3.1,0.4,3.2,3.2,3.2,9
+005110,"Broccolo a testa, crudo","Broccoli, head, fresh, raw","Verdure e ortaggi",51,200,33,3.0,0.4,3.1,3.1,3.1,12
+005120,"Carciofi, crudi","Artichokes, raw","Verdure e ortaggi",34,200,33,2.7,0.2,2.5,1.9,5.5,133
+005124,"Carciofi, cotti, al microonde","Artichokes, cooked by microwave","Verdure e ortaggi",100,200,34,2.8,0.2,2.5,1.9,5.6,
+005125,"Carciofi, cotti, bolliti","Artichokes, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,44,3.6,0.3,3.3,2.6,7.4,100
+005130,"Carciofi, surgelati","Artichokes, frozen, raw","Verdure e ortaggi",100,200,32,2.7,0.2,2.5,1.9,5.0,
+005131,"Carciofo Romanesco IGP","Artichokes Roman IGP","Verdure e ortaggi",37,200,48,3.0,0.2,6.10,,5.5,
+005132,"Carciofo, verde, precoce","Artichokes, green, premature","Verdure e ortaggi",34,200,45,2.9,0.2,5.40,,5.5,
+005134,"Carciofo, violetto, precoce","Artichokes, violet, premature","Verdure e ortaggi",36,200,43,2.8,0.2,5.2,,5.5,
+005136,"Carciofo, Spinoso sardo","Artichokes, Sardinian spiny","Verdure e ortaggi",37,200,45,1.9,0.2,8.9,1.7,1,104
+005140,"Cardi, crudi","Cardoon, raw","Verdure e ortaggi",70,200,13,0.6,0.1,1.7,1.5,1.5,23
+005150,"Carote, crude","Carrots, fresh, raw","Verdure e ortaggi",95,200,41,1.1,0.2,7.6,7.6,3.1,95
+005154,"Carote, cotte, al microonde","Carrots, cooked by microwave","Verdure e ortaggi",100,200,41,1.1,0.2,7.7,7.7,3.1,
+005155,"Carote, cotte, bollite","Carrots, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,47,1.3,0.2,8.7,8.7,3.6,71
+005160,"Cavolfiore, crudo","Cauliflower, raw","Verdure e ortaggi",66,200,30,3.2,0.2,2.7,2.4,2.4,8
+005164,"Cavolfiore, cotto, al microonde","Cauliflower, cooked by microwave","Verdure e ortaggi",100,200,30,3.2,0.2,2.8,2.4,2.4,
+005165,"Cavolfiore, cotto, bollito","Cauliflower, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,31,3.4,0.2,2.9,2.6,2.6,6
+005170,"Cavoli di Bruxelles, crudi","Brussels Sprouts, raw","Verdure e ortaggi",76,200,47,4.2,0.5,4.2,3.3,5.0,6
+005175,"Cavoli di Bruxelles, cotti, bolliti","Brussels Sprouts, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,53,4.7,0.6,4.6,3.7,5.6,5
+005180,"Cavolo broccolo verde ramoso, crudo","Broccoli, verde ramoso, raw","Verdure e ortaggi",72,200,30,3.4,0.3,2.0,2,3,8
+005185,"Cavolo broccolo verde ramoso, cotto, bollito","Broccoli, verde ramoso, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,52,6.0,0.5,3.5,3.5,5.3,6
+005190,"Cavolo cappuccio, rosso, crudo","Cabbage, red","Verdure e ortaggi",94,200,22,1.9,0.2,2.7,2.7,1.0,8
+005195,"Cardi, cotti, bolliti","Cardoon, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,22,1.0,0.2,2.9,2.5,2.5,17
+005200,"Cavolo cappuccio, verde, crudo","Cabbage, green, raw","Verdure e ortaggi",93,200,24,2.1,0.1,2.5,2.5,2.6,23
+005205,"Cavolo cappuccio, verde, cotto, bollito","Cabbage, green, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,24,2.1,0.1,2.5,2.5,2.6,17
+005210,"Cavolo verza, cruda","Cabbage, savoy, raw","Verdure e ortaggi",92,200,29,2.0,0.1,3.8,3.8,2.9,
+005215,"Cavolo verza, cotto, bollito","Cabbage, savoy, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,29,2.0,0.1,3.8,3.8,2.9,
+005220,"Cetrioli, freschi","Cucumbers, fresh","Verdure e ortaggi",77,200,16,0.7,0.5,1.8,1.8,0.8,13
+005230,"Cicoria, da taglio, coltivata, cruda","Chicory, greens, cultivated, raw","Verdure e ortaggi",89,200,14,1.2,0.1,1.7,1.7,1.2,7
+005240,"Cicoria, di campo, cruda","Chicory, greens, wild, raw","Verdure e ortaggi",80,200,17,1.4,0.2,0.7,0.7,3.6,1
+005245,"Cicoria, di campo, cotta, bollita","Chicory, greens, wild, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,17,1.4,0.2,0.7,0.7,3.6,1
+005250,"Cicoria, witloof o indivia belga, cruda","Chicory, witloof, raw","Verdure e ortaggi",100,200,20,0.7,0.3,3.2,3.2,1.1,
+005300,"Cipolle, crude","Onions, raw","Verdure e ortaggi",83,200,28,1.0,0.1,5.7,5.7,1.0,10
+005305,"Cipolle, cotte, bollite","Onions, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,39,1.4,0.1,7.8,7.8,1.4,8
+005310,"Cipolline, crude","Small Onions, raw","Verdure e ortaggi",93,200,42,1.3,0.1,8.5,8.5,1.9,
+005315,"Cipolline, cotte, bollite","Small Onions, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,53,1.7,0.1,10.9,10.9,2.4,
+005320,"Finocchi, crudi","Fennels, raw","Verdure e ortaggi",59,200,15,1.2,,1.5,1.5,2.2,4
+005324,"Finocchi, cotti, al microonde","Fennels, cooked by microwave","Verdure e ortaggi",100,200,15,1.2,,1.5,1.5,2.2,
+005325,"Finocchi, cotti, bolliti","Fennels, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,17,1.4,,1.7,1.7,2.6,3
+005330,"Fiori di zucca, freschi","Squash Flowers, fresh","Verdure e ortaggi",79,80,18,1.7,0.4,0.5,0.5,2.8,
+005340,"Foglie di rapa, crude","Turnip, leaf, raw","Verdure e ortaggi",63,200,27,2.6,0.1,2.8,2.8,2.5,
+005350,"Germogli di soia","Soy Sprouts","Verdure e ortaggi",98,80,54,6.2,1.4,3.0,3,2.8,30
+005400,"Indivia, fresca","Endive, fresh","Verdure e ortaggi",69,80,20,0.9,0.3,2.7,2.7,1.6,10
+005410,"Lattuga, fresca","Lettuce, fresh","Verdure e ortaggi",80,80,22,1.8,0.4,2.2,2.2,1.5,9
+005420,"Lattuga, a cappuccio, fresca","Iceberg Lettuce, fresh","Verdure e ortaggi",92,80,22,1.5,0.2,3,3,1.3,
+005430,"Lattuga, da taglio, fresca","Boston Lettuce, fresh","Verdure e ortaggi",83,80,17,1.1,0.1,2.2,2.2,1.5,
+005435,"Lattughino, fresco","Lettuce small, fresh Numero Campioni 14","Verdure e ortaggi",80,80,16,1.5,0.2,1.4,1.4,1.6,17
+005436,"Lattughino IV gamma, fresco","Lettuce, packaged, ready-to-use","Verdure e ortaggi",100,80,16,1.4,0.2,1.4,1.4,1.6,18
+005440,"Radicchio, rosso, fresco","Italian Chicory, radicchio, red, fresh","Verdure e ortaggi",72,80,19,1.4,0.1,1.6,1.6,3.0,10
+005441,"Radicchio rosso di Treviso IGP, precoce","Italian Chicory, radicchio from Treviso, red, precocius PGI, fresh","Verdure e ortaggi",95,80,16,1.6,0.1,1.0,1.0,2.5,13
+005442,"Radicchio rosso di Treviso IGP, tardivo","Italian Chicory, radicchio from Treviso, red, tardive PGI, fresh","Verdure e ortaggi",75,80,16,1.5,0.1,1.4,1.4,2.1,5
+005443,"Radicchio variegato di Castelfranco IGP","Italian Chicory, radicchio from Castelfranco, variegated PGI, fresh","Verdure e ortaggi",95,80,16,1.3,0.1,1.4,1.4,2.1,14
+005450,"Radicchio, verde, fresco","Italian Chicory, radicchio, green, fresh","Verdure e ortaggi",95,80,14,1.9,0.5,0.5,0.5,,
+005460,"Rucola o Ruchetta, fresca","Rocket, leaves, fresh","Verdure e ortaggi",100,80,30,2.6,0.3,3.9,3.9,0.9,
+005465,"Scarola","Endive, fresh Numero Campioni 14","Verdure e ortaggi",80,80,19,1.1,0.3,2.3,2.3,1.8,42
+005466,"Scarola IV gamma, fresca","Endive, packaged, ready-to-use","Verdure e ortaggi",100,80,17,0.9,0.2,2.2,2.2,1.6,43
+005470,"Tarassaco o dente di leone, fresco","Dandelion Greens, fresh","Verdure e ortaggi",100,200,37,3.1,1.1,3.7,3.7,0.4,76
+005500,"Melanzane, crude","Eggplants, raw","Verdure e ortaggi",92,200,23,1.0,0.4,2.6,2.6,2.6,3
+005506,"Melanzane, cotte, in padella","Eggplants, pan-fried without fat and salt","Verdure e ortaggi",100,200,39,1.3,0.7,5.4,5.4,3.7,4
+005507,"Melanzane, cotte, al microonde","Eggplants, cooked by microwave, no salt","Verdure e ortaggi",100,200,23,0.8,0.4,3.0,3.0,2.4,3
+005600,"Peperoni, crudi","Peppers, yellow, red and green, fresh, crudi","Verdure e ortaggi",82,200,26,0.9,0.3,4.2,4.2,1.9,2
+005606,"Peperoni, cotti, in padella","Peppers, yellow, red and green, fresh, pan-fried without fat and salt","Verdure e ortaggi",100,200,143,5.2,1.5,24.3,24.3,8.7,
+005610,"Peperoni, rossi e gialli, crudi","Peppers, red and yellow, raw","Verdure e ortaggi",81,200,35,0.9,0.3,6.7,6.7,1.9,
+005620,"Peperoni, gialli, crudi","Peppers, yellow, raw","Verdure e ortaggi",83,200,35,0.9,0.2,6.8,6.8,1.9,17
+005624,"Peperoni, gialli, cotti, al microonde","Peppers, yellow, cooked by microwave","Verdure e ortaggi",100,200,41,1.1,0.2,8.1,8.1,2.3,9
+005630,"Peperoni, rossi, crudi","Peppers, red, raw","Verdure e ortaggi",82,200,34,0.9,0.3,6.5,6.5,1.9,16
+005634,"Peperoni, rossi, cotti, al microonde","Peppers, red, cooked by microwave","Verdure e ortaggi",100,200,42,1.1,0.4,7.9,7.9,2.3,24
+005640,"Peperoni, verdi, crudi","Peppers, green, raw","Verdure e ortaggi",81,200,31,0.7,0.2,6.0,6.0,1.9,
+005650,"Porri, crudi","Leeks, raw","Verdure e ortaggi",77,200,35,2.1,0.1,5.2,5.2,2.9,2
+005655,"Porri, cotti, bolliti","Leeks, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,35,2.1,0.1,5.3,5.3,3.0,2
+005660,"Rape, crude","Turnips, raw","Verdure e ortaggi",69,200,24,1.0,0,4.0,3.8,2.6,15
+005665,"Rape, cotte, bollite","Turnips, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,26,1.1,0,4.3,4.1,2.8,11
+005670,"Ravanelli, freschi","Radish, fresh","Verdure e ortaggi",99,200,13,0.8,0.1,1.8,1.8,1.3,59
+005680,"Sedano, crudo","Celery, raw","Verdure e ortaggi",80,200,23,2.3,0.2,2.4,2.2,1.6,140
+005684,"Sedano, cotto, al microonde","Celery, cooked by microwave, no salt","Verdure e ortaggi",100,200,24,2.4,0.2,2.4,2.2,1.7,137
+005690,"Sedano rapa, crudo","Celeriac, raw","Verdure e ortaggi",72,200,29,1.9,0.1,3.8,3.8,3.1,
+005700,"Spinaci, crudi","Spinach, fresh, raw","Verdure e ortaggi",83,200,35,3.4,0.7,2.9,0.4,1.9,100
+005704,"Spinaci, cotti, al microonde","Spinach, fresh, cooked by microwave, no salt","Verdure e ortaggi",100,200,35,3.4,0.7,3.0,0.4,1.9,
+005705,"Spinaci, cotti, bolliti","Spinach, fresh, boiled in distelled water, no salt, drained","Verdure e ortaggi",100,200,41,4,0.8,3.5,0.5,2.3,75
+005710,"Spinaci, surgelati","Spinach, leaves, frozen","Verdure e ortaggi",100,200,15,2.8,,0,,1.8,57
+005720,"Zucca gialla, fresca","Squash, fresh","Verdure e ortaggi",81,200,29,1.1,0.1,3.5,2.5,5.5,
+005730,"Zucchine, crude","Zucchini Squash, raw","Verdure e ortaggi",88,200,16,1.5,0.1,1.7,1.8,1.2,1
+005735,"Zucchine, cotte, bollite","Zucchini Squash, boiled in distilled water, no salt, drained","Verdure e ortaggi",100,200,30,3.2,0.2,3.4,3.2,1.3,
+005740,"Zucchine, chiare","Zucchini Squash (Ligth Green), raw","Verdure e ortaggi",86,200,17,1.9,0.1,1.7,1.6,1.2,1
+005741,"Zucchine chiare, cotte, al vapore","Zucchini Squash (Ligth Green), steaming, no salt","Verdure e ortaggi",100,200,20,2.0,0,2.5,2.5,1.3,1
+005742,"Zucchine chiare, cotte, in padella grigliate","Zucchini Squash (Ligth Green), in pain grilled, no salt","Verdure e ortaggi",100,200,29,0,0.2,5.7,5.7,2.8,2
+005744,"Zucchine, chiare, cotte, al microonde","Zucchini Squash (Ligth Green), cooked by microwave, no salt","Verdure e ortaggi",100,200,23,2.0,0.1,3.0,3.0,1.6,2
+005750,"Zucchine, scure, crude","Zucchini Squash (Dark Green), raw","Verdure e ortaggi",89,200,17,1.4,0.1,2.1,2.0,1.2,1
+005751,"Zucchine, scure, cotte, al vapore","Zucchini Squash (Ligth Green), steaming, no salt","Verdure e ortaggi",100,200,20,1.6,0.1,2.7,2.7,1.5,
+005752,"Zucchine, scure, cotte, in padella grigliate","Zucchini Squash (Ligth Green), in pain grilled, no salt","Verdure e ortaggi",100,200,37,2.7,0.1,5.6,5.5,2.0,2
+005754,"Zucchine, scure, cotte, al microonde","Zucchini Squash (Dark Green), cooked by microwave, no salt","Verdure e ortaggi",100,200,23,1.8,0,3.5,3.5,1.5,1
+006000,"Funghi coltivati, prataioli, crudi","Mushrooms, prataioli, raw","Verdure e ortaggi",95,200,24,3.7,0.2,0.8,0.8,2.3,5
+006006,"Funghi coltivati, prataioli, cotti, in padella","Mushrooms, prataioli, pan-fried, no salt, no fat added","Verdure e ortaggi",100,200,46,7.0,0.4,1.5,1.5,4.3,4
+006010,"Funghi coltivati, pleurotes, crudi","Mushrooms, pleurotes, raw","Verdure e ortaggi",98,200,37,2.2,0.3,5.6,5.6,2.4,7
+006016,"Funghi coltivati, pleurotes, cotti, in padella","Mushrooms, pleurotes, pan-fried, no salt, no fat added","Verdure e ortaggi",100,200,35,2.6,0.4,5.3,5.3,0.8,
+006020,"Funghi ovuli, crudi","Mushrooms, ovuli, raw","Verdure e ortaggi",87,200,23,2.0,0.3,1.6,1.6,3.0,
+006030,"Funghi porcini, crudi","Mushrooms, porcini, raw","Verdure e ortaggi",92,200,31,3.9,0.7,1.0,1,2.5,52
+006200,"Tartufo, nero","Truffle, black","Verdure e ortaggi",79,5,48,6.0,0.5,0.7,0.7,8.4,
+006500,"Patate, crude","Potatoes, raw","Verdure e ortaggi",83,200,72,2.0,0.1,16.0,1,1.8,7
+006505,"Patate, con buccia, cotte, bollite","Potatoes, boiled in distilled water, no salt","Verdure e ortaggi",83,200,88,2.1,1.0,17.9,0.4,1.6,7
+006511,"Patate, cotte, arrosto","Potatoes, skinned, roasted","Verdure e ortaggi",100,200,152,2.9,4.5,25.7,0.6,1.8,9
+006514,"Patate, cotte, al microonde","Potatoes, skinned, cooked by microwave, no salt","Verdure e ortaggi",100,200,88,2.1,1.0,17.9,0.4,1.6,7
+006515,"Patate, senza buccia, cotte, bollite","Potatoes, skinned, boiled in distilled water, no salt","Verdure e ortaggi",100,200,74,1.8,0.1,16.9,0.4,1.3,7
+006517,"Patate, fritte","Potatoes, skinned, fried","Verdure e ortaggi",100,200,192,3.9,6.7,29.9,0.6,2.2,12
+006570,"Patatine, fritte, confezionate in busta","Potato Chips, packed","Verdure e ortaggi",100,25,512,5.4,29.6,58,1,3.2,1070
+006580,"Patate novelle, crude","Potatoes, new or earlies, raw","Verdure e ortaggi",96,200,72,2.0,0.3,15.7,0.2,1.4,10
+006584,"Patate novelle, cotte, al microonde","Potatoes, new or earlies, cooked by microwave, no salt","Verdure e ortaggi",100,200,72,2.0,0.3,15.7,0.2,1.4,10
+006585,"Patate novelle, cotte, bollite","Potatoes, new or earlies, boiled in distilled water, no salt","Verdure e ortaggi",100,200,68,1.9,0.2,14.9,0.2,1.4,
+006590,"Gnocchi di patate, crudi","Potato gnocchi, raw Numero Campioni 8","Cereali e derivati",100,120,164,3.9,0.3,37.9,1.4,1.9,9
+006591,"Gnocchi di patate, cotti","Potato gnocchi, cooked Numero Campioni 8","Cereali e derivati",100,130,147,3.5,0.2,34.0,1,1.8,180
+006596,"Topinambur, cotto, bollito","Jerusalem Artichoke, boiled in distilled water, no salt","Verdure e ortaggi",100,200,52,1.6,0.1,10.6,,2.7,
+006600,"Pomodori, da insalata, freschi","Tomatoes, fresh","Verdure e ortaggi",100,200,19,1.2,0.2,2.8,2.8,1.0,3
+006610,"Pomodori, maturi, freschi","Tomatoes, ripened, fresh","Verdure e ortaggi",100,200,23,1.0,0.2,3.5,3.5,2.0,6
+006620,"Pomodori, San Marzano, freschi","""|Tomatoes, type """"San Marzano"""", fresh|""","Verdure e ortaggi",100,200,21,1.1,0.2,3.0,3,2.0,3
+006630,"Pomodori, Nerina, verdi, freschi","""|Tomatoes, type """"Nerina"""", green, fresh|""","Verdure e ortaggi",100,200,21,0.9,0.4,2.8,2.8,1.5,16
+006640,"Pomodori, Nerina, rossi, freschi","""|Tomatoes, type """"Nerina"""", ripe, fresh|""","Verdure e ortaggi",100,200,21,1.1,0.4,2.8,2.8,1.4,16
+006650,"Pomodorini ciliegino, freschi","Tomatoes, cherry, fresh Numero Campioni 12","Verdure e ortaggi",100,250,37,1.1,0.4,7.2,9.0,1.0,5
+006660,"Pomodori, conserva","Tomatoes, preserve","Verdure e ortaggi",100,100,100,3.9,0.4,20.4,20.4,2.0,760
+006670,"Pomodori, passata","Tomatoes, sauce","Verdure e ortaggi",100,100,21,1.3,0.2,3.0,3.0,1.5,16
+006680,"Pomodori, pelati in scatola","Tomatoes, ripened, canned, pulp and juice","Verdure e ortaggi",100,100,22,1.2,0.5,3.0,3.0,0.9,9
+006690,"Pomodori, succo","Tomato Juice","Verdure e ortaggi",100,125,16,0.8,,3.0,3.0,0.6,230
+006800,"Basilico, fresco","Basil, fresh","Verdure e ortaggi",100,5,42,3.1,0.8,5.2,5.1,1.6,9
+006810,"Menta, fresca","Mint Leaves, fresh","Verdure e ortaggi",100,5,49,3.8,0.7,5.3,5.3,3.8,15
+006820,"Pepe nero","Pepper, black, grains","Verdure e ortaggi",100,1,311,11.4,3.3,49.0,,25.9,44
+006830,"Peperoncini piccanti, freschi","Hot Chili Peppers, fresh","Verdure e ortaggi",89,5,30,1.8,0.5,3.8,1.5,2.0,7
+006840,"Prezzemolo, fresco","Parsley, fresh","Verdure e ortaggi",80,5,30,3.7,0.6,,,5.0,20
+006850,"Rosmarino, fresco","Rosemary, fresh","Verdure e ortaggi",100,5,110,1.4,4.4,13.5,13.5,7.0,15
+006860,"Salvia, fresco","Sage, leaves, fresh","Verdure e ortaggi",100,5,132,3.9,4.6,15.6,15.6,8.2,4
+006990,"Vegetali misti, surgelati","Mixed Vegetables, (mais, peas, carrots, beans), frozen","Verdure e ortaggi",100,200,67,3.3,0.3,13.7,,,59
+007000,"Albicocche, fresche","Apricots, fresh","Frutta",94,150,42,0.4,0.1,9.8,9.8,1.5,1
+007010,"Albicocche, disidratate","Apricots, dehydrated","Frutta",100,30,356,5.6,1.0,80.6,80.6,11,33
+007020,"Albicocche, sciroppate","Apricots, in syrup","Frutta",100,30,65,0.4,0.1,16.1,16.1,0.9,10
+007030,"Albicocche, secche","Apricots, dried","Frutta",100,30,286,5.0,0.5,66.5,66.5,6,26
+007040,"Cocomero, fresco","Watermelon","Frutta",52,150,16,0.4,,3.7,3.7,0.2,3
+007050,"Fichi, freschi","Figs, fresh","Frutta",75,150,63,0.9,0.2,14.2,14.2,2,2
+007053,"Fichi, seccati al forno e mandorlati","Figs, dried in oven and almond added","Frutta",100,30,305,5.2,4.2,58.2,58.2,14,
+007060,"Fichi, canditi","Figs, candied","Frutta",100,30,294,3.5,0.2,73.7,73.7,1.1,
+007070,"Fichi, secchi","Figs, dried","Frutta",100,30,282,3.5,2.7,58.0,58,13,87
+007080,"Fichi d'india, freschi","Prickly Pear, fresh","Frutta",64,150,63,0.8,0.1,13.0,13,5,1
+007090,"Loti o kaki, freschi","Persimmon, fresh","Frutta",97,150,70,0.6,0.3,16.0,16.0,2.5,4
+007100,"Melagrane, fresche","Pomegranate, fresh","Frutta",59,150,68,0.5,0.2,15.9,15.9,2.2,7
+007110,"Mele, fresche, senza buccia","Apples, fresh, peel removed","Frutta",79,150,57,0.3,0.1,13.7,13.7,2,2
+007120,"Mele, fresche, con buccia","Apples, fresh, with peel","Frutta",85,150,44,0.2,,10.0,10,2.6,2
+007130,"Mele, fresche, annurche","Apples, fresh, var. annurca","Frutta",84,150,45,0.3,0.1,10.2,10.2,2.2,
+007140,"Mele, fresche, deliziose","Apples, fresh, var. delicious","Frutta",79,150,46,0.2,0.1,11.1,11.1,1.5,
+007150,"Mele, fresche, golden","Apples, fresh, var. golden deliciuos","Frutta",73,150,46,0.4,0.1,10.7,10.7,1.7,
+007160,"Mele, fresche, granny smith","Apples, fresh, var. granny smith","Frutta",81,150,42,0.5,0.1,9.4,9.4,1.9,
+007170,"Mele, fresche, imperatore","Apples, fresh, var. emperor","Frutta",75,150,48,0.2,0.1,11.3,11.3,1.9,
+007180,"Mele, fresche, renette","Apples, fresh, var. renetta","Frutta",71,150,43,0.3,0.1,10.0,10,1.7,
+007190,"Mele, disidratate","Apples, dehydrated","Frutta",100,30,356,1.3,2,82.2,82.2,12.5,7
+007220,"Mele cotogne, fresche","Quince, fresh","Frutta",79,150,38,0.3,0.1,6.3,6.3,5.9,3
+007230,"Melone, d'estate, fresco","Cantaloupe, fresh","Frutta",47,150,34,0.8,0.2,7.4,7.4,0.7,8
+007240,"Melone, d'inverno, fresco","Santa Claus Melon, fresh","Frutta",51,150,24,0.5,0.2,4.9,4.9,0.7,8
+007250,"Nespole, fresche","Loquats, fresh","Frutta",66,150,32,0.4,0.4,6.1,6.1,2.1,6
+007260,"Pere, fresche, senza buccia","Pears, fresh, peel removed","Frutta",84,150,43,0.3,0.1,8.8,8.8,3.8,2
+007261,"Pere, fresche, Abate Fetel","Pears, fresh, Abate Fetel","Frutta",89,150,59,0.2,0.3,12.7,12.7,3.8,
+007262,"Pere, fresche, Coscia","Pears, fresh, Coscia","Frutta",93,150,42,0.3,0.1,8.6,8.6,3.8,
+007263,"Pere, fresche, Kaiser","Pears, fresh, Kaiser","Frutta",91,150,48,0.3,0.5,9.2,9.2,3.8,
+007264,"Pere, fresche, Max-Red Barlett","Pears, fresh, Max-red Barlett","Frutta",90,150,50,0.3,0.4,10.0,10.0,3.8,
+007265,"Pere, fresche, William","Pears, fresh, William","Frutta",90,150,52,0.3,0.5,10.2,10.2,3.8,
+007270,"Pere, candite","Pears, candied","Frutta",100,150,294,1.0,0.4,73.9,73.9,4.5,
+007280,"Pesche, fresche, senza buccia","Peaches, fresh, peel removed","Frutta",91,150,30,0.8,0.1,6.1,6.1,1.6,3
+007290,"Pesche, fresche, con buccia","Peaches, fresh, with peel","Frutta",95,150,28,0.7,,5.8,5.8,1.9,
+007300,"Pesche, disidratate","Peaches, dried","Frutta",100,30,364,4.8,0.9,88.0,88,3.5,21
+007310,"Pesche, sciroppate","Peaches, canned in syrup","Frutta",100,30,56,0.5,,14,14,0.9,4
+007320,"Pesche, secche","Peaches, dried","Frutta",100,30,280,3.1,0.7,68.3,68.3,2.8,16
+007330,"Peschenoci, fresche","Nectarines, fresh","Frutta",90,150,36,1.4,0.1,7.0,7.0,1.5,
+007340,"Prugne, fresche","Plums, fresh","Frutta",90,150,45,0.5,0.1,10.5,10.5,1.5,2
+007350,"Prugne, gialle","Plums, yellow, fresh","Frutta",96,150,30,0.5,0.1,6.6,6.6,1.4,2
+007360,"Prugne, rosse","Plums, red, fresh","Frutta",87,150,45,0.5,0.1,10.5,10.5,1.6,
+007370,"Prugne, secche","Prunes, dried","Frutta",88,30,236,2.2,0.5,55.0,55,8.4,8
+007380,"Uva, fresca","Grapes, fresh","Frutta",94,150,64,0.5,0.1,15.6,15.6,1.5,1
+007390,"Uva, bianca, fresca","Grapes, white, fresh","Frutta",95,150,86,0.4,0.1,21.5,21.5,1.4,1
+007400,"Uva, nera, fresca","Grapes, black, fresh","Frutta",95,150,53,0.5,0.1,12.6,12.6,1.6,1
+007410,"Uva, secca","Raisin","Frutta",100,30,293,1.9,0.6,72,72,5.2,52
+007420,"Uva, succo, in cartone","Grape, juice, canned","Frutta",100,125,66,0.3,,17.3,17.3,0,2
+007460,"Ananas, fresco","Pineapple, fresh","Frutta",57,150,42,0.5,0,10.0,10,1,2
+007470,"Ananas, sciroppato","Pineapple in syrup","Frutta",100,30,66,0.5,0,16.6,16.6,0.7,2
+007480,"Anona, fresca","Custard apple, fresh","Frutta",72,150,73,1.8,0.2,15.8,,2.2,4
+007490,"Avocado, fresco","Avocado, fresh","Frutta",76,150,238,4.4,23,1.8,1.8,3.3,2
+007500,"Babaco, fresco","Babaco, fresh","Frutta",89,150,24,0.7,0.2,4.5,4.5,1.1,1
+007510,"Banane, fresche","Bananas, fresh","Frutta",65,150,76,1.2,0.3,17.4,14.8,1.8,1
+007520,"Cocco, fresco","Coconut, fresh","Frutta secca a guscio e semi oleaginosi",52,50,358,3.5,35,4.4,4.4,6.1,23
+007530,"Cocco, essiccato","Coconut, dried","Frutta secca a guscio e semi oleaginosi",100,30,669,5.6,62.0,16.4,16.4,13.7,28
+007550,"Feijoa, fresca","Feijoa, fresh","Frutta",67,150,59,0.7,0.8,9.6,9.6,6.5,18
+007560,"Guava, fresca","Guava, fresh","Frutta",98,150,31,0.7,0.5,3.5,3.5,5.4,4
+007570,"Kiwi, freschi","Kiwi, fresh","Frutta",87,150,48,1.2,0.6,9.0,9,2.2,5
+007580,"Litchi, freschi","Litchi, fresh","Frutta",72,150,72,1.1,0.1,17.2,17.2,1.3,1
+007590,"Mango, fresco","Mango, fresh","Frutta",73,150,56,1.0,0.2,12.6,12.6,1.6,1
+007600,"Papaia, fresca","Pawpaw, fresh","Frutta",70,150,33,0.4,0.1,6.9,6.9,2.3,7
+007610,"Passiflora, fresca","Passion Fruit, fresh","Frutta",42,150,64,3.0,0.3,5.7,5.7,13.9,19
+007630,"Datteri, secchi","Dates, dried","Frutta",90,30,270,2.7,0.6,63.1,63.1,8.7,5
+007700,"Amarene, fresche","Sour Cherry, fresh","Frutta",85,150,44,0.8,,10.2,10.2,1.1,2
+007710,"Ciliege, fresche","Cherry, fresh","Frutta",86,150,48,0.8,0.1,11.0,11,1.3,3
+007720,"Ciliege, candite","Cherry, candied","Frutta",100,30,252,0.4,,66.4,66.4,0.9,27
+007730,"Fragole, fresche","Strawberry, fresh","Frutta",94,150,30,0.9,0.4,5.3,5.3,1.6,2
+007740,"Lamponi, freschi","Raspberry, fresh","Frutta",100,150,49,1.0,0.6,6.5,6.5,7.4,3
+007750,"Mora di rovo","Blackberry wild, fresh","Frutta",100,150,42,1.3,,8.1,8.1,3.2,2
+007760,"Mirtilli, freschi","Blueberry, fresh","Frutta",100,150,49,0.9,0.2,10.1,10.1,3.1,2
+007770,"Ribes, freschi","Currant, fresh","Frutta",98,150,52,0.9,,9.7,9.7,5.8,3
+008000,"Arance, fresche","Oranges, fresh","Frutta",80,150,37,0.7,0.2,7.8,7.8,1.6,3
+008001,"Arance bionde, fresche","Oranges blondes, fresh","Frutta",68,150,45,0.7,0.2,9.9,9.9,1.6,
+008002,"Arance Valencia, fresche","Oranges Valencia, fresh Numero Campioni 10","Frutta",69,150,39,0.7,0.3,8.0,8.0,1.6,
+008003,"Arance Washington Navel, fresche","Oranges Washington, fresh Numero Campioni 13","Frutta",62,150,44,1.0,0.2,9.4,9.4,1.6,
+008004,"Arance rosse, fresche","Oranges red, fresh","Frutta",64,150,45,0.7,0.2,9.9,9.9,1.6,
+008005,"Arance Moro, fresche","Oranges Moro, fresh Numero Campioni 31","Frutta",59,150,42,0.7,0.2,9.0,9.0,1.6,
+008006,"Arance Sanguinello, fresche","Oranges Sanguinello, fresh Numero Campioni 37","Frutta",65,150,47,0.7,0.1,10.6,10.6,1.6,
+008007,"Arance Tarocco, fresche","Oranges Tarocco, fresh Numero Campioni 19","Frutta",57,150,45,0.7,0.2,10.0,10.0,1.6,
+008010,"Arance succo, fresco","Orange Juice, fresh","Frutta",100,150,33,0.5,,8.2,8.2,0,2
+008011,"Arance bionde succo, fresco","Oranges blondes Juice, fresh","Frutta",100,150,38,0.5,,9.6,9.6,0,
+008012,"Arance rosse succo, fresco","Oranges red Juice, fresh","Frutta",100,150,39,0.5,,9.8,9.8,0,
+008020,"Clementine, fresche","Clementines","Frutta",75,150,40,0.9,0.1,8.7,8.7,1.2,4
+008030,"Limoni, freschi","Lemons","Frutta",64,150,16,0.6,0,2.5,2.5,1.9,2
+008040,"Limoni, succo","Lemons, juice","Frutta",100,100,10,0.2,0,2.5,2.5,,2
+008050,"Mandaranci, freschi","Tangerines, fresh","Frutta",87,150,57,0.8,0.2,12.8,12.8,2.2,2
+008060,"Mandarini, freschi","Mandarins, fresh","Frutta",80,150,76,0.9,0.3,17.6,17.6,1.7,1
+008070,"Pompelmo, fresco","Grapefruit, fresh","Frutta",70,150,29,0.6,0,6.2,6.2,1.6,1
+008500,"Arachidi, tostate","Peanuts, toasted","Frutta secca a guscio e semi oleaginosi",65,30,620,29.0,50,8.5,3.1,10.9,6
+008510,"Carrube","Carobs","Frutta secca a guscio e semi oleaginosi",100,50,253,3.3,0.7,49.9,48.9,23.1,
+008520,"Castagne","Chestnuts","Frutta secca a guscio e semi oleaginosi",85,30,174,2.9,1.7,36.7,8.9,4.7,9
+008521,"Castagne, arrostite","Chestnuts, roasted","Frutta secca a guscio e semi oleaginosi",82,30,210,3.7,2.4,41.8,10.7,8.3,12
+008525,"Castagne, bollite","Chestnuts, boiled without salt, drained","Frutta secca a guscio e semi oleaginosi",88,30,130,2.5,1.3,26.1,7.5,5.4,
+008530,"Castagne, secche","Chestnuts, dried","Frutta secca a guscio e semi oleaginosi",100,30,315,6.0,3.4,62,16.1,13.8,17
+008540,"Mandorle dolci, secche","Almonds, sweet, dried","Frutta secca a guscio e semi oleaginosi",24,30,628,22.0,55.3,4.6,3.7,12.7,14
+008550,"Nocciole, secche","Hazelnuts, dried","Frutta secca a guscio e semi oleaginosi",42,30,671,13.8,64.1,6.1,4.1,8.1,11
+008560,"Noci","Walnuts","Frutta secca a guscio e semi oleaginosi",58,30,589,10.5,57.7,5.5,3.4,3.5,3
+008570,"Noci, secche","Walnuts, dried","Frutta secca a guscio e semi oleaginosi",39,30,702,14.3,68.1,5.1,3.1,6.2,2
+008580,"Noci pecan","Pecan Nuts","Frutta secca a guscio e semi oleaginosi",49,30,723,7.2,71.8,7.9,4.3,9.4,
+008590,"Pinoli","Pine Nuts","Frutta secca a guscio e semi oleaginosi",29,30,604,31.9,50.3,4,3.9,4.5,
+008600,"Pistacchi","Pistachios","Frutta secca a guscio e semi oleaginosi",50,30,629,18.1,56.1,8.1,4.5,10.6,1
+008605,"Pistacchio di Bronte DOP","Pistachios of Bronte, PDO","Frutta secca a guscio e semi oleaginosi",50,30,595,24.3,48.9,7.3,7.3,15.3,
+008610,"Anacardi","Cashew Nuts","Frutta secca a guscio e semi oleaginosi",100,30,604,15.0,46,33,5.6,3,16
+008620,"Macadamia","Macadamia Nuts Porzione 30 g Codice Langual | A0260 | A0685 | A0703 | A0730 | A0823 | B1451 | C0155 | E0150 | F0001 | G0003 | H0001 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 30 g Origine Dato Metodiche Referenze Acqua (g) g 3.0 0.9 A Drying Energia (kcal) kcal 751 225 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 3143 942 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 8.0 2.4 A Protein calculated from total nitrogen Lipidi (g) g 76.0 22.8 A Solvent extraction Colesterolo (mg) mg 0 0 S Imputation Carboidrati disponibili (g) g 5.1 1.5 C Carbohydrate, available calculated from sugar and starch Amido (g) g 1.0 0.3 A Enzyme hydrolysis Zuccheri solubili (g) g 4 1.2 A Colorimetric method Alcool (g) g 0 0 S Imputation Fibra totale (g) g 8 2.4 A Enzymatic-gravimetric method MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 30 g Origine Dato Metodiche Referenze Sodio (mg) mg 5 2 A Atomic emission spectroscopy Potassio (mg) mg 363 109 A Atomic emission spectroscopy Calcio (mg) mg 70 21 A Atomic emission spectroscopy Magnesio (mg) mg 118 35 A Atomic emission spectroscopy Fosforo (mg) mg 198 59 A Atomic emission spectroscopy Ferro (mg) mg 3 0.9 A Atomic emission spectroscopy Rame (mg) mg 1 0.30 A Atomic emission spectroscopy Zinco (mg) mg 1 0.30 A Atomic emission spectroscopy Selenio (μg) μg 4 1.2 A Atomic emission spectroscopy VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 30 g Origine Dato Metodiche Referenze Tiamina (mg) mg 0.70 0.21 A Fluorimetric method Riboflavina (mg) mg 0.10 0.03 A Fluorimetric method Niacina (mg) mg 2.00 0.60 A Microbiological assay Vitamina C (mg) mg 1 tr A High-performance liquid chromatography Vitamina A retinolo equivalente (μg) μg 0 0 S Imputation Vitamina E (mg) mg 1 0.30 A High-performance liquid chromatography ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 16.52 C Simple summation Acidi grassi Monoinsaturi (%) % 81.20 C Simple summation Acidi grassi Polinsaturi (%) % 1.38 C Simple summation C18:2 acido linoleico (%) % 1.38 A Gas chromatography mass spectroscopy C18:3 acido linolenico (%) % 0 A Gas chromatography mass spectroscopy Polinsatuti/Saturi 0.08 C Calculation methods AMINOACIDI (% di proteine) Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Lisina 2.50 A Chromatography Istidina 2.38 A Chromatography Arginina 14.75 A Chromatography Acido aspartico 13.50 A Chromatography Treonina 3.75 A Chromatography Serina 5.13 A Chromatography Acido glutammico 25.38 A Chromatography Prolina 5.75 A Chromatography Glicina 5.63 A Chromatography Alanina 4.75 A Chromatography Cistina 1.25 A Chromatography Valina 12.25 A Chromatography Metionina 1.25 A Chromatography Isoleucina 3.88 A Chromatography Leucina 7.38 A Chromatography Tirosina 2.50 A Chromatography Fenilalanina 5.63 A Chromatography Triptofano 0.88 A Chromatography Indice Chimico 56 C Calculation methods Aminoacido limitante Lisina C Calculation methods Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Frutta secca a guscio e semi oleaginosi",,30,751,8.0,76.0,5.1,4,8,5
+008800,"Olive da tavola conservate","Table Olive, preserved","Frutta",83,30,277,1.5,27,5,5,4.4,
+008810,"Olive, nere","Black Olive","Frutta",74,30,243,1.6,25.1,0.8,0.8,3.9,54
+008820,"Olive, verdi","Green Olive","Frutta",84,30,148,0.8,15,1,1,3,
+008830,"Olive, verdi, in salamoia","Green Olive, in brine","Frutta",78,30,113,1.2,11,1,1,2.8,
+008840,"Oliva Nocellara del Belice","Olive Nocellara del Belice","Frutta",83,30,211,1.4,22.1,0.06,0.06,3.3,1274
+008850,"Oliva Giarraffa","Olive Giarrafa","Frutta",83,30,192,1.4,20,0.19,0.19,2.6,1576
+008930,"Succo di frutta","Fruit Juice (apricot and peach)","Frutta",100,125,56,0.3,0.1,14.5,14.5,,
+008940,"Cocktail di frutta sciroppata","Fruit In Syrup, mix","Frutta",100,150,59,0.4,,14.8,14.8,1,3
+009010,"Burro d'arachidi","Peanut Butter","Oli e grassi",100,10,625,24.9,53.7,8.0,4.4,6.0,370
+009100,"Margarina, 100% vegetale","Margarine (100% vegetable)","Oli e grassi",100,10,760,0.6,84.0,0.4,0.4,0,800
+009110,"Margarina, 2/3 di grassi animali, 1/3 di grassi vegetali","Margarine (1/3 vegetable fats; 2/3 animal fats)","Oli e grassi",100,,760,0.7,84.0,0.4,0.4,0,
+009200,"Olio di oliva","Olive Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009210,"Olio di oliva extra vergine","Olive Oil, extra-virgin","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009610,"Olio di arachide","Peanuts Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009620,"Olio di cocco","Coconut Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009630,"Olio di colza","Rapeseed Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009640,"Olio di germe di grano","Wheatgerm Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009650,"Olio di girasole","Sunflower Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009660,"Olio di mais","Corn Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009670,"Olio di mandorle dolci","Almond Sweet Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009680,"Olio di palma","Palm Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009690,"Olio di sesamo","Sesame Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009700,"Olio di soia","Soya Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009710,"Olio di vinacciolo","Grapeseed Oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+009799,"Oli vegetali","Vegetable Oils (Olive, soy, mais, etc.)","Oli e grassi",100,10,899,0,99.9,0,0,0,
+101120,"Bovino adulto o vitellone, tagli anteriori, crudo","Beef, front part cuts","Carni fresche",100,100,145,20.5,7.0,0,0,0,43
+101130,"Bovino adulto o vitellone, tagli posteriori, crudo","Beef, hind part cuts","Carni fresche",100,100,117,21.5,3.4,0,0,0,55
+101150,"Bovino adulto o vitellone, costata, crudo","Beef, rib, lean only","Carni fresche",100,100,140,21.3,6.1,0,0,0,41
+101160,"Bovino adulto o vitellone, fesa, crudo","Beef, top side (shank), lean only","Carni fresche",100,100,103,21.8,1.8,0,0,0,41
+101170,"Bovino adulto o vitellone, filetto, crudo","Beef, tenderloin (fillet), lean only","Carni fresche",100,100,127,20.5,5.0,0,0,0,41
+101180,"Bovino adulto o vitellone, girello, crudo","Beef, eye-round, lean only","Carni fresche",100,100,110,21.3,2.8,0,0,0,42
+101190,"Bovino adulto o vitellone, lombata, crudo","Beef, sirloin-steak, lean only","Carni fresche",100,100,134,21.8,5.2,0,0,0,44
+101200,"Bovino adulto o vitellone, noce, crudo","Beef, knuckle (thick flank), lean only","Carni fresche",100,100,106,21.3,2.3,0,0,0,40
+101210,"Bovino adulto o vitellone, scamone, crudo","Beef, rump, lean only","Carni fresche",100,100,119,21.4,3.7,0,0,0,40
+101220,"Bovino adulto o vitellone, sottofesa, crudo","Beef, under top side, lean only","Carni fresche",100,100,111,22.0,2.6,0,0,0,41
+101230,"Bovino adulto o vitellone, copertina di sotto, copertina di spalla, sottospalla e collo, crudo","Beef, shoulder clod, middle rib and chuck, lean only","Carni fresche",100,100,132,20.3,5.7,0,0,0,53
+101240,"Bovino adulto o vitellone, geretto anteriore e posteriore, crudo","Beef, fore shank and hind shank, lean only","Carni fresche",100,100,112,20.9,3.2,0,0,0,56
+101250,"Bovino adulto o vitellone, pancia, biancostato e punta di petto, crudo","Beef, flank steak and brisket, lean only","Carni fresche",100,100,171,19.7,10.2,0,0,0,57
+101260,"Bovino adulto o vitellone, spalla, muscolo, girello e fesone, crudo","Beef, shoulder clod and blade fillet, lean only","Carni fresche",100,100,108,21.5,2.4,0,0,0,51
+101520,"Vitello, filetto, crudo","Calf, fillet, raw","Carni fresche",100,100,107,20.7,2.7,0,0,0,89
+101521,"Vitello, filetto, cotto in padella","Calf, fillet, roasted in pan, no fat added, no salt added","Carni fresche",100,83,126,24.4,3.2,0,0,0,
+102000,"Bufalo, solo tessuto muscolare, crudo","Buffalo, lean only","Carni fresche",100,100,98,22.0,1.1,0,0,0,
+103010,"Cavallo, tessuto muscolare e grasso, crudo","Horse, raw Numero Campioni 5","Carni fresche",100,100,143,19.8,6.8,0.6,0,0,74
+103020,"Cavallo, solo tessuto muscolare, crudo","Horse, lean only","Carni fresche",100,100,106,23.5,1.0,0.7,0,0,
+104020,"Agnello, crudo","Lamb, lean only, raw","Carni fresche",100,100,159,20.0,8.8,0,0,0,88
+104029,"Agnello, cotto, al forno","Lamb, lean only, cooked","Carni fresche",100,75,199,25.0,11.0,0,0,0,106
+104030,"Agnello, coscio, crudo","Lamb, leg, lean only, raw","Carni fresche",100,100,102,20.0,2.5,0,0,0,68
+104033,"Agnello, coscio, cotto, al forno","Lamb, leg, lean only, baked in oven, no salt, no fat added","Carni fresche",100,75,118,23.0,2.9,0,0,0,65
+104040,"Agnello, costoletta, crudo","Lamb, cutlet, lean only, raw","Carni fresche",100,100,106,20.4,2.7,0,0,0,70
+104043,"Agnello, costoletta, cotto, al forno","Lamb, cutlet, lean only, baked in oven, no salt, no fat added","Carni fresche",100,75,118,22.7,3.0,0,0,0,71
+104250,"Capra, solo tessuto muscolare, crudo","Goat, lean only","Carni fresche",100,100,106,21.2,2.3,0,0,0,
+104300,"Capretto, crudo","Kid, lean only","Carni fresche",75,100,113,19.2,4.0,0,0,0,
+104610,"Pecora, solo tessuto muscolare, crudo","Sheep, lean only, raw","Carni fresche",100,100,121,21.0,4.1,0,0,0,
+105200,"Maiale, coscio, crudo","Swine, light, leg","Carni fresche",87,100,110,20.2,3.2,0,0,0,76
+105210,"Maiale, lombo, crudo","Swine, light, loin","Carni fresche",79,100,146,20.7,7.0,0,0,0,73
+105220,"Maiale, spalla, crudo","Swine, light, shoulder","Carni fresche",79,100,133,19.0,6.3,0,0,0,73
+105230,"Maiale, bistecca, crudo","Swine, light, steak, raw","Carni fresche",74,100,157,21.3,8.0,0,0,0,56
+105236,"Maiale, bistecca, cotto, in padella","Swine, light, steak, cooked in pan, no salt and fat added","Carni fresche",75,80,187,25.4,9.5,0,0,0,84
+105600,"Maiale, pesante, coscio, crudo","Swine, heavy, leg","Carni fresche",90,100,127,20.4,5.1,0,0,0,76
+105700,"Maiale, pesante, lombo, crudo","Swine, heavy, loin","Carni fresche",78,100,172,20.8,9.9,0,0,0,59
+105800,"Maiale, pesante, spalla, crudo","Swine, heavy, shoulder","Carni fresche",94,100,156,19.0,8.9,0,0,0,73
+106010,"Anatra domestica, crudo","Duck, domestic","Carni fresche",80,100,159,21.4,8.2,0,0,0,110
+106020,"Faraona, coscio, con pelle, crudo","Guinea Fowl, thigh, with skin, raw","Carni fresche",85,100,133,24.3,3.8,0.3,0,0,97
+106030,"Faraona, coscio, senza pelle, crudo","Guinea Fowl, thigh, without skin, raw","Carni fresche",78,100,127,24.0,3.3,0.3,0,0,100
+106032,"Faraona, coscio, senza pelle, cotto, allo spiedo","Guinea Fowl, leg, without skin, cooked on the spit, no salt, no fat added","Carni fresche",77,85,194,34.4,6.1,0.3,0,0,180
+106050,"Faraona, petto, senza pelle, crudo","Guinea Fowl, breast, without skin, raw","Carni fresche",100,100,121,25.8,1.9,0.2,0,0,50
+106052,"Faraona, petto, senza pelle, cotto, allo spiedo","Guinea Fowl, breast, without skin, cooked on the spit, no salt, no fat added","Carni fresche",100,85,146,30.7,2.5,0.2,0,0,70
+106100,"Gallina, crudo","Hen","Carni fresche",70,100,194,20.9,12.3,0,0,0,
+106150,"Oca, crudo","Goose","Carni fresche",70,100,373,15.8,34.4,0,0,0,120
+106200,"Pollo, intero, con pelle, crudo","Chicken, whole, with skin, raw","Carni fresche",77,100,171,19.0,10.6,0,0,0,62
+106203,"Pollo, intero, con pelle, cotto, al forno","Chicken, whole, with skin, baked in oven, no salt, no fat added, dripped","Carni fresche",73,90,200,27.1,10.2,0,0,0,93
+106210,"Pollo, intero, senza pelle, crudo","Chicken, whole, no skin, raw","Carni fresche",62,100,110,19.4,3.6,0,0,0,70
+106213,"Pollo, intero, senza pelle, cotto, al forno","Chicken, whole, no skin, baked in oven, no salt, no fat added, dripped","Carni fresche",63,90,160,27.9,5.4,0,0,0,90
+106251,"Pollo, intero, con pelle, cotto, arrosto","Chicken, whole, with skin, roasted (goods store)","Carni fresche",74,85,245,28.3,14.7,0,0,0,75
+106261,"Pollo, intero, senza pelle, cotto, arrosto","Chicken, whole, no skin, roasted (goods store)","Carni fresche",59,83,206,28.9,10,0,0,0,85
+106270,"Pollo, ala, con pelle, crudo","Chicken, wing, with skin, raw","Carni fresche",63,100,196,16.7,14.3,0,0,0,100
+106273,"Pollo, ala, con pelle, cotta, al forno","Chicken, wing, with skin, baked in oven, no salt, no fat added, dripped","Carni fresche",60,85,283,31.7,17.4,0,0,0,168
+106400,"Pollo, fuso, con pelle, crudo","Chicken, drumstick, with skin, raw","Carni fresche",67,100,125,18.4,5.7,0,0,0,87
+106403,"Pollo, fuso, con pelle, cotto, al forno","Chicken, drumstick, with skin, baked in oven, no salt, no fat added, dripped","Carni fresche",62,84,201,31.2,8.5,0,0,0,136
+106410,"Pollo, fuso, senza pelle, crudo","Chicken, drumstick, no skin, raw","Carni fresche",66,100,107,18.5,3.7,0,0,0,86
+106413,"Pollo, fuso, senza pelle, cotto, al forno","Chicken, drumstick, no skin, baked in oven, no salt, no fat added, dripped","Carni fresche",64,85,175,29.9,6.2,0,0,0,128
+106500,"Pollo, petto, crudo","Chicken, breast, raw","Carni fresche",98,100,100,23.3,0.8,0,0,0,33
+106506,"Pollo, petto, cotto, in padella","Chicken, breast, cooked in pan, no salt, no fat added","Carni fresche",98,75,129,30.2,0.9,0,0,0,46
+106600,"Pollo, sovracoscia, con pelle, crudo","Chicken, leg quarter, with skin, raw","Carni fresche",86,100,196,17.4,14,0,0,0,71
+106603,"Pollo, sovracoscia, con pelle, cotto, al forno","Chicken, leg quarter, with skin, baked in oven, no salt, no fat added, dripped","Carni fresche",83,90,219,26.7,12.5,0,0,0,100
+106610,"Pollo, sovracoscia, senza pelle, crudo","Chicken, leg quarter, no skin, raw","Carni fresche",83,100,132,18.7,6.3,0,0,0,67
+106613,"Pollo, sovracoscia, senza pelle, cotto, al forno","Chicken, leg quarter, no skin, baked in oven, no salt, no fat added, dripped","Carni fresche",81,85,188,28.3,8.3,0,0,0,112
+106700,"Tacchino intero, con pelle, crudo","Turkey, whole, with skin, raw","Carni fresche",70,100,135,18.2,6.9,0,0,0,
+106710,"Tacchino intero, senza pelle, crudo","Turkey, whole, no skin, raw","Carni fresche",58,100,109,21.9,2.4,0,0,0,
+106719,"Tacchino intero, senza pelle, cotto, al forno","Turkey, whole, no skin, baked in oven, no salt, no fat added, dripped","Carni fresche",59,88,117,23.3,2.6,0,0,0,
+106800,"Tacchino, coscio, con pelle, crudo","Turkey, thigh, with skin, raw","Carni fresche",74,100,131,18.1,6.5,0,0,0,
+106850,"Tacchino, fesa, crudo","Turkey, breast, raw","Carni fresche",100,100,107,24.0,1.2,0,0,0,52
+106856,"Tacchino, fesa, cotta, al forno","Turkey, breast, cooked in pan, no salt, no fat added","Carni fresche",100,80,131,29.6,1.4,0,0,0,68
+106900,"Tacchino, fuso, con pelle, crudo","Turkey, leg, with skin, raw","Carni fresche",74,100,126,17.9,6.0,0,0,0,88
+106903,"Tacchino, fuso, con pelle, cotto, al forno","Turkey, leg, with skin, baked in oven, no salt, no fat added, dripped","Carni fresche",71,88,191,26.7,9.3,0,0,0,117
+106910,"Tacchino, fuso, senza pelle, crudo","Turkey, leg, no skin, raw","Carni fresche",73,100,113,18.0,4.6,0,0,0,94
+106913,"Tacchino, fuso, senza pelle, cotto, al forno","Turkey, leg, no skin, baked in oven, no salt, no fat added, dripped","Carni fresche",72,85,190,28.0,8.7,0,0,0,131
+106960,"Tacchino, sovracoscia, senza pelle, crudo","Turkey, leg quarter, no skin, raw","Carni fresche",86,100,120,18.5,5.1,0,0,0,75
+106963,"Tacchino, sovracoscia, senza pelle, cotto, al forno","Turkey, leg quarter, no skin, baked in gas oven, no salt, no fat added, dripped","Carni fresche",84,85,182,30.2,6.8,0,0,0,114
+107010,"Coniglio intero, crudo","Rabbit, whole, raw","Carni fresche",71,100,118,19.9,4.3,0,0,0,67
+107019,"Coniglio, intero, cotto","Rabbit, whole, cooked","Carni fresche",71,88,166,27.9,6.0,0,0,0,
+107020,"Coniglio, intero surgelato, crudo","Rabbit, whole, deep-frozen, raw","Carni fresche",69,100,116,20.3,3.9,0,0,0,67
+107030,"Coniglio, coscio, crudo","Rabbit, thigh, raw","Carni fresche",83,100,137,21.0,5.9,0,0,0,
+108010,"Cervo, solo tessuto muscolare, crudo","Deer, lean only, raw","Carni fresche",100,100,91,21.0,0.8,0,0,0,
+108100,"Daino, solo tessuto muscolare, crudo","Buck, lean only, raw","Carni fresche",100,100,95,21.0,1.2,0,0,0,81
+108510,"Fagiano, crudo","Pheasant, raw","Carni fresche",85,100,144,24.3,5.2,0,0,0,70
+108520,"Piccione giovane, crudo","Pigeon Young, raw","Carni fresche",90,100,138,22.1,5.5,0,0,0,
+108530,"Quaglia, crudo","Quail, raw","Carni fresche",67,100,161,25.0,6.8,0,0,0,40
+108900,"Struzzo, solo tessuto muscolare, crudo","Ostrich, lean only, raw","Carni fresche",100,100,92,20.9,0.9,0,0,0,
+108901,"Struzzo, solo tessuto muscolare, cotto, al forno","Ostrich, lean only, baked in oven, no salt, no fat added, dripped","Carni fresche",100,100,101,22.2,1.4,0,0,0,
+109010,"Lumaca, cruda","Snail, raw","Carni fresche",24,100,67,12.9,1.7,0,0,0,
+109510,"Rana, crudo","Frog, raw Porzione 100 g Codice Langual | A0303 | A0717 | A0726 | A0751 | A0802 | B1252 | C0268 | E0150 | F0003 | G0003 | H0003 | J0003 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 100 g Origine Dato Metodiche Referenze Acqua (g) g 81.9 81.9 A Drying Energia (kcal) kcal 64 64 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 267 267 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 15.5 15.5 A Protein calculated from total nitrogen Lipidi (g) g 0.2 0.2 A Solvent extraction Colesterolo (mg) mg 50 50 A Gas-liquid chromatography Carboidrati disponibili (g) g 0 0 S Imputation Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0 0 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 100 g Origine Dato Metodiche Referenze Calcio (mg) mg 20 20 A Atomic emission spectroscopy Fosforo (mg) mg 430 430 A Atomic emission spectroscopy Ferro (mg) mg 6.0 6.0 A Atomic emission spectroscopy VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 100 g Origine Dato Metodiche Referenze Tiamina (mg) mg 0.16 0.16 A Fluorimetric method Riboflavina (mg) mg 0.06 0.06 A Fluorimetric method Niacina (mg) mg 1.20 1.20 A Microbiological assay Vitamina C (mg) mg 0 0 S Imputation ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 100 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Carni fresche",,100,64,15.5,0.2,0,0,0,
+110020,"Bresaola della Valtellina IGP","Bresaola, cured meat","Carni trasformate e conservate",100,50,152,33.1,2.0,0.4,,0,1600
+110100,"Capocollo","Capocollo, cured meat","Carni trasformate e conservate",100,50,450,20.8,40.2,1.4,1.4,0,
+110110,"Capocollo di Calabria","Capocollo, Calabria, cured meat","Carni trasformate e conservate",100,50,344,29.1,24.9,0.9,0.9,0,
+110130,"Ciccioli","Ciccioli, scraps of swine fat","Carni trasformate e conservate",100,50,636,45.2,50.6,0,,0,640
+110150,"Coppa","Coppa, cured meat","Carni trasformate e conservate",100,50,400,28.9,31.6,,,0,1960
+110190,"Cotechino, confezionato precotto","Cotechino, pre-cooked packed, raw","Carni trasformate e conservate",100,50,449,17.2,42.3,0,0,0,1138
+110195,"Cotechino Modena IGP, cotto","Cotechino, Modena PGI, cooked","Carni trasformate e conservate",100,50,253,23.6,16.3,3.2,,0,880
+110200,"Mortadella Bologna IGP","Mortadella, Bologna, swine","Carni trasformate e conservate",100,50,288,15.7,25.0,,,0,960
+110210,"Mortadella di bovini e suini","Mortadella, bovine & swine","Carni trasformate e conservate",100,50,388,13.3,37.0,0.5,0.5,0,
+110300,"Pancetta magretta","Bacon, fat reduced, swine","Carni trasformate e conservate",100,50,314,21.7,25.3,0,0,0,1686
+110310,"Pancetta tesa","Bacon, tense, swine","Carni trasformate e conservate",100,50,337,20.9,28.1,0,0,0,1016
+110320,"Pancetta arrotolata","Bacon, rolled, swine","Carni trasformate e conservate",100,50,530,15.1,52.2,,,0,1200
+110400,"Prosciutto cotto","Baked ham Numero Campioni 10","Carni trasformate e conservate",100,50,138,15.7,7.6,1.7,,0,840
+110401,"Prosciutto cotto, sgrassato","Baked ham, visible fat removed","Carni trasformate e conservate",100,50,107,17.0,3.5,1.9,,0,840
+110410,"Prosciutto cotto, alta qualità","Baked ham, high quality Numero Campioni 10","Carni trasformate e conservate",100,50,182,18.0,11.9,0.8,,0,760
+110411,"Prosciutto cotto, alta qualità, sgrassato","Baked ham, high quality, visible fat removed","Carni trasformate e conservate",100,50,126,19.5,5.0,0.9,,0,800
+110420,"Prosciutto cotto, scelto","Baked ham, selected Numero Campioni 10","Carni trasformate e conservate",100,50,155,17.5,9.2,0.6,,0,760
+110421,"Prosciutto cotto, scelto, sgrassato","Baked ham, selected, visible fat removed","Carni trasformate e conservate",100,50,115,19.4,4,0.5,,0,800
+110500,"Prosciutto crudo di Modena DOP","Prosciutto, Modena PDO","Carni trasformate e conservate",100,50,309,25.6,22.9,0.1,,0,2040
+110501,"Prosciutto crudo di Modena DOP, sgrassato","Prosciutto, Modena PDO, visible fat removed","Carni trasformate e conservate",100,50,201,30.2,8.9,0.1,,0,2400
+110505,"Prosciutto crudo di montagna","Prosciutto, mountain","Carni trasformate e conservate",100,50,303,26.2,22,0,0,0,
+110510,"Prosciutto crudo DOP, di Parma","Prosciutto, Parma PDO","Carni trasformate e conservate",100,50,269,25.9,18.3,0.3,,0,1760
+110511,"Prosciutto crudo di Parma DOP, sgrassato","Prosciutto, Parma PDO, visible fat removed","Carni trasformate e conservate",100,50,176,29.1,6.4,0.4,,0,2040
+110515,"Prosciutto crudo di Pietraroja","Prosciutto, Pietraroja","Carni trasformate e conservate",100,50,358,26.2,28.1,0,0,0,
+110520,"Prosciutto crudo di San Daniele DOP","Prosciutto, San Daniele PDO","Carni trasformate e conservate",100,50,271,25.7,18.6,0.2,,0,1800
+110521,"Prosciutto crudo di San Daniele DOP, sgrassato","Prosciutto, San Daniele PDO, visible fat removed","Carni trasformate e conservate",100,50,176,29.0,6.5,0.4,,0,2040
+110525,"Prosciutto crudo, disossato","Prosciutto, whole, bone removed","Carni trasformate e conservate",100,50,224,26.9,12.9,0,0,0,2238
+110526,"Prosciutto crudo, disossato, sgrassato","Prosciutto, whole, bone removed, visible fat removed","Carni trasformate e conservate",100,50,159,29.3,4.6,0,0,0,2440
+110530,"Prosciutto crudo, gambuccio","Prosciutto, gambuccio","Carni trasformate e conservate",100,50,306,26.2,22.4,0,0,0,
+110535,"Prosciutto crudo, Nazionale","Prosciutto, National","Carni trasformate e conservate",100,50,235,27.8,13.7,0.1,,0,2400
+110536,"Prosciutto crudo, Nazionale, sgrassato","Prosciutto, National, visible fat removed","Carni trasformate e conservate",100,50,169,30.5,5.1,0.3,,0,2760
+110600,"Salame Brianza","Salami, Brianza type","Carni trasformate e conservate",100,50,384,26.5,30.5,1,1,0,1827
+110610,"Salami italiani alla cacciatora DOP","Salami, Cacciatore type","Carni trasformate e conservate",100,50,411,28.4,32.7,0.7,,0,1680
+110620,"Salame Fabriano","Salami, Fabriano type","Carni trasformate e conservate",100,50,420,26.5,34.3,1.5,1.5,0,1683
+110630,"Salame Felino","Salami, Felino type","Carni trasformate e conservate",100,50,375,30.5,27.9,0.5,0.5,0,1697
+110640,"Salame Milano","Salami, Milano type","Carni trasformate e conservate",100,50,385,25.4,31.0,1.1,,0,1560
+110650,"Salame Napoli","Salami, Napoli type","Carni trasformate e conservate",100,50,378,27.4,29.7,0.2,,0,1640
+110660,"Salame nostrano","Salami, Italian average","Carni trasformate e conservate",100,50,370,27.3,28.5,1.1,1.1,0,1633
+110670,"Salame ungherese","Salami, Ungherese type","Carni trasformate e conservate",100,50,420,23.6,35.7,1.1,,0,1600
+110700,"Salsiccia di fegato","Sausage, liver","Carni trasformate e conservate",100,50,424,12.4,41.2,0.9,0.9,0,810
+110710,"Salsiccia di suino, fresca","Sausage, swine, fresh, raw","Carni trasformate e conservate",100,50,304,15.4,26.7,0.6,0.6,0,1100
+110716,"Salsiccia di suino, fresca, cotta, in padella","Sausage, swine, fresh, cooked in pan, no salt, no fat added","Carni trasformate e conservate",100,50,324,22.2,26.1,0,0,0,1273
+110720,"Salsiccia di suino, secca","Sausage, swine, dried","Carni trasformate e conservate",100,50,514,22.0,47.3,0,0,0,
+110730,"Salsiccia di Calabria","Sausage, Calabria, cured meat","Carni trasformate e conservate",100,50,366,33.6,25.2,1.3,1.3,0,
+110740,"Soppressata di Calabria","Soppressata, Calabria, cured meat","Carni trasformate e conservate",100,50,377,34.2,26.3,0.9,0.9,0,
+110800,"Speck dell'Alto Adige IGP","Speck Numero Campioni 10","Carni trasformate e conservate",100,50,299,30.7,19.1,1.2,,0,1640
+110900,"Wurstel di puro suino, crudo","Wurstel, pure swine, raw","Carni trasformate e conservate",100,50,250,13.2,21.1,1.9,,0,880
+110906,"Wurstel di puro suino, cotto","Wurstel, pure swine, cooked in pan, no fat added, no salt added","Carni trasformate e conservate",100,50,259,14.6,22.2,0.3,,0,920
+110950,"Zampone confezionato, precotto","Zampone, precooked packed, raw","Carni trasformate e conservate",100,50,361,19.1,31.6,0,0,0,762
+110955,"Zampone Modena IGP, cotto","Zampone Modena PGI, precooked packed, boiled","Carni trasformate e conservate",100,50,262,23.7,17.5,2.6,,0,680
+113010,"Carne bovina in gelatina, in scatola","Beef, in jelly, canned","Carni trasformate e conservate",100,50,67,12.6,1.8,0,0,0,656
+113020,"Carne bovina pressata, in scatola","Beef, pressed, canned","Carni trasformate e conservate",100,50,141,16.5,8.3,0,0,0,697
+114010,"Patè di coniglio","Pate, rabbit","Carni trasformate e conservate",100,50,346,13.0,32.2,1.1,,0,
+114020,"Patè di fegato","Pate, liver","Carni trasformate e conservate",100,50,341,12.7,31.7,1.3,,0,790
+114030,"Patè di pollo","Pate, chicken","Carni trasformate e conservate",100,50,289,11.1,26.2,2.3,,0,
+114040,"Patè di prosciutto","Pate, ham","Carni trasformate e conservate",100,50,358,11.3,34.3,1.1,,0,
+115010,"Animelle di bovini","Sweetbreads - Thymus Bovine Organ","Frattaglie",100,100,304,11.5,28.6,0.1,0.1,0,
+115019,"Animelle di bovini, cotte","Sweetbreads - Thymus Bovine Organ, cooked","Frattaglie",100,100,434,16.4,40.9,0.2,0.2,0,
+115110,"Cervello di bovini","Brain, bovine","Frattaglie",100,100,157,10.0,12.7,0.8,0.8,0,140
+115120,"Coratella di agnello","Giblets, lamb","Frattaglie",100,100,109,15.7,4.7,1,1,0,
+115130,"Coratella di vitello","Giblets, calf","Frattaglie",100,100,100,17.1,3.2,0.8,0.8,0,
+115210,"Cuore di bovini","Heart, bovine, raw","Frattaglie",100,100,123,16.8,6.0,0.5,0.5,0,95
+115219,"Cuore di bovini, cotto","Heart, bovine, cooked","Frattaglie",100,100,189,25.8,9.2,0.8,0.8,0,
+115220,"Cuore di equini","Heart, horse","Frattaglie",100,100,146,18.7,7.7,0.6,0.6,0,
+115230,"Cuore di ovini","Heart, ovine","Frattaglie",100,100,134,16.9,7.2,0.4,0.4,0,
+115240,"Cuore di pollo","Heart, chicken, raw","Frattaglie",100,100,103,14.1,5.1,0.2,0.2,0,
+115249,"Cuore di pollo, cotto","Heart, chicken, cooked","Frattaglie",100,100,147,20.1,7.3,0.3,0.3,0,
+115250,"Cuore di suino","Heart, swine, raw","Frattaglie",100,100,159,18.3,9.4,0.4,0.4,0,80
+115260,"Cuore di tacchino","Heart, turkey, raw","Frattaglie",100,100,103,14.1,5.1,0.2,0.2,0,
+115269,"Cuore di tacchino, cotto","Heart, turkey, cooked","Frattaglie",100,100,147,20.1,7.3,0.3,0.3,0,
+115320,"Fegato di bovini","Liver, bovine","Frattaglie",100,100,142,20.0,4.4,5.9,5.9,0,81
+115329,"Fegato di bovini, cotto","Liver, bovine, cooked","Frattaglie",100,100,190,26.7,5.9,7.9,7.9,0,
+115340,"Fegato di equini","Liver, horse","Frattaglie",100,100,145,22.4,4.0,5.3,5.3,0,
+115350,"Fegato di ovini","Liver, ovine","Frattaglie",100,100,135,19.5,5.5,2.0,2,0,67
+115360,"Fegato di pollo","Liver, chicken, raw","Frattaglie",100,100,154,22.8,6.3,1.5,1.5,0,
+115369,"Fegato di pollo, cotto","Liver, chicken, coocked","Frattaglie",100,100,192,29.4,7.4,2.0,2.0,0,
+115370,"Fegato di suini","Liver, swine, raw","Frattaglie",100,100,140,22.8,4.8,1.5,1.5,0,108
+115379,"Fegato di suini, cotto","Liver, swine, cooked","Frattaglie",100,100,183,29.4,6.4,2.0,2.0,0,
+115380,"Fegato di tacchino","Liver, turkey, raw","Frattaglie",100,100,127,17.8,6.0,0.5,0.5,0,
+115389,"Fegato di tacchino, cotto","Liver, turkey, cooked","Frattaglie",100,100,195,27.4,9.2,0.8,0.8,0,
+115400,"Lingua di bovini","Toungue, bovine, raw","Frattaglie",100,100,232,17.1,18,0.4,0.4,0,73
+115409,"Lingua di bovini, cotta, fritta","Tongue Bovine, fried","Frattaglie",100,100,309,22.8,24.0,0.5,0.5,0,
+115500,"Milza di bovini","Spleen, bovine","Frattaglie",100,100,107,18.5,3.7,0,0,0,85
+115600,"Polmone di bovini","Lung, bovine, raw","Frattaglie",100,100,75,14.0,2.1,0,0,0,198
+115710,"Rene di bovini","Kidney, bovine, raw","Frattaglie",100,100,118,18.4,4.6,0.8,0.8,0,180
+115800,"Trippa di bovini","Tripe Bovine, raw","Frattaglie",100,100,108,15.8,5.0,0,0,0,107
+119020,"Cheese burger, fast food","Cheese Burger, fast food preparation","Fast-food a base di carne",100,130,300,16.3,13.1,30.2,,2.0,
+119030,"Hamburger, fast food","Hamburger, fast food preparation","Fast-food a base di carne",100,110,251,13.1,9.1,30.1,,2.0,
+119040,"Chicken Nuggets, fast food","Chicken Nuggets, fast food","Fast-food a base di carne",100,109,242,17.7,12.4,15.4,1.5,0.9,
+119050,"Hamburger piccolo, solo carne, fast food","Hamburger, only meat, fast food preparation Numero Campioni 6","Fast-food a base di carne",100,30,264,24.5,18.4,0,0,0,
+119060,"Panino, fast food","Bread, fast food preparation Numero Campioni 6","Fast-food a base di carne",100,50,248,10.1,3.0,47,7.5,2,
+119070,"Panino con hamburger piccolo, fast food","Bread and small hamburger, fast food preparation Numero Campioni 6","Fast-food a base di carne",100,80,254,15.6,8.9,29.0,4.7,1.2,
+119080,"Patatine, fritte, fast food","French fries, fast food preparation Numero Campioni 6","Fast-food a base di carne",100,88,283,3.3,13.7,37.6,1.3,2.7,
+120010,"Acciuga o alice","Anchovy, fresh, raw","Prodotti della pesca",75,150,96,16.8,2.6,1.5,1.5,0,110
+120020,"Acciuga o alice, sott'olio","Anchovy, in oil","Prodotti della pesca",100,50,206,25.9,11.3,0.2,0.2,0,480
+120030,"Acciuga o alice, sotto sale","Anchovy, salted","Prodotti della pesca",50,50,137,25.0,3.1,2.3,2.3,0,
+120210,"Anguilla, affumicata","Eel, smoked Porzione 50 g Codice Langual | A0267 | A0717 | A0727 | A0769 | A0803 | B1278 | C0173 | E0133 | F0001 | G0003 | H0172 | J0106 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 50 g Origine Dato Metodiche Referenze Acqua (g) g 62.0 31.0 S Imputation Energia (kcal) kcal 231 116 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 966 484 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 17.5 8.8 S Imputation Lipidi (g) g 17.8 8.9 A Solvent extraction Carboidrati disponibili (g) g 0.2 0.1 C Carbohydrate, available calculated from sugar and starch Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0.2 0.1 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 28.97 C Simple summation C4:0-C10:0 (%) % 0 A Gas chromatography mass spectroscopy C12:0 acido laurico (%) % 1.08 A Gas chromatography mass spectroscopy C14:0 acido miristico (%) % 3.13 A Gas chromatography mass spectroscopy C16:0 acido palmitico (%) % 18.84 A Gas chromatography mass spectroscopy C18:0 acido stearico (%) % 4.64 A Gas chromatography mass spectroscopy C20:0 acido arachidico (%) % tr A Gas chromatography mass spectroscopy C22:0 acido beenico (%) % tr A Gas chromatography mass spectroscopy Acidi grassi Monoinsaturi (%) % 47.07 C Simple summation C14:1 acido miristoleico (%) % tr A Gas chromatography mass spectroscopy C16:1 acido palmitoleico (%) % 9.48 A Gas chromatography mass spectroscopy C18:1 acido oleico (%) % 36.01 A Gas chromatography mass spectroscopy C20:1 acido eicosenoico (%) % 1.28 A Gas chromatography mass spectroscopy C22:1 acido erucico (%) % 0.31 A Gas chromatography mass spectroscopy Acidi grassi Polinsaturi (%) % 24.75 C Simple summation C18:2 acido linoleico (%) % 2.36 A Gas chromatography mass spectroscopy C18:3 acido linolenico (%) % 1.2 A Gas chromatography mass spectroscopy C20:4 acido arachidonico (%) % 2.59 A Gas chromatography mass spectroscopy C20:5 acido eicosapentenoico EPA (%) % 0 A Gas chromatography mass spectroscopy C22:6 acido docosaesenoico DHA (%) % 0 A Gas chromatography mass spectroscopy Polinsatuti/Saturi 0.85 C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 50 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,50,231,17.5,17.8,0.2,0.2,0,
+120220,"Anguilla, marinata","Eel, pickled","Prodotti della pesca",88,50,259,14.8,21.9,0.6,0.6,0,
+120230,"Anguilla di fiume","River Eel, raw","Prodotti della pesca",71,150,261,11.8,23.7,0.1,0.1,0,65
+120240,"Anguilla di mare","Sea Eel, raw","Prodotti della pesca",70,150,237,14.6,19.6,0.7,0.7,0,87
+120250,"Anguilla d'allevamento, filetti","Eel, fish breeding, fillets","Prodotti della pesca",100,150,237,16.2,18.9,0.5,0.5,0,
+120290,"Capitone","Freshwater Large Female Eel, raw","Prodotti della pesca",65,150,247,13.0,21.5,0.5,0.5,0,
+120300,"Aringa","Herring, raw","Prodotti della pesca",70,150,216,16.5,16.7,0,0,0,95
+120310,"Aringa, affumicata","Herring, smoked","Prodotti della pesca",70,50,194,19.9,12.7,0,0,0,1237
+120320,"Aringa, marinata","Herring, pickled","Prodotti della pesca",95,50,199,18.3,14,0,0,0,1030
+120330,"Aringa, sotto sale","Herring, salted","Prodotti della pesca",73,50,218,19.8,15.4,0,0,0,5060
+120400,"Boga","Bogue, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B3370 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 79.3 119.0 B Energia (kcal) kcal 87 131 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 364 547 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 18.3 27.5 B Lipidi (g) g 1.2 1.8 B Colesterolo (mg) mg 25 38 B Carboidrati disponibili (g) g 0.8 1.2 B Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0.8 1.2 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Potassio (mg) mg 348 522 B Calcio (mg) mg 65 98 B Magnesio (mg) mg 22 33 B Ferro (mg) mg 4.1 6.2 B Rame (mg) mg 0.9 1.35 B Zinco (mg) mg 2 3.00 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr S Imputation ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 31.46 B C4:0-C10:0 (%) % 0 B C12:0 acido laurico (%) % 0 B C14:0 acido miristico (%) % 13.61 B C16:0 acido palmitico (%) % 8.5 B C18:0 acido stearico (%) % 5.95 B C20:0 acido arachidico (%) % 0 B C22:0 acido beenico (%) % 0 B Acidi grassi Monoinsaturi (%) % 47.62 B C14:1 acido miristoleico (%) % 0 B C16:1 acido palmitoleico (%) % 5.1 B C18:1 acido oleico (%) % 32.31 B C20:1 acido eicosenoico (%) % 0.85 B C22:1 acido erucico (%) % 2.55 B Acidi grassi Polinsaturi (%) % 22.11 B C18:2 acido linoleico (%) % 1.7 B C18:3 acido linolenico (%) % tr B C20:4 acido arachidonico (%) % tr B C20:5 acido eicosapentenoico EPA (%) % 5.95 B C22:6 acido docosaesenoico DHA (%) % 11.9 B Polinsatuti/Saturi 0.70 C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,87,18.3,1.2,0.8,0.8,0,
+120500,"Carpa","Carp, raw","Prodotti della pesca",50,150,139,18.9,7.1,0,0,0,50
+120510,"Cefalo muggine","Flathead Mullet, raw","Prodotti della pesca",55,150,127,15.8,6.8,0.7,0.7,0,67
+120590,"Bottarga, cefalo muggine","Flathead Mullet, eggs (bottarga)","Prodotti della pesca",100,50,405,43.5,25.7,0,0,0,
+120610,"Cernia surgelata","Groper, deep frozen","Prodotti della pesca",68,150,88,17.0,2.0,0.5,0.5,0,120
+120710,"Coregone","Lake Whitefish, coregone, raw","Prodotti della pesca",69,150,135,19.0,6.5,0.1,0.1,0,
+120810,"Corvina","Corb, brown meagre, raw","Prodotti della pesca",65,150,88,20.0,0.8,0.2,0.2,0,128
+120910,"Dentice","Dentex, raw","Prodotti della pesca",65,150,101,16.7,3.5,0.7,0.7,0,128
+120920,"Dentice, surgelato","Dentex, deep frozen","Prodotti della pesca",65,150,103,17.2,3.5,0.7,0.7,0,
+121010,"Halibut","Halibut, raw","Prodotti della pesca",80,150,114,20.6,3.5,0,0,0,
+121100,"Lattarini","Sand Smelt, raw","Prodotti della pesca",100,150,145,14.6,9.6,0,0,0,
+121200,"Luccio","Pike, raw","Prodotti della pesca",56,150,81,18.7,0.6,0.1,0.1,0,63
+121310,"Melù o pesce molo","Whiting, raw","Prodotti della pesca",65,150,72,17.4,0.3,,,0,72
+121320,"Melù o pesce molo, stoccafisso, secco","Whiting, stockfish, dried","Prodotti della pesca",78,50,356,80.1,3.5,1.1,1.1,0,500
+121330,"Melù o pesce molo, stoccafisso, ammollato","Whiting, stockfish, dried, rehydrated","Prodotti della pesca",85,150,92,20.7,0.9,0.3,0.3,0,51
+121410,"Merluzzo o nasello","Cod, raw","Prodotti della pesca",76,150,71,17.0,0.3,0,0,0,77
+121420,"Merluzzo o nasello, surgelato","Cod, deep frozen, raw","Prodotti della pesca",75,150,75,17.3,0.6,0,0,0,77
+121423,"Merluzzo o nasello, surgelato, cotto, in forno","Cod, deep frozen, roasted in oven","Prodotti della pesca",75,150,78,17.5,0.9,0,0,0,78
+121424,"Merluzzo o nasello, surgelato, cotto, al microonde","Cod, deep frozen, cooked by microwave","Prodotti della pesca",75,150,107,24.8,0.9,0,0,0,82
+121430,"Merluzzo o nasello, surgelato, filetti","Cod, fillet, deep frozen","Prodotti della pesca",100,150,68,15.6,0.6,0,0,0,68
+121440,"Merluzzo o nasello, baccalà, secco","Cod, codfish, dried, raw","Prodotti della pesca",75,50,131,29.0,1.7,0,0,0,
+121450,"Merluzzo o nasello, baccalà, ammollato","Cod, codfish, dried, rehydrated, raw","Prodotti della pesca",82,150,95,21.6,1.0,0,0,0,
+121490,"Merluzzo o nasello, bastoncini di pesce, surgelati","Cod, fish' s sticks, deep frozen","Prodotti della pesca",100,150,191,11.0,10.1,15.0,0.6,0,
+121500,"Mormora","Poor Cod, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B1808 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 78.0 117.0 B Energia (kcal) kcal 97 145 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 404 608 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 18.0 27.0 B Lipidi (g) g 1.9 2.9 B Colesterolo (mg) mg 45 68 B Carboidrati disponibili (g) g 2.0 3.0 B Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 2.0 3.0 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Potassio (mg) mg 287 431 B Calcio (mg) mg 69 104 B Magnesio (mg) mg 20 30 B Ferro (mg) mg 5.6 8.4 B Rame (mg) mg 1.1 1.65 A Atomic emission spectroscopy Zinco (mg) mg 4.6 6.90 A Atomic emission spectroscopy Selenio (μg) μg 102 153.0 A Atomic emission spectroscopy VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr S Imputation Vitamina A retinolo equivalente (μg) μg tr tr S Imputation ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 28.07 B C4:0-C10:0 (%) % 0 B C12:0 acido laurico (%) % 0 B C14:0 acido miristico (%) % 1.75 B C16:0 acido palmitico (%) % 14.04 B C18:0 acido stearico (%) % 7.02 B C20:0 acido arachidico (%) % 0.58 B C22:0 acido beenico (%) % 0 B Acidi grassi Monoinsaturi (%) % 28.07 B C14:1 acido miristoleico (%) % 0 B C16:1 acido palmitoleico (%) % 3.51 B C18:1 acido oleico (%) % 13.45 B C20:1 acido eicosenoico (%) % 4.09 B C22:1 acido erucico (%) % 4.09 B Acidi grassi Polinsaturi (%) % 43.86 B C18:2 acido linoleico (%) % 1.75 B C18:3 acido linolenico (%) % 2.34 B C20:4 acido arachidonico (%) % 9.94 B C20:5 acido eicosapentenoico EPA (%) % 6.43 B C22:6 acido docosaesenoico DHA (%) % 0 B Polinsatuti/Saturi 1.56 C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,97,18.0,1.9,2.0,2.0,0,
+121600,"Occhiata","Saddled Bream, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B1808 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 77.0 115.5 B Energia (kcal) kcal 117 176 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 489 735 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 19.0 28.5 B Lipidi (g) g 3.7 5.6 B Colesterolo (mg) mg 48 72 B Carboidrati disponibili (g) g 2.0 3.0 C Carbohydrate, available calculated from sugar and starch Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 2.0 3.0 B Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Potassio (mg) mg 427 641 B Calcio (mg) mg 32 48 B Magnesio (mg) mg 17 26 B Ferro (mg) mg 4.2 6.3 B Rame (mg) mg 0.6 0.90 B Zinco (mg) mg 1.4 2.10 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg 0 0 S Imputation Vitamina A retinolo equivalente (μg) μg tr tr S Imputation ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 33.93 B C4:0-C10:0 (%) % 0 B C12:0 acido laurico (%) % 0 B C14:0 acido miristico (%) % 3.6 B C16:0 acido palmitico (%) % 21.62 B C18:0 acido stearico (%) % 5.41 B C20:0 acido arachidico (%) % 0.3 B C22:0 acido beenico (%) % 0 B Acidi grassi Monoinsaturi (%) % 35.14 B C14:1 acido miristoleico (%) % 0 B C16:1 acido palmitoleico (%) % 6.31 B C18:1 acido oleico (%) % 20.42 B C20:1 acido eicosenoico (%) % 0.9 B C22:1 acido erucico (%) % 0.6 B Acidi grassi Polinsaturi (%) % 30.93 B C18:2 acido linoleico (%) % 4.5 B C18:3 acido linolenico (%) % 0.9 B C20:4 acido arachidonico (%) % 2.7 B C20:5 acido eicosapentenoico EPA (%) % 6.01 B C22:6 acido docosaesenoico DHA (%) % 0 B Polinsatuti/Saturi 0.91 C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,117,19.0,3.7,2.0,2.0,0,
+121710,"Orata, surgelata","Gilthead, deep frozen, raw","Prodotti della pesca",69,150,94,19.8,1.2,1,1,0,
+121720,"Orata, filetti","Glithead, fillets, raw","Prodotti della pesca",100,150,121,20.7,3.8,1,1,0,
+121730,"Orata d'allevamento, filetti","Glithead, fish breeding, fillets, raw","Prodotti della pesca",100,150,159,19.7,8.4,1.2,1.2,0,
+121800,"Pagello","Red bream, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B1808 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 79.0 118.5 B Energia (kcal) kcal 101 152 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 423 636 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 21.0 31.5 B Lipidi (g) g 1.9 2.9 B Colesterolo (mg) mg 35 53 B Carboidrati disponibili (g) g 0 0 B Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0 0 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Sodio (mg) mg 120 180 S Imputation Potassio (mg) mg 690 1035 B Calcio (mg) mg 34 51 B Magnesio (mg) mg 22 33 B Ferro (mg) mg 4.3 6.5 B Rame (mg) mg 0.4 0.60 B Zinco (mg) mg 1.6 2.40 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr S Imputation ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 40.6 B C4:0-C10:0 (%) % 0 B C12:0 acido laurico (%) % 0 B C14:0 acido miristico (%) % 3.01 B C16:0 acido palmitico (%) % 18.05 B C18:0 acido stearico (%) % 6.02 B C20:0 acido arachidico (%) % 0 B C22:0 acido beenico (%) % 0 B Acidi grassi Monoinsaturi (%) % 32.33 B C14:1 acido miristoleico (%) % 0 B C16:1 acido palmitoleico (%) % 4.51 B C18:1 acido oleico (%) % 23.31 B C20:1 acido eicosenoico (%) % 3.01 B C22:1 acido erucico (%) % 0.75 B Acidi grassi Polinsaturi (%) % 27.07 B C18:2 acido linoleico (%) % 1.5 B C18:3 acido linolenico (%) % 0.75 B C20:4 acido arachidonico (%) % 3.76 B C20:5 acido eicosapentenoico EPA (%) % 5.26 B C22:6 acido docosaesenoico DHA (%) % 0 B Polinsatuti/Saturi 0.67 C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,101,21.0,1.9,0,0,0,120
+121900,"Pagello bocca d'oro","Giltheat bream, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B2388 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 73.0 109.5 B Energia (kcal) kcal 118 177 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 495 742 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 20.0 30.0 B Lipidi (g) g 3.0 4.5 B Colesterolo (mg) mg 23 35 B Carboidrati disponibili (g) g 3.0 4.5 B Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 3 4.5 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Sodio (mg) mg 120 180 S Imputation Potassio (mg) mg 648 972 B Calcio (mg) mg 34 51 B Ferro (mg) mg 4 6.0 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr S Imputation ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,118,20.0,3.0,3.0,3,0,120
+122000,"Palombo","Dogfish, raw","Prodotti della pesca",65,150,80,16.0,1.2,1.3,1.3,0,61
+122100,"Pesce gatto","Catfish, raw","Prodotti della pesca",60,150,92,15.5,3.3,0.2,0.2,0,63
+122200,"Razza","Thornback Ray, raw","Prodotti della pesca",32,150,68,14.2,0.9,0.7,0.7,0,110
+122300,"Rombo","Turbot, raw","Prodotti della pesca",55,150,81,16.3,1.3,1.2,1.2,0,127
+122400,"Salmone","Salmon, raw","Prodotti della pesca",65,150,185,18.4,12,1,1,0,98
+122410,"Salmone, affumicato","Salmon, smocked","Prodotti della pesca",100,50,147,25.4,4.5,1.2,1.2,0,1880
+122430,"Salmone, in salamoia","Salmon, in brine","Prodotti della pesca",98,50,192,21.1,11.5,1,1,0,540
+122500,"Salpa","Salema, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B1808 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 77.3 116.0 A Drying Energia (kcal) kcal 104 156 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 434 653 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 18.0 27.0 A Protein calculated from total nitrogen Lipidi (g) g 2.7 4.1 A Solvent extraction Colesterolo (mg) mg 62 93 B Carboidrati disponibili (g) g 2.0 3.0 C Carbohydrate, available calculated from sugar and starch Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 2.0 3.0 A Colorimetric method Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Potassio (mg) mg 540 810 B Calcio (mg) mg 28 42 B Magnesio (mg) mg 29 44 B Ferro (mg) mg 4.3 6.5 B Rame (mg) mg 0.6 0.90 B Zinco (mg) mg 3.3 4.95 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr A High-performance liquid chromatography ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,104,18.0,2.7,2.0,2.0,0,
+122600,"Sarago","Seabream, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B2388 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 75.2 112.8 S Imputation Energia (kcal) kcal 97 146 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 407 612 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 20.7 31.1 S Imputation Lipidi (g) g 1.2 1.8 A Solvent extraction Colesterolo (mg) mg 65 98 B Carboidrati disponibili (g) g 1.0 1.5 S Imputation Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0 0 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr A High-performance liquid chromatography ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 34.83 C Simple summation C4:0-C10:0 (%) % 0 A Gas chromatography mass spectroscopy C12:0 acido laurico (%) % 0 A Gas chromatography mass spectroscopy C14:0 acido miristico (%) % 2.49 A Gas chromatography mass spectroscopy C16:0 acido palmitico (%) % 22.39 A Gas chromatography mass spectroscopy C18:0 acido stearico (%) % 7.46 A Gas chromatography mass spectroscopy C20:0 acido arachidico (%) % 0 A Gas chromatography mass spectroscopy C22:0 acido beenico (%) % 0 A Gas chromatography mass spectroscopy Acidi grassi Monoinsaturi (%) % 26.12 C Simple summation C14:1 acido miristoleico (%) % 0 A Gas chromatography mass spectroscopy C16:1 acido palmitoleico (%) % 4.98 A Gas chromatography mass spectroscopy C18:1 acido oleico (%) % 13.68 A Gas chromatography mass spectroscopy C20:1 acido eicosenoico (%) % 2.49 A Gas chromatography mass spectroscopy C22:1 acido erucico (%) % 0 A Gas chromatography mass spectroscopy Acidi grassi Polinsaturi (%) % 38.56 C Simple summation C18:2 acido linoleico (%) % 1.24 A Gas chromatography mass spectroscopy C18:3 acido linolenico (%) % 1.24 A Gas chromatography mass spectroscopy C20:4 acido arachidonico (%) % 4.98 A Gas chromatography mass spectroscopy C20:5 acido eicosapentenoico EPA (%) % 6.22 A Gas chromatography mass spectroscopy C22:6 acido docosaesenoico DHA (%) % 0 A Gas chromatography mass spectroscopy Polinsatuti/Saturi 1.11 C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,97,20.7,1.2,1.0,0,0,
+122700,"Sarda","Round Sardinella, raw","Prodotti della pesca",70,150,129,20.8,4.5,1.5,1.5,0,66
+122800,"Sardine","Pilchard, raw","Prodotti della pesca",75,150,225,20.3,15.4,1.5,1.5,0,115
+122806,"Sardine, fritte","Pilchard, fried","Prodotti della pesca",75,150,324,32.3,21.2,1.0,1,0,
+122900,"Scorfano","Scorpionfish, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0747 | A0802 | B1084 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 79.0 118.5 B Energia (kcal) kcal 82 123 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 342 514 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 19.0 28.5 B Lipidi (g) g 0.4 0.6 B Colesterolo (mg) mg 67 101 B Carboidrati disponibili (g) g 0.6 0.9 B Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0.6 0.9 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Potassio (mg) mg 465 698 B Calcio (mg) mg 61 92 B Magnesio (mg) mg 21 32 B Ferro (mg) mg 5.5 8.3 B Rame (mg) mg 0.5 0.75 B Zinco (mg) mg 1.8 2.70 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Vitamina C (mg) mg tr tr S Imputation ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,82,19.0,0.4,0.6,0.6,0,
+123000,"Sgombro o maccarello","Mackerel, raw","Prodotti della pesca",80,150,170,17.0,11.1,0.5,0.5,0,130
+123010,"Sgombro o maccarello, in salamoia","Mackerel, in brine","Prodotti della pesca",100,50,177,19.3,11.1,0,0,0,
+123100,"Sogliola","Sole, raw","Prodotti della pesca",48,150,83,16.9,1.4,0.8,0.8,0,120
+123110,"Sogliola, surgelata","Sole, deep frozen","Prodotti della pesca",48,150,81,17.3,1.3,0.1,0.1,0,120
+123200,"Spigola","Sea Bass, raw","Prodotti della pesca",54,150,82,16.5,1.5,0.6,0.6,0,128
+123220,"Spigola d'allevamento, filetti","Sea Bass, fish breeding, fillets","Prodotti della pesca",100,150,149,21.3,6.8,0.8,0.8,0,
+123300,"Storione","Sturgeon, raw Porzione 150 g Codice Langual | A0267 | A0717 | A0727 | A0746 | A0802 | B1465 | C0268 | E0150 | F0003 | G0003 | H0003 | J0001 | K0003 | M0001 | N0001 | P0024 | R0001 Vedi tutti i campi MACRO NUTRIENTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acqua (g) g 72.5 108.8 B Energia (kcal) kcal 145 218 C Energy calculated according to Southgate (kcal) Energia (kJ) kJ 608 911 C Energy calculated according to Southgate (kJ) Proteine (g) g (N x 6,25) 19.2 28.8 B Lipidi (g) g 7.6 11.4 B Colesterolo (mg) mg 66 99 B Carboidrati disponibili (g) g 0 0 S Imputation Amido (g) g 0 0 S Imputation Zuccheri solubili (g) g 0 0 S Imputation Alcool (g) g 0 0 ZL Imputation Fibra totale (g) g 0 0 ZL Imputation MINERALI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Sodio (mg) mg 44 66 B Potassio (mg) mg 330 495 B Calcio (mg) mg 18 27 B Fosforo (mg) mg 239 359 B Ferro (mg) mg 0.5 0.8 B VITAMINE Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Niacina (mg) mg 5.60 8.40 B Vitamina C (mg) mg 0 0 S Imputation ACIDI GRASSI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Acidi grassi Saturi (%) % 27.55 B C4:0-C10:0 (%) % 0 B C12:0 acido laurico (%) % 0 B C14:0 acido miristico (%) % 3.87 B C16:0 acido palmitico (%) % 21.05 B C18:0 acido stearico (%) % 2.17 B C20:0 acido arachidico (%) % 0 B C22:0 acido beenico (%) % 0 B Acidi grassi Monoinsaturi (%) % 48.92 B C14:1 acido miristoleico (%) % 0.15 B C16:1 acido palmitoleico (%) % 7.59 B C18:1 acido oleico (%) % 30.34 B C20:1 acido eicosenoico (%) % 6.97 B C22:1 acido erucico (%) % 3.72 B Acidi grassi Polinsaturi (%) % 23.84 B C18:2 acido linoleico (%) % 3.25 B C18:3 acido linolenico (%) % 0.93 B C20:4 acido arachidonico (%) % 0.77 B C20:5 acido eicosapentenoico EPA (%) % 6.04 B C22:6 acido docosaesenoico DHA (%) % 9.75 B Polinsatuti/Saturi 0.87 C Calculation methods AMINOACIDI (% di proteine) Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Origine Dato Metodiche Referenze Lisina 9.11 A Chromatography Istidina 4.27 A Chromatography Arginina 6.04 A Chromatography Acido aspartico 10.00 A Chromatography Treonina 4.32 A Chromatography Serina 3.91 A Chromatography Acido glutammico 14.48 A Chromatography Prolina 4.01 A Chromatography Glicina 5.36 A Chromatography Alanina 5.73 A Chromatography Cistina 0.99 A Chromatography Valina 5.00 A Chromatography Metionina 2.92 A Chromatography Isoleucina 4.79 A Chromatography Leucina 7.60 A Chromatography Tirosina 3.39 A Chromatography Fenilalanina 4.11 A Chromatography Triptofano 0.73 A Chromatography Indice Chimico 122 C Calculation methods Aminoacido limitante Triptofano C Calculation methods ALTRI COMPOSTI Descrizione Nutriente Unità di Misura Valore per 100 g Min. Max. Valore per Porzione 150 g Origine Dato Metodiche Referenze Acido fitico (g) g 0 0 S Imputation Prefazione Introduzione Presentazione Dati Simboli - Abbreviazioni - Sinonimi Ricerca Dati Ricerca per alimento Ricerca per categoria Ricerca per nutriente Ricerca per ordine alfabetico Gruppo di Lavoro Bibliografia Link Ultimo aggiornamento: Dicembre 2019 Il CREA, Centro di ricerca Alimenti e la Nutrizione, non si assume alcuna responsabilità per gli eventuali problemi derivanti dall'utilizzazione del presente sito o di eventuali siti esterni collegati Dati e testi di www.alimentinutrizione.it non possono essere copiati o in altro modo riprodotti o trasmessi in qualsiasi forma e con qualsiasi mezzo, elettronico o meccanico, comprese fotocopie, registrazione, o da qualunque archivio di informazioni o sistema di recupero, senza una chiara indicazione della fonte originale. Il riferimento è: CREA Centro di ricerca Alimenti e Nutrizione Pagina web: https://www.crea.gov.it/alimenti-e-nutrizione e Pagina web: https://www.alimentinutrizione .it Ultimo aggiornamento del sito Dicembre 2019. Chi siamo Conosci Il crea Newsletter","Prodotti della pesca",,150,145,19.2,7.6,0,0,0,44
+123390,"Caviale, storione","Sturgeon'S Eggs (Caviar)","Prodotti della pesca",100,50,255,26.9,15,3.3,3.3,0,2200
+123400,"Tinca","Tench, raw","Prodotti della pesca",55,150,79,17.9,0.5,0.9,0.9,0,80
+123500,"Tonno","Tuna, raw","Prodotti della pesca",90,150,159,21.5,8.1,0.1,0.1,0,43
+123550,"Tonno in salamoia, sgocciolato","Brine Tuna, dripped","Prodotti della pesca",100,50,103,25.1,0.3,0,0,0,336
+123610,"Tonno sott'olio, sgocciolato","Tuna, in oil, dripped","Prodotti della pesca",100,50,192,25.2,10.1,0,0,0,316
+123900,"Triglia","Mullet, raw","Prodotti della pesca",60,150,123,15.8,6.2,1.1,1.1,0,
+124000,"Trota","Trout, raw","Prodotti della pesca",55,150,86,14.7,3,0,0,0,40
+124010,"Trota surgelata","Trout, deep frozen","Prodotti della pesca",55,150,92,17.8,2.3,0,0,0,42
+124013,"Trota surgelata, cotta, al microonde","Trout, deep frozen, baked in oven, no salt, no fat added, dripped","Prodotti della pesca",55,150,105,20.4,2.6,0,0,0,48
+124014,"Trota surgelata, cotta, in forno","Trout, deep frozen, cooked by microwave","Prodotti della pesca",55,110,136,26.7,3.2,0,0,0,
+124050,"Trota iridea d'allevamento, filetti","Rainbow Trout, fish breeding, fillets raw","Prodotti della pesca",100,150,118,20.3,4.1,0,0,0,61
+124100,"Suro o sugarello","Scad, raw","Prodotti della pesca",55,150,104,18.3,3.0,1,1,0,111
+127100,"Calamaro","Squid, raw","Prodotti della pesca",65,150,68,12.6,1.7,0.6,0.6,0,185
+127110,"Calamaro surgelato","Squid, deep-freezed","Prodotti della pesca",59,150,68,13.1,1.5,0.6,0.6,0,185
+127120,"Cozza o mitilo","Mussel, raw","Prodotti della pesca",32,150,84,11.7,2.7,3.4,0.3,0,290
+127130,"Ostrica","Oyster, raw","Prodotti della pesca",12,150,69,10.2,0.9,5.4,0.5,0,510
+127150,"Polpo","Octopus, raw","Prodotti della pesca",90,150,57,10.6,1.0,1.4,1.4,0,
+127160,"Seppia","Cuttlefish, raw","Prodotti della pesca",50,150,72,14.0,1.5,0.7,0.7,0,355
+127170,"Vongola","Clam, raw","Prodotti della pesca",25,150,65,9.8,1.2,3.9,0,0,591
+128050,"Aragosta","Lobster, raw","Prodotti della pesca",29,150,85,16.0,1.9,1.0,1,0,177
+128055,"Aragosta, bollita","Lobster, boiled","Prodotti della pesca",29,150,86,16.2,1.9,1.0,1.0,0,179
+128100,"Gamberi","Prawns, raw","Prodotti della pesca",45,150,71,13.6,0.6,2.9,2.9,0,146
+128110,"Gamberi sgusciati, surgelati","Prawns, shelled, frozen","Prodotti della pesca",100,150,85,16.5,0.9,2.9,2.9,0,375
+128200,"Granchio, in scatola","Crab, canned","Prodotti della pesca",100,50,81,18.1,0.9,0,0,0,550
+130010,"Latte di capra","Milk, goat","Latte e yogurt",100,125,76,3.9,4.8,4.7,4.7,0,40
+131010,"Latte di pecora","Milk, sheep","Latte e yogurt",100,125,103,5.3,6.9,5.2,5.2,0,30
+132010,"Latte di bufala","Milk, buffalo Numero Campioni 60","Latte e yogurt",100,125,114,4.5,8.5,5.1,5.1,0,
+135010,"Latte di vacca, pastorizzato, intero","Milk, cow, whole","Latte e yogurt",100,125,64,3.3,3.6,4.9,4.9,0,50
+135020,"Latte di vacca, pastorizzato, parzialmente scremato","Milk, cow, partially skimmed","Latte e yogurt",100,125,46,3.5,1.5,5.0,5.0,0,
+135030,"Latte di vacca, pastorizzato, scremato","Milk, cow, skimmed","Latte e yogurt",100,125,36,3.6,0.2,5.3,5.3,0,52
+135510,"Latte di vacca, condensato, zuccherato","Milk, cow, condensed, sugared","Latte e yogurt",100,125,328,8.7,9.0,56.5,56.5,0,130
+135520,"Latte di vacca, evaporato, non zuccherato","Milk, cow, dry off, not sugared","Latte e yogurt",100,125,134,7.0,8.2,8.6,8.6,0,150
+135610,"Latte di vacca, in polvere, intero","Milk, cow, whole, dried","Latte e yogurt",100,125,484,25.7,24.9,42.0,42.0,0,440
+135620,"Latte di vacca, in polvere, parzialmente scremato","Milk, cow, partially skimmed, dried","Latte e yogurt",100,125,418,28.8,12.7,50.2,50.2,0,
+135630,"Latte di vacca, in polvere, scremato","Milk, cow, skimmed, dried","Latte e yogurt",100,125,351,33.1,0.9,56.2,56.2,0,550
+135810,"Latte di vacca, UHT, intero","Milk, cow, uht, whole","Latte e yogurt",100,125,63,3.3,3.6,4.7,4.7,0,
+135820,"Latte di vacca, UHT, parzialmente scremato","Milk, cow, uht, partially skimmed","Latte e yogurt",100,125,46,3.2,1.6,5.1,5.1,0,
+140100,"Crema di latte, 12% di lipidi","Milk Cream (fat 12%)","Latte e yogurt",100,10,140,2.8,12.5,4.4,4.4,0,
+140300,"Panna da montare, 35% di lipidi","Milk Cream, 35% lipid","Latte e yogurt",100,30,337,2.3,35.0,3.4,3.4,0,34
+140400,"Panna da cucina, sterilizzata, 23% di lipidi","Milk Cream, UHT, 23% lipid","Latte e yogurt",100,30,233,2.7,23.0,4.0,4.0,0,
+150010,"Yogurt, da latte intero","Yogurt, whole milk","Latte e yogurt",100,125,66,3.8,3.9,4.3,4.3,0,48
+150015,"Yogurt, 0% lipidi","Yogurt, 0% fat","Latte e yogurt",100,125,42,4.7,0.1,6.0,6.0,0,
+150020,"Yogurt greco, da latte intero","Yogurt, whole milk, greek","Latte e yogurt",100,125,115,6.4,9.1,2.0,2.0,0,71
+150025,"Yogurt greco, da latte magro, alla frutta","Yogurt, low-fat milk, greek, with fruit","Latte e yogurt",100,125,74,6.0,0.9,11.0,11.0,0.5,
+150030,"Yogurt greco, 0% lipidi","Yogurt, greek, 0% fat","Latte e yogurt",100,125,51,9.0,0,4.0,4.0,0,
+150035,"Yogurt greco, 0% lipidi, aromatizzato","Yogurt, greek, 0% fat, flavored","Latte e yogurt",100,125,86,7.5,0,15.0,14.0,0,
+150500,"Yogurt da latte intero, alla frutta","Yogurt, whole milk, with fruit","Latte e yogurt",100,125,80,3.4,2.8,10.5,10.5,1.0,
+151000,"Yogurt da latte, parzialmente scremato","Yogurt, semiskimmed milk","Latte e yogurt",100,125,43,3.4,1.7,3.8,3.8,0,45
+152000,"Yogurt da latte, scremato","Yogurt, skimmed milk","Latte e yogurt",100,125,36,3.3,0.9,4.0,4.0,0,58
+158000,"Yogurt caprino","Yogurt, goat milk","Latte e yogurt",100,125,60,3.6,2.9,5.1,5.1,0,60
+160400,"Formaggio molle da tavola","Cheese, semi soft","Formaggi e latticini",100,100,377,25.4,30.2,1,1.0,0,
+160410,"Brie","Cheese, brie","Formaggi e latticini",100,50,320,19.3,26.9,0.2,0.2,0,700
+160420,"Burrini","Cheese, semisoft, burrino","Formaggi e latticini",100,50,527,22.1,47.0,4.1,4.1,0,
+160430,"Butirro calabro","""|Cheese, semisoft, """"butirro calabro""""|""","Formaggi e latticini",100,50,449,24.7,38.8,0.3,0.3,0,
+160800,"Caciocavallo","Cheese, semisoft, caciocavallo","Formaggi e latticini",100,50,431,35.7,31.1,2.3,2.3,0,960
+160810,"Cacioricotta di capra","Cheese, semisoft, goat's cacioricotta","Formaggi e latticini",100,100,182,11.9,14.3,1.5,1.5,0,
+160820,"Caciotta mista","Cheese, semisoft, mixed caciotta","Formaggi e latticini",100,50,384,24.5,31.0,1.8,1.8,0,
+160830,"Caciotta romana di pecora","Cheese, semisoft, sheep's caciotta romana","Formaggi e latticini",100,50,364,27.7,27.3,2.1,2.1,0,
+160840,"Caciotta toscana","Cheese, semisoft, tuscan caciotta","Formaggi e latticini",100,50,368,24.6,29.6,0.8,0.8,0,514
+160850,"Caciottina vaccina","Cheese, semisoft, cow milk, caciottina","Formaggi e latticini",100,50,324,21.1,25.4,3.0,3.0,0,
+160860,"Caciottina fresca","Cheese, semisoft, raw caciottina","Formaggi e latticini",100,100,263,17.3,21.3,0.5,0.5,0,
+160870,"Camembert","Cheese, semisoft, camembert","Formaggi e latticini",100,100,307,20.9,24.7,0.2,0.2,0,650
+160880,"Cheddar","Cheese, cheddar","Formaggi e latticini",100,50,388,26.7,31.0,0.5,0.5,0,610
+160890,"Crescenza","Cheese, soft, crescenza","Formaggi e latticini",100,100,281,16.1,23.3,1.9,1.9,0,350
+161200,"Dolce verde","Cheese, sweet green","Formaggi e latticini",100,100,276,19.1,21.1,2.5,2.5,0,
+161600,"Edam","Cheese, edam","Formaggi e latticini",100,50,326,25.5,24.3,1.4,1.4,0,
+161610,"Emmenthal","Cheese, emmenthal","Formaggi e latticini",100,50,403,28.5,30.6,3.6,3.6,0,450
+162000,"Feta","Cheese, feta","Formaggi e latticini",100,100,250,15.6,20.2,1.5,1.5,0,1440
+162010,"Fior di latte","Cheese, semisoft, fiordilatte","Formaggi e latticini",100,100,268,20.6,20.3,0.7,0.7,0,200
+162020,"Fontina","Cheese, fontina","Formaggi e latticini",100,50,361,24.5,28.9,0.8,0.8,0,686
+162030,"Formaggino","Cheese, soft, formaggino","Formaggi e latticini",100,50,309,11.2,26.9,6.0,6.0,0,1000
+162040,"Formaggino con ridotto contenuto di grasso","Cheese, soft, formaggino light","Formaggi e latticini",100,100,239,14.7,17.3,6.5,6.5,0,1000
+162050,"Formaggio cremoso spalmabile","Cheese, spreadable, soft white, full fat","Formaggi e latticini",100,50,313,8.6,31.0,,,0,330
+162400,"Gorgonzola","Cheese, soft, gorgonzola","Formaggi e latticini",100,50,324,19.1,27.1,1,1.0,0,600
+162410,"Grana Padano, DOP","Cheese, Grana Padano, PDO, hard cheese","Formaggi e latticini",100,50,392,33.9,28.5,0,0,0,700
+162420,"Groviera","Cheese, gruyere","Formaggi e latticini",100,50,417,30.6,32.1,1.5,1.5,0,332
+163200,"Italico","Cheese, italico","Formaggi e latticini",100,50,316,21.2,25.2,1.2,1.2,0,
+164400,"Latteria","Cheese, semihard, latteria","Formaggi e latticini",100,50,456,30.7,36.4,1.4,1.4,0,
+164800,"Mascarpone","Cheese, soft, mascarpone","Formaggi e latticini",100,50,455,7.6,47.0,0.3,0.3,0,86
+164810,"Mozzarella di bufala","Mozzarella, buffalo milk","Formaggi e latticini",100,100,288,16.7,24.4,0.4,0.4,0,
+164811,"Mozzarella di bufala campana DOP","Mozzarella, buffalo milk, PDO Numero Campioni 60","Formaggi e latticini",100,100,257,14.1,21.7,1.4,,0,211
+164820,"Mozzarella di vacca","Mozzarella, cow milk","Formaggi e latticini",100,100,253,18.7,19.5,0.7,0.7,0,200
+166000,"Parmigiano Reggiano DOP","Cheese, Parmigiano Reggiano, PDO, hard cheese","Formaggi e latticini",100,50,397,32.4,29.7,,,0,600
+166010,"Caciottina mista","Cheese, semisoft cheese, mixed caciottina","Formaggi e latticini",100,50,370,26.9,28.5,1.5,1.5,0,
+166050,"Pecorino","Cheese, hard cheese, pecorino, sheep milk","Formaggi e latticini",100,50,404,28.8,32.0,0.2,0.2,0,1800
+166060,"Pecorino romano","Cheese, hard cheese, roman pecorino, sheep milk","Formaggi e latticini",100,50,409,26.0,33.1,1.8,1.8,0,1800
+166070,"Pecorino siciliano","Cheese, hard cheese, sicilian pecorino, sheep milk","Formaggi e latticini",100,50,427,28.9,33.6,2.4,2.4,0,450
+166100,"Provolone","Cheese, semisoft, provolone","Formaggi e latticini",100,50,374,28.1,28.2,2.0,2.0,0,860
+166800,"Ricotta di bufala","Whey cheese, ricotta, buffalo milk","Formaggi e latticini",100,100,212,10.5,17.3,3.7,3.7,0,
+166810,"Ricotta di pecora","Whey cheese, ricotta, sheep milk","Formaggi e latticini",100,100,157,9.5,11.5,4.2,4.2,0,85
+166820,"Ricotta di vacca","Whey cheese, ricotta, cow milk","Formaggi e latticini",100,100,146,8.8,10.9,3.5,3.5,0,78
+166850,"Robiola","Cheese, soft, robiola","Formaggi e latticini",100,50,338,20.0,27.7,2.3,2.3,0,
+167200,"Scamorza","Cheese, semisoft, scamorza","Formaggi e latticini",100,50,334,25.0,25.6,1,1.0,0,
+167250,"Stracchino","Cheese, soft cheese, stracchino","Formaggi e latticini",100,50,300,18.5,25.1,,,0,
+167600,"Taleggio","Cheese, soft, taleggio","Formaggi e latticini",100,50,315,19.0,26.2,0.9,0.9,0,873
+170010,"Fiocchi di formaggio magro","Cheese, light, flakes","Formaggi e latticini",100,50,115,9.7,7.1,3.2,3.2,0,290
+170510,"Formaggio cremoso spalmabile, light","Cheese, spreadable, soft white, low fat","Formaggi e latticini",100,100,179,9.2,14.5,3.1,3.1,0,
+180010,"Uova di anatra, intero","Duck Egg, whole","Uova",88,50,190,12.2,15.4,0.7,0.7,0,122
+181100,"Uova di gallina, intero","Chicken Egg, whole","Uova",91,50,128,12.4,8.7,,,0,137
+181105,"Uova di gallina, intero, cotto, alla coque o sodo","Chicken Egg, whole, boiled, a la coque or hard-boiled","Uova",100,50,128,12.4,8.7,,,0,
+181117,"Uova di gallina, intero, cotto, a frittata o strapazzato","Chicken Egg, whole, fried, omelette or scrumbled","Uova",100,50,150,14.6,10.2,,,0,
+181500,"Uova di gallina, intero, congelato","Chicken Egg, whole, frozen","Uova",100,50,128,12.4,8.7,,,0,
+181600,"Uova di gallina, intero, in polvere","Chicken Egg, whole, powder","Uova",100,100,537,51.9,36.4,0.4,0.4,0,573
+182010,"Uova di gallina, albume","Chicken Egg, white","Uova",100,35,43,10.7,,,,0,179
+183010,"Uova di gallina, tuorlo","Chicken Egg, yolk","Uova",100,15,325,15.8,29.1,,,0,43
+183015,"Uova di gallina, tuorlo, cotto, in camicia","Chicken Egg, yolk, boiled without shell","Uova",100,15,325,15.8,29.1,,,0,
+183800,"Uova di gallina, tuorlo, congelato","Chicken Egg, yolk, frozen","Uova",100,15,325,15.8,29.1,,,0,
+183900,"Uova di gallina, tuorlo, in polvere","Chicken Egg, yolk, powder","Uova",100,100,642,31.2,57.5,0.02,0.02,0,
+185010,"Uova di oca, intero","Goose Egg, whole","Uova",87,50,189,13.8,14.4,1.0,1.0,0,
+189010,"Uova di tacchina, intero","Turkey Egg, whole","Uova",87,50,147,12.8,10.2,1.0,1.0,0,
+190010,"Burro","Butter","Oli e grassi",100,10,758,0.8,83.4,1.1,1.1,0,7
+191010,"Lardo","Lard, spread","Oli e grassi",100,10,891,0,99.0,0,0,0,2
+192010,"Sego di bue","Tallow","Oli e grassi",100,10,872,0.8,96.5,0,0,0,
+193010,"Strutto o sugna","Lard, swine fat only","Oli e grassi",100,10,892,0.3,99.0,0,0,0,
+194000,"Olio di fegato di merluzzo","Cod liver oil","Oli e grassi",100,10,899,0,99.9,0,0,0,
+201500,"Zucchero, saccarosio","Sugar, white","Dolci",100,5,392,0,0,104.5,104.5,0,1
+202010,"Caramelle dure","Hard Candies","Dolci",100,5,344,,0,91.6,91.6,0,
+202020,"&quot;|Caramelle tipo &quot;&quot;mou&quot;&quot;|&quot;","Toffee","Dolci",100,5,430,2.1,17.2,71.1,70.0,0,320
+202030,"Lenti colorate ripiene di cioccolato","Tablets, sugar-coated chocolate","Dolci",100,30,456,5.4,17.5,73.9,70.8,,58
+202500,"Gomme da masticare, lastrine e confetti","Chewing Gum, bars and confections","Dolci",100,100,262,0,0,70.0,70.0,0,
+202800,"Torrone alla mandorla","Nougat With Almond","Dolci",100,30,483,10.8,26.8,52.0,52.0,1.9,
+203010,"Cioccolato, al latte","Chocolate, milk","Dolci",100,30,552,7.3,36.3,50.5,50.5,3.2,120
+203020,"Cioccolato, fondente","Chocolate, dark","Dolci",100,30,531,6.6,33.6,49.7,49.7,8,11
+203030,"Cioccolato, al latte con nocciole","Chocolate, milk with hazelnut","Dolci",100,30,553,7.2,36.9,48.6,48.6,4.8,
+203500,"Crema di nocciole e cacao","Spread, hazelnut cocoa","Dolci",100,30,537,6.9,32.4,58.1,58.1,,50
+204010,"Canditi","Sweet, candied fruits","Dolci",100,30,292,0.5,0,75.0,75.0,4.5,
+204500,"Marmellata","Jam","Dolci",100,20,227,0.5,,58.7,58.7,2.2,12
+206010,"Gelato confezionato, cacao, in vaschetta","Ice Cream, cocoa cream ice, packed","Dolci",100,100,173,3.6,7.1,25.3,25.3,0,
+206020,"Gelato confezionato, caffè, in vaschetta","Ice Cream, coffee, packed","Dolci",100,100,245,5.1,15.0,23.9,23.9,0,
+206040,"Gelato confezionato, fior di latte, in vaschetta","Ice Cream, milk shower, packed","Dolci",100,100,218,4.2,13.7,20.7,20.7,0,
+206050,"Gelato confezionato, fior di latte, ricoperto di sorbetto alla fragola","Ice Cream, milk shower, coated by strawbery ice lolly, packed","Dolci",100,100,101,1.4,1.7,21.3,21.3,0,
+206060,"Gelato confezionato, nocciola, in vaschetta","Ice Cream, hazelnut, packed in dish","Dolci",100,100,183,3.3,8.4,25.2,25.2,0,
+206070,"Gelato confezionato, panna, in vaschetta","Ice Cream, cream, packed","Dolci",100,100,189,3.2,8.2,27.2,27.2,0,
+206080,"Gelato confezionato, panna ricoperta di cioccolato fondente","Ice Cream, cream coated by dark chocolate, packed","Dolci",100,100,316,4.5,21.4,28.2,28.2,0,
+206090,"Gelato confezionato, stracciatella, in vaschetta","Ice Cream, stracciatella (cream with chocolate chips), packed","Dolci",100,100,193,2.9,7.0,31.5,31.5,0,
+206100,"Gelato confezionato, vaniglia, in vaschetta","Ice Cream, vanille, packed","Dolci",100,100,167,2.7,6.7,25.7,25.7,0,
+206260,"Gelato confezionato, biscotto con crema, zabaione e cioccolato","Ice Cream cookie with cream, zabaione and chocolate","Dolci",100,100,271,5.3,7.3,49.1,,,
+206270,"Gelato confezionato, cono con panna e cioccolato","Ice Cream, cone with cream and chocolate, packed","Dolci",100,100,291,5.1,15.5,34.9,,,
+206280,"Gelato confezionato, cono con panna, scaglie di cioccolato e noccioline","Ice Cream, cone with cream, chocolate chip, hazelnut, packed","Dolci",100,100,326,4.2,20.5,33.3,,,
+206710,"Gelato confezionato, ghiacciolo all'arancio","Popsicle, orange ice lolly, packed","Dolci",100,100,137,0,,36.5,36.5,0,
+206800,"Gelato confezionato, sorbetto al limone, in vaschetta","Sorbet, lemon, packed","Dolci",100,100,132,0.9,,34.2,34.2,0,18
+207010,"Baba' al rhum","Baba' with Rhum","Dolci",100,100,288,5.9,5.7,41.2,18.5,1.1,
+207020,"Cannoli alla crema, industriale","Pastry, horns filled with custard, packed","Dolci",100,100,368,6.2,20.7,41.9,10.9,,
+208500,"Crostata, con crema al cacao, industriale","Tart with cacao cream, packed","Dolci",100,100,492,4.6,24.7,67,36.1,,208
+208510,"Crostata, con marmellata, industriale","Tart with jam, packed","Dolci",100,100,339,4.9,8.2,65.5,,,
+208520,"Crostata, con marmellata di albicocche, industriale","Tart with apricot jam, packed","Dolci",100,100,421,0.9,16.5,71.7,28.4,,235
+209010,"Torta margherita","""|Cake """" Margherita"""", packed|""","Dolci",100,100,370,8.9,10.4,63.4,34.1,1.4,
+210010,"Miele","Honey","Dolci",100,20,304,0.6,0,80.3,80.3,0,11
+210030,"Merendine, con marmellata, industriale","Short cake, with jam, packed","Dolci",100,30,364,5.5,9.5,67.9,44.8,1.1,
+210040,"Merendine, farcite con cacao, industriale","Short cake, wtih cocoa, packed","Dolci",100,30,410,6.2,15.1,65.5,43.8,1.9,
+210050,"Merendine, tipo pan di Spagna, industriale","Short cake, like sponge cake,packed","Dolci",100,30,386,7.4,13.1,62.7,34.9,1.5,
+210060,"Merendine, tipo brioche, industriale","Short cake, like brioche, packed","Dolci",100,30,440,8.2,17.6,65.7,22.5,1.0,
+210070,"Merendine, tipo pasta frolla, industriale","Short cake, like shortcrust pastry, packed","Dolci",100,30,447,5.3,17.1,71.7,35.2,1.7,
+214000,"Barretta al cocco ricoperta di cioccolato, industriale","Coconut snack, covered by chocolate, packed","Dolci",100,30,472,4.8,26.1,58.2,53.7,,180
+214500,"Wafer ricoperto di cioccolato","Snack wafer coated by chocolate, packed","Dolci",100,30,498,8.2,26.6,60.3,46.8,,110
+215000,"Savoiardi, industriali","Ladyfingers, packed","Dolci",100,100,395,11.9,9.2,69.6,39.3,1.6,
+216000,"Panettone","Panettone, packed","Dolci",100,100,337,6.4,10.7,56.2,22.9,2.1,
+217000,"Pasta di mandorle","Almond paste","Frutta secca a guscio e semi oleaginosi",100,30,455,9.9,23.4,54.6,54.6,,
+401010,"Aranciata","Soft drink, orange","Prodotti vari",100,125,38,0.1,0,10.0,10.0,0,
+401100,"Bevanda tipo cola","Soft drink, coke","Prodotti vari",100,125,39,,0,10.5,10.5,0,8
+403010,"Bevanda alcolica, Aperitivo a base di vino","Aperitifs, wine based","Bevande alcoliche",100,75,186,,0,17,17,0,
+404010,"Bevanda alcolica, Birra chiara","Beer, light colour","Bevande alcoliche",100,250,34,0.2,0,3.5,3.5,0,10
+405010,"Bevanda alcolica, Vino da pasto bianco","White Wine","Bevande alcoliche",100,125,70,,0,,,0,4
+405020,"Bevanda alcolica, Vino da pasto rosso","Red Wine","Bevande alcoliche",100,125,75,,0,,,0,4
+406010,"Bevanda alcolica, Marsala tipico","Marsala, italian cured wine","Bevande alcoliche",100,75,203,,0,28.0,28,0,
+406500,"Bevanda alcolica, Vermouth dolce","Vermouth, sweet","Bevande alcoliche",100,75,139,,0,13.9,13.9,0,28
+406510,"Bevanda alcolica, Vermouth secco","Vermouth, dry","Bevande alcoliche",100,75,121,,0,4.0,4.0,0,17
+407010,"Bevanda alcolica, Liquori da dessert","Liquor, dessert","Bevande alcoliche",100,75,314,,0,31.1,31.1,0,
+407510,"Bevanda alcolica, Marsala all'uovo","Marsala, italian cured wine with egg","Bevande alcoliche",100,75,150,,,12.4,12.4,0,
+408010,"Bevanda alcolica, Brandy","Brandy","Bevande alcoliche",100,40,230,,0,,,0,0
+408100,"Bevanda alcolica, Grappa","Grappa, spirit","Bevande alcoliche",100,40,242,,0,,,0,0
+408900,"Bevanda alcolica, Whisky","Whisky, spirit","Bevande alcoliche",100,40,245,,0,,,0,0
+409000,"Bevanda alcolica, Spumante","Sparkling Wine","Bevande alcoliche",100,75,87,,0,0.6,0.6,0,3
+501200,"Pop corn","Popcorn","Prodotti vari",100,30,408,12.0,4.2,77.9,,15.1,4
+502260,"Ketchup, salsa","Tomato Ketchup","Prodotti vari",100,30,100,2.1,,24,22.9,0.9,1120
+502760,"Maionese, industriale","Mayonnaise, packed","Prodotti vari",100,10,655,4.3,70,2.1,2.1,0,
+503010,"Dadi da brodo","Stock cubes","Prodotti vari",100,10,250,15.7,18.7,5.0,,,
+503100,"Lievito di birra, compresso","Yeast, compressed","Prodotti vari",100,25,70,12.1,0.4,1.1,1.1,6.9,16
+504010,"Farina di castagne","Flour, chestnut","Frutta secca a guscio e semi oleaginosi",100,100,318,6.1,3.7,62.0,16.1,13.8,11
+504100,"Fecola di patate","Potato-Flour","Prodotti vari",100,100,346,1.4,0,90.7,9.1,,
+507100,"Pappa reale","Royal Jelly","Prodotti vari",100,5,146,10.0,6.0,14.0,14.0,0,
+508010,"Cacao amaro, in polvere","Cocoa, bitter, powder","Prodotti vari",100,30,355,20.4,25.6,11.5,,,
+508100,"Tè, foglie","Tea, leaves","Prodotti vari",100,2,108,19.6,2.0,3.0,3.0,,45
+508200,"Caffe' tostato","Coffee, toasted, powder","Prodotti vari",100,6,287,10.4,15.4,28.5,,,74
+509010,"Soia, bevanda","Soy, milk","Prodotti vari",100,125,32,2.9,1.9,0.8,0.8,,32
+509020,"Soia, salsa","Soy, sauce","Prodotti vari",100,30,66,8.7,0,8.3,8.3,0,5720
+509030,"Soia, yogurt","Soy, yoghurt","Prodotti vari",100,125,72,5.0,4.2,3.9,3.9,,
+900010,"Minestre in scatola, crema di asparagi","Soup, canned, asparagus cream","Prodotti vari",100,200,26,1.0,0.7,4.2,,,410
+900110,"Minestre in scatola, crema di cipolle","Soup, canned, onion cream","Prodotti vari",100,200,26,2.2,1.0,2.2,,,438
+900210,"Minestre in scatola, crema di funghi","Soup, canned, mushrooms cream","Prodotti vari",100,200,56,1.0,4.0,4.2,,,398
+900310,"Minestre in scatola, crema di pollo","Soup, canned, chicken cream","Prodotti vari",100,200,58,1.7,3.8,4.5,1.1,,460
+900410,"Minestre in scatola, crema di pomodori","Soup, canned, tomato cream","Prodotti vari",100,200,36,0.8,1.0,6.4,,,396
+905010,"Minestrone, cotto","Potage, cooked,freeze","Verdure e ortaggi",100,200,45,2.0,0.4,7.8,,2.1,
+905100,"Minestrone liofilizzato","Potage, freezer-dried","Prodotti vari",100,30,298,10.1,8.8,47.6,15.0,,5600
