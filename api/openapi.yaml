@@ -2761,6 +2761,37 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
 
+  /api/admin/coach/setups:
+    get:
+      tags: [admin, coach]
+      operationId: getAdminCoachSetups
+      summary: 'Admin: the Coach setups the chat can switch between'
+      description: |
+        Every provider that already holds a credential (or needs none and has an endpoint),
+        with the model it remembers and whether it is the active one. Reads the store only,
+        so unlike `GET /api/admin/coach` it makes no call to a provider. Switch with
+        `POST /api/admin/coach/config` (`provider`, optionally `model`).
+      responses:
+        '200':
+          description: The setups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  provider: { type: string }
+                  setups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        provider: { type: string }
+                        label: { type: string }
+                        model: { type: [string, 'null'] }
+                        active: { type: boolean }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+
   /api/admin/coach/config:
     post:
       tags: [admin, coach]

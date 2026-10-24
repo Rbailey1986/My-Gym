@@ -88,6 +88,8 @@ export const coachAccount = async () =>
 /* Admin-only. The token is write-only from the client's side: it goes up once and is never
    read back, so there is deliberately no "show me the current credential" call to pair with it. */
 export const connectCredential = body => api('/api/admin/coach/connect', { method: 'POST', body: JSON.stringify(body) })
+export const coachSetups = () => api('/api/admin/coach/setups')
+export const switchCoachSetup = provider => api('/api/admin/coach/config', { method: 'POST', body: JSON.stringify({ provider }) })
 export const disconnectCredential = () => api('/api/admin/coach/disconnect', { method: 'POST', body: '{}' })
 
 /**

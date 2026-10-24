@@ -29,7 +29,7 @@ import {
   changeTitle, changeValues, exName, canRevert, revertLast
 } from '../lib/coach.js'
 import { insightsFor, sessionInsights } from '../lib/coach-insights.js'
-import { useCoachStatus, requestReview, requestDebrief, requestPlan, refinePlan, resolvePending, cohortStats, setCohortShare, jobErrorText, awaitedJob, settleAwaited, JOB_ERRORS } from '../lib/coach-api.js'
+import { coachSetups, switchCoachSetup, useCoachStatus, requestReview, requestDebrief, requestPlan, refinePlan, resolvePending, cohortStats, setCohortShare, jobErrorText, awaitedJob, settleAwaited, JOB_ERRORS } from '../lib/coach-api.js'
 import { confirmSheet } from '../sheets.jsx'
 import Icon from '../components/Icon.jsx'
 import { glyphOf } from '../lib/glyphs.js'
@@ -151,6 +151,9 @@ export default function CoachChat() {
 
   const showHistory = () => openSheet(close => <HistorySheet S={S} close={close} openSheet={openSheet} />)
   const showCohort = () => openSheet(() => <CohortSheet S={S} update={update} toast={toast} />)
+  // Only the admin can change the instance's model, and only a server Coach has one to change.
+  const canSwitch = !!user?.admin && !DEMO && !MOBILE && !coachMode
+  const showModels = () => openSheet(close => <ModelSheet close={close} />)
 
   const idle = !job && !pending
   const menu = () => openSheet(close => <div className="chat-menu">
@@ -160,6 +163,7 @@ export default function CoachChat() {
       {idle && !!lastWorkout && <Row icon="checkCircle" iconTint="var(--green)" title={t('Review my last workout')} subtitle={t('What went well, what to watch, what to do next time')} accessory="chevron" onClick={() => { close(); askDebrief() }} />}
       {idle && !!(S.routines || []).length && <Row icon="wrench" iconTint="var(--orange)" title={t('Improve a routine')} subtitle={t('Pick one; the Coach works on just that')} accessory="chevron" onClick={() => { close(); pickRoutine() }} />}
       {community && <Row icon="person" iconTint="var(--teal)" title={t('Compare with others here')} subtitle={t('Anonymous medians from this instance')} accessory="chevron" onClick={() => { close(); showCohort() }} />}
+      {canSwitch && idle && <Row icon="swap" iconTint="var(--green)" title={t('Coach model')} subtitle={config?.coach?.providerLabel} accessory="chevron" onClick={() => { close(); showModels() }} />}
       <Row icon="history" iconTint="var(--blue)" title={t('Everything the Coach proposed')} subtitle={t('Plans, suggestions and debriefs, kept')} accessory="chevron" onClick={() => { close(); showHistory() }} />
       {idle && <Row icon="clipboard" iconTint="var(--indigo)" title={t('Start a new plan')} subtitle={t('A fresh plan from your answers; your workouts stay')} accessory="chevron" onClick={() => { close(); askNewPlan() }} />}
       <Row icon="pencil" iconTint="var(--indigo)" title={t('Edit my answers')} subtitle={t('Goal, days, equipment, limits')} accessory="chevron" onClick={() => closeThenNav(close, '/coach/intake?edit=1')} />
@@ -218,6 +222,7 @@ export default function CoachChat() {
         {!!lastWorkout && <button className="qchip" onClick={askDebrief}><Icon name="checkCircle" />{t('Last workout')}</button>}
         {!!(S.routines || []).length && <button className="qchip" onClick={pickRoutine}><Icon name="wrench" />{t('Improve a routine')}</button>}
         {community && <button className="qchip" onClick={showCohort}><Icon name="person" />{t('Compare')}</button>}
+        {canSwitch && <button className="qchip" onClick={showModels}><Icon name="swap" />{config?.coach?.providerLabel || t('Coach model')}</button>}
       </div>}
       <div className="composer-in">
         <textarea rows={1} value={text} maxLength={maxMessageLen || 1000} placeholder={placeholder} disabled={!!job}
@@ -729,6 +734,37 @@ function CohortSheet({ S, update, toast }) {
       </div>}
       {!d.exercises.length && <div className="chat-empty">{t('No exercise is trained by three or more people yet.')}</div>}
     </div>}
+    <div style={{ height: 10 }} />
+  </div>
+}
+
+/* ---------------------------------- model switcher ---------------------------------- */
+
+// Admin only: the setups the admin card already holds (a key or an endpoint, plus the model each
+// remembers), one tap to make one active. Adding a key or changing a model stays on the card.
+function ModelSheet({ close }) {
+  const toast = useUI(s => s.toast)
+  const refreshConfig = useStore(s => s.refreshConfig)
+  const [setups, setSetups] = useState(null)
+  const [busy, setBusy] = useState(false)
+  useEffect(() => { coachSetups().then(r => setSetups(r.setups || [])).catch(e => { toast(e.message || t('Could not load')); close() }) }, [])
+  const pick = async s => {
+    if (s.active || busy) return
+    setBusy(true)
+    try {
+      await switchCoachSetup(s.provider)
+      await refreshConfig()
+      toast(t('Coach now uses {0}', s.label))
+      close()
+    } catch (e) { toast(e.message || t('Could not switch')); setBusy(false) }
+  }
+  return <div className="chat-menu">
+    <h3>{t('Coach model')}</h3>
+    <div className="sect-b">
+      {(setups || []).map(s => <Row key={s.provider} icon="sparkles" iconTint={s.active ? 'var(--green)' : 'var(--grey)'}
+        title={s.label} subtitle={s.model || t('Default model')} accessory={s.active ? 'check' : 'none'} onClick={() => pick(s)} />)}
+      {setups && !setups.length && <div className="chat-empty">{t('No provider is connected yet. Add one in Settings → Account → Admin dashboard.')}</div>}
+    </div>
     <div style={{ height: 10 }} />
   </div>
 }

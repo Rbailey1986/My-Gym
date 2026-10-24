@@ -102,6 +102,31 @@ test('the admin card is told which providers hold a key, and switching never dro
   } finally { mock.close(); }
 });
 
+test('the chat switcher lists only providers that hold a key, with their own model, and switching keeps them', async () => {
+  fresh();
+  const { call } = harness();
+  let r = await call('GET /api/admin/coach/setups');
+  assert.deepEqual(r.body.setups, [], 'nothing connected, nothing to switch to');
+
+  await call('POST /api/admin/coach/connect', { provider: 'anthropic', type: 'apikey', token: 'sk-ant-x' });
+  await call('POST /api/admin/coach/connect', { provider: 'openai', type: 'apikey', token: 'sk-oa-x' });
+  await call('POST /api/admin/coach/config', { provider: 'openai', model: 'gpt-x' });
+  r = await call('GET /api/admin/coach/setups');
+  assert.equal(r.status, 200);
+  assert.equal(r.body.provider, 'openai');
+  assert.deepEqual(r.body.setups.map(s => [s.provider, s.model, s.active]), [['anthropic', 'claude-opus-5', false], ['openai', 'gpt-x', true]]);
+  assert.ok(!JSON.stringify(r.body).includes('sk-'), 'no key ever comes back');
+
+  await call('POST /api/admin/coach/config', { provider: 'anthropic' });
+  r = await call('GET /api/admin/coach/setups');
+  assert.deepEqual(r.body.setups.map(s => [s.provider, s.model, s.active]), [['anthropic', 'claude-opus-5', true], ['openai', 'gpt-x', false]]);
+
+  // A compatible endpoint needs no key, only an address.
+  await call('POST /api/admin/coach/config', { provider: 'compatible', baseUrl: 'http://ollama.lan:11434', model: 'qwen3:8b' });
+  r = await call('GET /api/admin/coach/setups');
+  assert.ok(r.body.setups.some(s => s.provider === 'compatible' && s.model === 'qwen3:8b' && s.active));
+});
+
 test('a key filed for a provider that does not take one, or an unknown provider, is refused', async () => {
   fresh();
   const { call } = harness();

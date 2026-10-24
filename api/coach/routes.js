@@ -205,6 +205,23 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
       });
     },
 
+    /* The setups the chat can switch between: every provider that already holds a credential (or
+       needs none and has an endpoint), with the model it remembers. Reads the store only, so it
+       is cheap enough to call each time the picker opens, unlike GET /api/admin/coach. */
+    'GET /api/admin/coach/setups': async (req, res) => {
+      if (!requireAdmin(req, res)) return;
+      const cfg = cfgStore.load();
+      const setups = Object.entries(cfgStore.PROVIDERS)
+        .filter(([id, p]) => {
+          if (id === 'fixture') return false;
+          const rec = cfgStore.authFor(cfg, id);
+          if (rec && rec.data) return true;
+          return !!p.keyOptional && !!baseUrlFor(id, cfg);
+        })
+        .map(([id, p]) => ({ provider: id, label: p.label, model: cfgStore.modelFor(cfg, id), active: id === cfg.provider }));
+      json(res, 200, { provider: cfg.provider, setups });
+    },
+
     'POST /api/admin/coach/config': async (req, res) => {
       if (!requireAdmin(req, res)) return;
       const body = await readBody(req);
