@@ -108,6 +108,14 @@ export function coachRoutes({ json, readBody, readSession, requireAdmin }) {
 
     /* How this profile sits against everyone else on the instance who opted in: medians only,
        at least three people, and nothing for a profile that does not share itself. */
+    'POST /api/coach/meals': async (req, res) => {
+      const user = guard(req, res); if (!user) return;
+      const body = await readBody(req);
+      try {
+        const out = await jobs.runMealCoach(user.id, body || {});
+        json(res, 200, out);
+      } catch (e) { failEnqueue(res, e); }
+    },
     'GET /api/coach/cohort': async (req, res) => {
       const user = guard(req, res); if (!user) return;
       if (!cfgStore.load().community) return json(res, 200, { ok: false, enabled: false });

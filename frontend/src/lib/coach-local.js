@@ -17,6 +17,8 @@
 //     riding into a backup or a sync.
 import * as payloadLib from '../../../api/coach/core/payload.js'
 import { runPipeline } from '../../../api/coach/core/pipeline.js'
+import { extractJSON } from '../../../api/coach/core/parse.js'
+import { buildMealsPrompt, extractAIRecipes } from '../../../api/coach/core/meals-prompt.js'
 import { HTTP_PROVIDERS, baseUrlFor } from '../../../api/coach/core/providers.js'
 import anthropic from '../../../api/coach/core/adapters/anthropic.js'
 import openai from '../../../api/coach/core/adapters/openai.js'
@@ -190,4 +192,36 @@ function workoutMetaOf(S, workoutId) {
 }
 
 // Test seam.
+export async function localMeals(S, opts = {}) {
+  const d = await loadCoachDevice()
+  const adapter = ADAPTERS[d.provider]
+  if (d.mode !== 'byok' || !adapter) return { ok: false, recipes: [] }
+  const cap = await capState()
+  if (cap.used >= cap.limit) return { ok: false, recipes: [] }
+  await bumpDaily()
+  const key = await getApiKey()
+  const parts = buildMealsPrompt({
+    prefs: opts.prefs || S?.foodPrefs || {},
+    targets: opts.targets || {},
+    mode: opts.mode || 'week',
+    mealKey: opts.mealKey || 'lunch',
+    currentTitle: opts.currentTitle || '',
+    lang: opts.lang || getLang(),
+  })
+  const r = await adapter.invoke({
+    cfg: cfgOf(d),
+    prompt: parts.user,
+    system: parts.system,
+    model: d.model || HTTP_PROVIDERS[d.provider]?.defaultModel,
+    timeoutMs: timeoutFor(d.provider),
+    env: envOf(d, key),
+    fetch: nativeFetch,
+  })
+  if (r.timedOut || r.code !== 0) return { ok: false, provider: d.provider, recipes: [] }
+  const parsed = extractJSON(r.text)
+  if (parsed.error) return { ok: false, provider: d.provider, recipes: [] }
+  const recipes = extractAIRecipes(parsed.value)
+  return { ok: recipes.length > 0, provider: d.provider, recipes }
+}
+
 export function _resetLocal() { job = null; lastError = null; last = null }

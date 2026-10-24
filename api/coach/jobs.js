@@ -21,6 +21,7 @@ import { adapterFor } from './adapters/index.js';
 import * as payloadLib from './core/payload.js';
 import { runPipeline } from './core/pipeline.js';
 import { extractJSON } from './core/parse.js';
+import { buildMealsPrompt, extractAIRecipes } from './core/meals-prompt.js';
 import { hashPlan } from './core/plan-hash.js';
 import { buildPrompt } from './core/prompt.js';
 import { handleFor } from './handle.js';
@@ -494,6 +495,66 @@ export async function testRun() {
  * user retry, rather than leaving a spinner that never resolves or silently re-running work
  * that may already have cost them a provider call.
  */
+export async function runMealCoach(uid, opts = {}) {
+  if (!cfgStore.isEnabled() || !cfgStore.isConnected()) throw new CoachError('off', 'the Coach is not set up on this instance');
+  const S = readState(uid);
+  const cred = cfgStore.credentialFor(uid);
+  if (!cred.ok) {
+    if (cred.reason === 'shared-account') throw new CoachError('shared', cred.message);
+    throw new CoachError('off', 'this profile has no provider account connected');
+  }
+  const cfg = cfgStore.load();
+  const adapter = adapterFor(cfg.provider);
+  if (!adapter) throw new CoachError('off', 'no provider configured');
+  if (adapter.spawns !== false) {
+    const priv = canDropPrivileges();
+    if (!priv.ok) throw new CoachError('unprivileged', `Coach jobs are disabled: ${priv.why}`);
+  }
+  const caps = cfg.caps || {};
+  const { used, limit } = capState(uid);
+  if (limit > 0 && used >= limit) throw new CoachError('cap', 'daily limit reached');
+  if (caps.instanceDaily > 0 && instanceUsedToday() >= caps.instanceDaily) throw new CoachError('cap', 'this instance has reached its daily limit');
+  cfgStore.bindInstanceCredential(uid);
+  bumpDaily(uid);
+  bumpInstanceDaily();
+
+  const parts = buildMealsPrompt({
+    prefs: opts.prefs || S?.foodPrefs || {},
+    targets: opts.targets || {},
+    mode: opts.mode || 'week',
+    mealKey: opts.mealKey || 'lunch',
+    currentTitle: opts.currentTitle || '',
+    lang: opts.lang || 'en',
+  });
+  const split = adapter.spawns === false;
+  const jobDir = split ? null : fs.mkdtempSync(path.join(os.tmpdir(), 'coach-meals-'));
+  const env = cfgStore.jobEnv(jobDir || os.tmpdir(), cred);
+  try {
+    const ids = jobDir && unprivilegedIds();
+    if (ids) shareJobDir(jobDir, ids);
+    const r = await adapter.invoke({
+      cfg,
+      jobDir,
+      env,
+      prompt: split ? parts.user : parts.system + '\n\n---\n\n' + parts.user,
+      ...(split ? { system: parts.system } : {}),
+      model: cfgStore.modelFor(cfg),
+      timeoutMs: Math.min(TIMEOUT_MS, 180000),
+      fetch: fetchFor(Math.min(TIMEOUT_MS, 180000)),
+      maxTokens: cfg.maxOutputTokens,
+    });
+    if (r.timedOut || r.spawnError || r.code !== 0) {
+      return { ok: false, provider: cfg.provider, recipes: [] };
+    }
+    const parsed = extractJSON(r.text);
+    if (parsed.error) return { ok: false, provider: cfg.provider, recipes: [] };
+    const recipes = extractAIRecipes(parsed.value);
+    return { ok: recipes.length > 0, provider: cfg.provider, recipes };
+  } finally {
+    if (jobDir) removeJobDir(jobDir, unprivilegedIds());
+  }
+}
+
 export function recoverOnBoot() {
   let n = 0;
   try {

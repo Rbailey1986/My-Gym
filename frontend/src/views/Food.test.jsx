@@ -19,6 +19,7 @@ vi.mock('../store/useStore.js', () => {
   return { useStore }
 })
 vi.mock('../sheets.jsx', () => ({ goalSheet: vi.fn() }))
+vi.mock('../lib/coach-api.js', () => ({ requestMealRecipes: vi.fn(async () => ({ ok: false, recipes: [] })) }))
 
 const mounted = []
 function render(el) {
@@ -108,5 +109,49 @@ describe('Food table search, meal logging, planned meals, and favourites/recents
     act(() => { ateBtn.click() })
 
     expect(mocks.S.foodLog[today]?.lunch).toHaveLength(2)
+  })
+
+  it('generates a weekly meal plan, opens recipes with partner portions, and swaps a meal', async () => {
+    const today = todayISO()
+    mocks.S.foodPrefs = {
+      diet: 'any',
+      allergies: '',
+      dislikes: '',
+      likes: 'chicken',
+      cookMin: 30,
+      budget: 'mid',
+      meals: 3,
+      partner: { enabled: true, name: 'Elena', kcal: 1650 },
+    }
+    const host = render(<Food />)
+    const planBtn = [...host.querySelectorAll('button')].find(b => b.textContent.includes('Plan my week'))
+    expect(planBtn).toBeDefined()
+    await act(async () => { planBtn.click() })
+
+    expect(mocks.S.mealPlan?.days?.[today]).toBeDefined()
+    const firstLunchTitle = mocks.S.mealPlan.days[today].lunch.title
+
+    // Re-render with updated mealPlan
+    const host2 = render(<Food />)
+    expect(host2.textContent).toContain(firstLunchTitle)
+    expect(host2.textContent).toContain('Elena')
+
+    // Open recipe sheet by clicking the lunch row in the meal planner
+    const lunchRow = [...host2.querySelectorAll('.list .item')].find(el => el.textContent.includes(`Lunch: ${firstLunchTitle}`))
+    expect(lunchRow).toBeDefined()
+    act(() => { lunchRow.click() })
+
+    const recipeRender = useUI.getState().sheets.at(-1)?.render
+    expect(typeof recipeRender).toBe('function')
+    const recipeHost = render(recipeRender(() => {}))
+    expect(recipeHost.textContent).toContain('Ingredients')
+    expect(recipeHost.textContent).toContain('Steps')
+    expect(recipeHost.textContent).toContain('Cook total:')
+
+    // Swap the meal
+    const swapBtn = [...recipeHost.querySelectorAll('button')].find(b => b.textContent.includes('Swap meal'))
+    expect(swapBtn).toBeDefined()
+    act(() => { swapBtn.click() })
+    expect(mocks.S.mealPlan.days[today].lunch.title).not.toBe(firstLunchTitle)
   })
 })
