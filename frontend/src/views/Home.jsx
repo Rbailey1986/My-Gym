@@ -13,6 +13,7 @@ import { queueOf, queueView, weekTally, pinState } from '../lib/queue.js'
 import { scheduleModeOf } from '../lib/rotation.js'
 import { goalProgress } from '../lib/goal-eta.js'
 import { targetsForDay } from '../lib/nutrition-targets.js'
+import { dayTotals } from '../lib/food-log.js'
 import { useConnectionTrouble } from '../components/SyncBanner.jsx'
 import { Button } from '../components/ui.jsx'
 import { tappable } from '../lib/use-sheet-keyboard.js'
@@ -118,6 +119,7 @@ export default function Home() {
     : t('A few more weigh-ins and a date appears here')
   const weekShare = plannedPerWeek ? doneThisWeek / plannedPerWeek : null
   const food = targetsForDay(S, todayISO())
+  const eaten = dayTotals(S, todayISO())
 
   return <div className="narrow home">
     <div className="hdr">
@@ -145,12 +147,11 @@ export default function Home() {
         <span className="dash-ring-l">{goal ? t('To goal') : t('Set a goal')}</span>
       </button>
       <button className="dash-ring" onClick={() => nav('/food')}>
-        {/* Today's target until food logging fills the ring with what was eaten. */}
-        <Ring value={null} color="var(--orange)" label={t('Calories')}>
-          <div className={'ring-num' + (food ? ' ring-num-sm' : '')}>{food ? fmtNum(food.day.kcal) : '–'}</div>
-          {food && <div className="ring-unit">kcal</div>}
+        <Ring value={food && eaten.count ? eaten.kcal / food.day.kcal : null} color="var(--orange)" label={t('Calories')}>
+          <div className={'ring-num' + (food || eaten.count ? ' ring-num-sm' : '')}>{eaten.count ? fmtNum(eaten.kcal) : food ? fmtNum(food.day.kcal) : '–'}</div>
+          {(food || eaten.count > 0) && <div className="ring-unit">{eaten.count && food ? '/ ' + fmtNum(food.day.kcal) : 'kcal'}</div>}
         </Ring>
-        <span className="dash-ring-l">{food ? t('Calorie target') : t('Calories')}</span>
+        <span className="dash-ring-l">{eaten.count ? t('Calories eaten') : food ? t('Calorie target') : t('Calories')}</span>
       </button>
     </div>
 

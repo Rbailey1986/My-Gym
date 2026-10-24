@@ -8,11 +8,24 @@ import { t } from '../lib/i18n.js'
 import { fmtNum, todayISO } from '../lib/format.js'
 import { targetsForDay, ACTIVITY } from '../lib/nutrition-targets.js'
 import { searchFoods, macrosFor, pieceGrams } from '../lib/foods.js'
+import {
+  dayLog,
+  dayTotals,
+  makeLogItem,
+  addFoodToMeal,
+  removeFoodFromMeal,
+  plannedMealFor,
+  eatPlannedMeal,
+  isFavFood,
+  toggleFavFood,
+  favouriteFoods,
+  recentFoods,
+} from '../lib/food-log.js'
 import { tappable } from '../lib/use-sheet-keyboard.js'
 import { goalSheet } from '../sheets.jsx'
 
-// The Food tab: today's targets (lib/nutrition-targets.js), the day's meals, food search and
-// portion calculator (lib/foods.js), and the shopping list.
+// The Food tab: today's targets (lib/nutrition-targets.js), per-meal food logging (lib/food-log.js),
+// food table search and portion calculator (lib/foods.js), and the shopping list.
 const MEALS = [
   { key: 'breakfast', label: 'Breakfast', icon: 'sunrise' },
   { key: 'lunch', label: 'Lunch', icon: 'sun' },
@@ -36,11 +49,18 @@ const FOOD_UNITS = [
 
 export default function Food() {
   const S = useStore(s => s.S)
+  const update = useStore(s => s.update)
   const [q, setQ] = useState('')
   const today = todayISO()
   const tg = targetsForDay(S, today)
   const day = tg?.day
-  const macros = [['Protein', 'var(--blue)', day?.protein], ['Carbs', 'var(--yellow)', day?.carbs], ['Fat', 'var(--pink)', day?.fat]]
+  const eaten = dayTotals(S, today)
+  const log = dayLog(S, today)
+  const macros = [
+    ['Protein', 'var(--blue)', eaten.protein, day?.protein],
+    ['Carbs', 'var(--yellow)', eaten.carbs, day?.carbs],
+    ['Fat', 'var(--pink)', eaten.fat, day?.fat],
+  ]
   const hasWeight = S.bodyweight.length > 0
   const hits = q.trim() ? searchFoods(q, 25) : []
   return <div className="narrow food">
@@ -51,15 +71,21 @@ export default function Food() {
 
     <div className="card food-today">
       <div className="food-rings">
-        <Ring value={null} color="var(--orange)" size={92} stroke={10} label={t('Calories')}>
-          <div className="ring-num">{day ? fmtNum(day.kcal) : '–'}</div><div className="ring-unit">kcal</div>
+        <Ring value={day && eaten.count ? eaten.kcal / day.kcal : null} color="var(--orange)" size={92} stroke={10} label={t('Calories')}>
+          <div className="ring-num">{eaten.count ? fmtNum(eaten.kcal) : day ? fmtNum(day.kcal) : '–'}</div>
+          <div className="ring-unit">{eaten.count && day ? `/ ${fmtNum(day.kcal)} kcal` : 'kcal'}</div>
         </Ring>
         <div className="food-macros">
-          {macros.map(([m, c, g]) =>
-            <div key={m} className="macro">
-              <div className="row between small"><span>{t(m)}</span><span className="dim">{g != null ? fmtNum(g) : '–'} g</span></div>
-              <div className="macro-bar" style={{ '--c': c }}><span style={{ width: 0 }} /></div>
-            </div>)}
+          {macros.map(([m, c, got, target]) => {
+            const pct = target && eaten.count ? Math.min(100, Math.round((got / target) * 100)) : 0
+            return <div key={m} className="macro">
+              <div className="row between small">
+                <span>{t(m)}</span>
+                <span className="dim">{eaten.count ? `${fmtNum(got)}${target != null ? ' / ' + fmtNum(target) : ''} g` : `${target != null ? fmtNum(target) : '–'} g`}</span>
+              </div>
+              <div className="macro-bar" style={{ '--c': c }}><span style={{ width: pct ? pct + '%' : 0 }} /></div>
+            </div>
+          })}
         </div>
       </div>
       {tg ? <div className="food-why small">
@@ -81,11 +107,25 @@ export default function Food() {
 
     <h2 className="sec-title">{t('Today')}</h2>
     <div className="list">
-      {MEALS.map(m => <div key={m.key} className="item disabled" aria-disabled="true">
-        <span className="lrow-i" style={{ background: 'color-mix(in srgb,var(--orange) 22%,transparent)', color: 'var(--orange)' }}><Icon name={m.icon} /></span>
-        <div className="grow"><div className="tt">{t(m.label)}</div><div className="ss">{t('Nothing planned yet')}</div></div>
-        <Icon name="plus" className="chev" />
-      </div>)}
+      {MEALS.map(m => {
+        const items = log[m.key]
+        const mt = eaten.byMeal[m.key]
+        const planned = plannedMealFor(S, today, m.key)
+        const sub = items.length
+          ? `${fmtNum(mt.kcal)} kcal · ${items.map(i => i.name).join(', ')}`
+          : planned
+            ? t('Planned: {0}', planned.title || planned.name)
+            : t('Nothing logged yet')
+        return <div key={m.key} className="item" {...tappable(() => mealSheet(today, m.key))}>
+          <span className="lrow-i" style={{ background: 'color-mix(in srgb,var(--orange) 22%,transparent)', color: 'var(--orange)' }}><Icon name={m.icon} /></span>
+          <div className="grow"><div className="tt">{t(m.label)}</div><div className="ss">{sub}</div></div>
+          {!items.length && planned && <Button size="sm" variant="tinted" icon="check" onClick={e => {
+            e.stopPropagation()
+            update(s => { eatPlannedMeal(s, today, m.key) })
+          }}>{t('Ate this')}</Button>}
+          <Icon name="plus" className="chev" />
+        </div>
+      })}
     </div>
 
     <h2 className="sec-title">{t('Food table')}</h2>
@@ -100,7 +140,7 @@ export default function Food() {
     {q.trim() && <div className="list" style={{ marginBottom: 12 }}>
       {hits.map(f => <div key={f.id} className="item" {...tappable(() => foodSheet(f))}>
         <div className="grow">
-          <div className="tt">{f.n}</div>
+          <div className="tt">{isFavFood(S, f.id) && <Icon name="starFill" className="fav-star" />}{f.n}</div>
           <div className="ss">{t('{0} kcal · {1} g protein · {2} g carbs · {3} g fat · per 100 g', fmtNum(Math.round(f.k)), fmtNum(f.p), fmtNum(f.c), fmtNum(f.f))}</div>
         </div>
         <Icon name="chevronRight" className="chev" />
@@ -138,9 +178,102 @@ function whyLine(tg, S) {
     : t('About {0} kcal keeps your weight steady; {1} more a day gains {2} a week.', fmtNum(tg.maintenance), fmtNum(gap), pace)
 }
 
-function FoodSheet({ food, close }) {
-  const [amount, setAmount] = useState(food.pt || 100)
-  const [unit, setUnit] = useState('g')
+function MealSheet({ iso, mealKey, close }) {
+  const S = useStore(s => s.S)
+  const update = useStore(s => s.update)
+  const [mq, setMq] = useState('')
+  const mealDef = MEALS.find(m => m.key === mealKey) || MEALS[0]
+  const items = dayLog(S, iso)[mealKey]
+  const mt = dayTotals(S, iso).byMeal[mealKey]
+  const planned = plannedMealFor(S, iso, mealKey)
+  const favs = favouriteFoods(S)
+  const favSet = new Set(favs.map(x => x.food.id))
+  const recents = recentFoods(S, 10).filter(x => !favSet.has(x.food.id))
+  const hits = mq.trim() ? searchFoods(mq, 20) : []
+
+  const quickRow = ({ food, amount, unit }) => {
+    const m = macrosFor(food, amount, unit)
+    return <div key={food.id} className="item" {...tappable(() => foodSheet(food, { iso, mealKey, amount, unit }))}>
+      <div className="grow">
+        <div className="tt">{isFavFood(S, food.id) && <Icon name="starFill" className="fav-star" />}{food.n}</div>
+        <div className="ss">{`${fmtNum(amount)} ${t(unit)} · ${fmtNum(Math.round(m?.kcal || 0))} kcal`}</div>
+      </div>
+      <Button size="sm" variant="tinted" icon="plus" onClick={e => {
+        e.stopPropagation()
+        const entry = makeLogItem(food, amount, unit)
+        if (entry) update(s => { addFoodToMeal(s, iso, mealKey, entry) })
+      }}>{t('Add')}</Button>
+    </div>
+  }
+
+  return <>
+    <div className="row between" style={{ marginBottom: 8 }}>
+      <h3 style={{ margin: 0 }}>{t(mealDef.label)}</h3>
+      {items.length > 0 && <span className="dim small">{fmtNum(mt.kcal)} kcal</span>}
+    </div>
+
+    {!items.length && planned && <div className="card" style={{ marginBottom: 12 }}>
+      <div className="row between" style={{ gap: 8 }}>
+        <div>
+          <div className="tt">{planned.title || planned.name}</div>
+          <div className="muted small">{t('Planned meal · search below to log a swap instead.')}</div>
+        </div>
+        <Button size="sm" variant="primary" icon="check" onClick={() => update(s => { eatPlannedMeal(s, iso, mealKey) })}>{t('Ate this')}</Button>
+      </div>
+    </div>}
+
+    {items.length > 0 && <div className="list" style={{ marginBottom: 12 }}>
+      {items.map(it => <div key={it.id} className="item">
+        <div className="grow">
+          <div className="tt">{it.name}</div>
+          <div className="ss">{`${fmtNum(it.amount)} ${t(it.unit)} · ${fmtNum(it.kcal)} kcal · P ${fmtNum(it.protein)} g · C ${fmtNum(it.carbs)} g · F ${fmtNum(it.fat)} g`}</div>
+        </div>
+        <button className="iconbtn" onClick={() => update(s => { removeFoodFromMeal(s, iso, mealKey, it.id) })} aria-label={t('Remove')}><Icon name="trash" /></button>
+      </div>)}
+    </div>}
+
+    <div className="search-row" style={{ marginBottom: 10 }}>
+      <div className={'search' + (mq.trim() ? ' has-count' : '') + (mq ? ' has-clear' : '')}>
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        <input className="input" placeholder={t('Search foods…')} value={mq} onChange={e => setMq(e.target.value)} />
+        {mq.trim() && <span className="search-count" role="status">{fmtNum(hits.length)}</span>}
+        {mq && <button className="clear" onClick={() => setMq('')} aria-label={t('Clear')}><Icon name="xmark" /></button>}
+      </div>
+    </div>
+
+    {mq.trim() ? <div className="list" style={{ marginBottom: 12 }}>
+      {hits.map(f => <div key={f.id} className="item" {...tappable(() => foodSheet(f, { iso, mealKey }))}>
+        <div className="grow">
+          <div className="tt">{isFavFood(S, f.id) && <Icon name="starFill" className="fav-star" />}{f.n}</div>
+          <div className="ss">{t('{0} kcal · {1} g protein · {2} g carbs · {3} g fat · per 100 g', fmtNum(Math.round(f.k)), fmtNum(f.p), fmtNum(f.c), fmtNum(f.f))}</div>
+        </div>
+        <Icon name="plus" className="chev" />
+      </div>)}
+      {hits.length === 0 && <div className="empty"><div className="ico"><Icon name="magnifier" /></div>{t('No match')}</div>}
+    </div> : <>
+      {favs.length > 0 && <>
+        <div className="sect-t">{t('Favourites')}</div>
+        <div className="list" style={{ marginBottom: 12 }}>{favs.map(quickRow)}</div>
+      </>}
+      {recents.length > 0 && <>
+        <div className="sect-t">{t('Recent')}</div>
+        <div className="list" style={{ marginBottom: 12 }}>{recents.map(quickRow)}</div>
+      </>}
+    </>}
+
+    <Button variant="primary" onClick={close}>{t('Done')}</Button>
+  </>
+}
+export const mealSheet = (iso, mealKey) => useUI.getState().openSheet(close => <MealSheet iso={iso} mealKey={mealKey} close={close} />)
+
+function FoodSheet({ food, opts = {}, close }) {
+  const S = useStore(s => s.S)
+  const update = useStore(s => s.update)
+  const [amount, setAmount] = useState(opts.amount ?? (food.pt || 100))
+  const [unit, setUnit] = useState(opts.unit || 'g')
+  const [mealKey, setMealKey] = useState(opts.mealKey || 'breakfast')
+  const iso = opts.iso || todayISO()
+  const fav = isFavFood(S, food.id)
   const changeUnit = next => {
     if ((next === 'pieces' || next === 'cup' || next === 'tbsp' || next === 'tsp') && (unit === 'g' || unit === 'ml')) setAmount(1)
     else if ((next === 'g' || next === 'ml') && unit !== 'g' && unit !== 'ml') setAmount(food.pt || 100)
@@ -148,7 +281,12 @@ function FoodSheet({ food, close }) {
   }
   const m = macrosFor(food, amount ?? 0, unit) || { kcal: 0, protein: 0, carbs: 0, fat: 0, grams: 0 }
   return <>
-    <h3>{food.n}</h3>
+    <div className="row between" style={{ gap: 8 }}>
+      <h3 style={{ margin: 0 }}>{food.n}</h3>
+      <button className="iconbtn" onClick={() => update(s => { toggleFavFood(s, food.id) })} aria-label={fav ? t('Remove from favourites') : t('Add to favourites')}>
+        <Icon name={fav ? 'starFill' : 'star'} />
+      </button>
+    </div>
     {food.en && food.en !== food.n && <div className="muted small" style={{ marginBottom: 10 }}>{food.en}</div>}
     <div className="sect-t">{t('Amount')}</div>
     <NumberField className="input" value={amount ?? ''} onChange={setAmount} placeholder="100" />
@@ -171,11 +309,17 @@ function FoodSheet({ food, close }) {
       {m.fibre != null && <div className="row between small dim" style={{ marginTop: 4 }}><span>{t('Fibre')}</span><span>{fmtNum(m.fibre)} g</span></div>}
       {m.sugars != null && <div className="row between small dim" style={{ marginTop: 4 }}><span>{t('Sugars')}</span><span>{fmtNum(m.sugars)} g</span></div>}
     </div>
+    <div className="sect-t" style={{ marginTop: 14 }}>{t('Meal')}</div>
+    <Segmented value={mealKey} onChange={setMealKey} options={MEALS.map(m => ({ value: m.key, label: t(m.label) }))} />
     <div style={{ height: 14 }} />
-    <Button variant="primary" onClick={close}>{t('Done')}</Button>
+    <Button variant="primary" icon="plus" disabled={!(amount > 0)} onClick={() => {
+      const entry = makeLogItem(food, amount, unit)
+      if (entry) update(s => { addFoodToMeal(s, iso, mealKey, entry) })
+      close()
+    }}>{t('Log food')}</Button>
   </>
 }
-export const foodSheet = food => useUI.getState().openSheet(close => <FoodSheet food={food} close={close} />)
+export const foodSheet = (food, opts) => useUI.getState().openSheet(close => <FoodSheet food={food} opts={opts} close={close} />)
 
 function ProfileSheet({ close }) {
   const S = useStore(s => s.S)

@@ -2364,4 +2364,12 @@ export default {
   '{0} g': '{0} g',
   'Fibre': 'Fibre',
   'Sugars': 'Zuccheri',
+  // --- food logging ---
+  'Calories eaten': 'Calorie assunte',
+  'Planned: {0}': 'Pianificato: {0}',
+  'Ate this': 'Mangiato',
+  'Planned meal · search below to log a swap instead.': 'Pasto pianificato · cerca sotto per registrare un’alternativa.',
+  'Recent': 'Recenti',
+  'Meal': 'Pasto',
+  'Log food': 'Registra alimento',
 }
