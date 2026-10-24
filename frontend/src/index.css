@@ -69,6 +69,70 @@
   --conn:0px;
 }
 
+/* Modern Wellness theme: soft cream (#FAF7F2), coral accent (#FF6F59), electric blue charts (#2D7FF9) */
+:root[data-theme="wellness"] {
+  --bg:        #FAF7F2;
+  --bg-el:     #F4EFE6;
+  --surface:   #FFFFFF;
+  --surface-2: #F5EFE6;
+  --surface-3: #EBE3D7;
+
+  --label:     #2D2823;
+  --label-2:   #5C554E;
+  --label-3:   #8C8379;
+  --label-4:   #C2B9AE;
+
+  --sep:       rgba(90, 80, 70, 0.12);
+  --sep-op:    rgba(90, 80, 70, 0.08);
+
+  --blue:      #2D7FF9;   /* electric blue for charts and highlights */
+  --green:     #28B873;
+  --red:       #E84855;
+  --orange:    #FF6F59;   /* coral */
+  --yellow:    #F4B740;
+  --teal:      #2A9D8F;
+  --pink:      #FF6F59;
+
+  --acc:       #FF6F59;
+  --acc-2:     #E85A45;
+  --on-acc:    #ffffff;
+  --acc-soft:  rgba(255, 111, 89, 0.14);
+  --acc-line:  rgba(255, 111, 89, 0.38);
+
+  --r-sm:      8px;
+  --r:         10px;
+  --r-lg:      12px;
+  --r-card:    12px;
+}
+
+:root[data-theme="wellness"] .card {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(90, 80, 70, 0.05);
+  border: 1px solid rgba(220, 210, 200, 0.55);
+}
+
+:root[data-theme="wellness"] .btn.primary {
+  background: #FF6F59;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+:root[data-theme="wellness"] #tabbar {
+  background: rgba(250, 247, 242, 0.94);
+  border-top: 1px solid rgba(90, 80, 70, 0.10);
+}
+
+:root[data-theme="wellness"] .sheet {
+  background: var(--bg);
+  border-radius: 20px 20px 0 0;
+}
+
+:root[data-theme="wellness"] .modal, :root[data-theme="wellness"] .center {
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
 :root[data-theme="light"] {
   --bg:        #f2f2f7;
   --bg-el:     #f7f7fa;
@@ -99,6 +163,7 @@
 :root[data-accent="pink"]  { --acc:var(--pink);   --acc-2:#d70036; --on-acc:#fff }
 :root[data-accent="red"]   { --acc:var(--red);    --acc-2:#d70015; --on-acc:#fff }
 :root[data-accent="teal"]  { --acc:var(--teal);   --acc-2:#0071a4; --on-acc:#000 }
+:root[data-accent="coral"] { --acc:#FF6F59; --acc-2:#E85A45; --on-acc:#fff }
 :root[data-accent="gold"]  { --acc:var(--yellow); --acc-2:#b25000; --on-acc:#000; --knob-ring:rgba(0,0,0,.28) }
 /* Label colour on a filled accent button is picked per accent by measured contrast,
    not by taste. Button text is 17px/600, so the AA bar is 3:1 (large text). White on

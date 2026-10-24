@@ -130,6 +130,26 @@ export default function Home() {
       <button className="iconbtn" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
     </div>
 
+    
+    <div className="card streak-banner" style={{ background: 'var(--acc)', color: 'var(--on-acc)', borderRadius: 'var(--r-card)', padding: '14px 18px', marginBottom: 14, boxShadow: '0 4px 14px rgba(255, 111, 89, 0.28)' }}>
+      <div className="row between" style={{ alignItems: 'center' }}>
+        <div className="row" style={{ gap: 12, alignItems: 'center' }}>
+          <span style={{ fontSize: 26, lineHeight: 1 }}>🔥</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 17, color: '#fff', letterSpacing: '-0.01em' }}>
+              {t('{0} week streak', streakWeeks(S))}
+            </div>
+            <div style={{ fontSize: 13, opacity: 0.95, color: '#fff', marginTop: 2 }}>
+              {doneThisWeek}{plannedPerWeek ? ' / ' + plannedPerWeek : ''} {t('this week')} · {tn('{0} workout total', '{0} workouts total', S.workouts.length)}
+            </div>
+          </div>
+        </div>
+        <span className="chip-day" style={{ background: 'rgba(255, 255, 255, 0.24)', color: '#fff', fontWeight: 600, border: 'none' }}>
+          {t('Active')}
+        </span>
+      </div>
+    </div>
+
     {/* Two columns on a wide screen (index.css .home-cols): how it is going on the left, the day
         on the right. One column, in this order, everywhere else. */}
     <div className="home-cols">
@@ -150,7 +170,7 @@ export default function Home() {
         <span className="dash-ring-l">{goal ? t('To goal') : t('Set a goal')}</span>
       </button>
       <button className="dash-ring" onClick={() => nav('/food')}>
-        <Ring value={food && eaten.count ? eaten.kcal / food.day.kcal : null} color="var(--orange)" label={t('Calories')}>
+        <Ring value={food && eaten.count ? eaten.kcal / food.day.kcal : null} color="var(--blue)" label={t('Calories')}>
           <div className={'ring-num' + (food || eaten.count ? ' ring-num-sm' : '')}>{eaten.count ? fmtNum(eaten.kcal) : food ? fmtNum(food.day.kcal) : '–'}</div>
           {(food || eaten.count > 0) && <div className="ring-unit">{eaten.count && food ? '/ ' + fmtNum(food.day.kcal) : 'kcal'}</div>}
         </Ring>
@@ -193,7 +213,7 @@ export default function Home() {
             {t('Target {0}', fmtDate(goal.by))}</span>
           <span className="dim">{t('needs {0} a week', (goal.neededPerWeek > 0 ? '+' : '−') + amount(goal.neededPerWeek))}</span>
         </div>}
-        <div className="chart" style={{ marginTop: 8 }}><LineChart points={bwPoints} h={120} unit={unit} goal={S.targetW} /></div>
+        <div className="chart" style={{ marginTop: 8 }}><LineChart points={bwPoints} h={120} unit={unit} goal={S.targetW} color="var(--blue)" /></div>
         {/* every weigh-in, week by week with its average (Discord 'Weight') */}
         <div className="row" style={{ justifyContent: 'flex-end', marginTop: 4 }}>
           <Button size="sm" variant="ghost" trailingIcon="chevronRight" onClick={weighInsSheet}>{t('All weigh-ins')}</Button>
