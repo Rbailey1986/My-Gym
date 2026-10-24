@@ -93,6 +93,8 @@ export const DEF = {
   // worked out from (lib/nutrition-targets.js): { sex, birthYear, heightCm, activity }, null until
   // it is set up on the Food tab.
   targetDate: null, nutrition: null,
+  // What the meal planner may cook: { diet, allergies, dislikes, likes, cookMin, budget, meals }, null until set.
+  foodPrefs: null,
   bodyweight: [], routines: [], week: {}, dayPlan: {},
   // A note per day off (#261): { [iso]: { tag, text, _ts } } (lib/day-notes.js). A noted day is
   // excused from the missed-day nudge; each day merges on its own stamp (lib/sync-merge.js).

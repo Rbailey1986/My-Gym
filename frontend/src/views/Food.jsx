@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Icon from '../components/Icon.jsx'
 import Ring from '../components/Ring.jsx'
-import { Button, NumberField, Segmented } from '../components/ui.jsx'
+import { Button, NumberField, Segmented, TextArea, TextField } from '../components/ui.jsx'
 import { useStore } from '../store/useStore.js'
 import { useUI } from '../store/useUI.js'
 import { t } from '../lib/i18n.js'
@@ -91,6 +91,7 @@ export default function Food() {
       <div className="lbl2" style={{ color: 'var(--orange)' }}>{t('Coming next')}</div>
       <div className="ttl" style={{ marginTop: 2 }}>{t('Your meal planner')}</div>
       <div className="muted small" style={{ marginTop: 4 }}>{t('Tell it your diet, allergies and the foods you like, and it plans a week of meals with recipes that hit your targets, then writes the shopping list.')}</div>
+      <Button icon="heart" onClick={prefsSheet} style={{ marginTop: 10 }}>{S.foodPrefs ? t('Edit food preferences') : t('Set food preferences')}</Button>
     </div>
   </div>
 }
@@ -143,3 +144,42 @@ function ProfileSheet({ close }) {
   </>
 }
 const profileSheet = () => useUI.getState().openSheet(close => <ProfileSheet close={close} />)
+
+const DIETS = [['any', 'Anything'], ['vegetarian', 'Vegetarian'], ['vegan', 'Vegan'], ['pescatarian', 'Pescatarian']]
+
+function PrefsSheet({ close }) {
+  const S = useStore(s => s.S)
+  const update = useStore(s => s.update)
+  const p = S.foodPrefs || {}
+  const [diet, setDiet] = useState(p.diet || 'any')
+  const [allergies, setAllergies] = useState(p.allergies || '')
+  const [dislikes, setDislikes] = useState(p.dislikes || '')
+  const [likes, setLikes] = useState(p.likes || '')
+  const [cookMin, setCookMin] = useState(p.cookMin || 30)
+  const [budget, setBudget] = useState(p.budget || 'mid')
+  const [meals, setMeals] = useState(p.meals || 3)
+  return <>
+    <h3>{t('Food preferences')}</h3>
+    <div className="muted small" style={{ marginBottom: 12 }}>{t('The meal planner only uses these. Separate items with commas.')}</div>
+    <div className="sect-t">{t('Diet')}</div>
+    <Segmented value={diet} onChange={setDiet} options={DIETS.map(([value, label]) => ({ value, label: t(label) }))} />
+    <label><div className="sect-t" style={{ marginTop: 14 }}>{t('Allergies and intolerances')}</div>
+      <TextField value={allergies} onChange={e => setAllergies(e.target.value)} placeholder={t('peanuts, shellfish')} /></label>
+    <label><div className="sect-t" style={{ marginTop: 14 }}>{t('Foods you avoid')}</div>
+      <TextField value={dislikes} onChange={e => setDislikes(e.target.value)} placeholder={t('mushrooms, olives')} /></label>
+    <label><div className="sect-t" style={{ marginTop: 14 }}>{t('Foods you like')}</div>
+      <TextArea rows={2} value={likes} onChange={e => setLikes(e.target.value)} placeholder={t('chicken, rice, eggs, pasta')} /></label>
+    <div className="sect-t" style={{ marginTop: 14 }}>{t('Time to cook a meal')}</div>
+    <Segmented value={cookMin} onChange={setCookMin} options={[15, 30, 60].map(m => ({ value: m, label: t('{0} min', m) }))} />
+    <div className="sect-t" style={{ marginTop: 14 }}>{t('Budget')}</div>
+    <Segmented value={budget} onChange={setBudget} options={[{ value: 'low', label: t('Tight') }, { value: 'mid', label: t('Normal') }, { value: 'high', label: t('Relaxed') }]} />
+    <div className="sect-t" style={{ marginTop: 14 }}>{t('Meals a day')}</div>
+    <Segmented value={meals} onChange={setMeals} options={[3, 4, 5].map(n => ({ value: n, label: String(n) }))} />
+    <div style={{ height: 14 }} />
+    <Button variant="primary" onClick={() => {
+      update(s => { s.foodPrefs = { diet, allergies: allergies.trim(), dislikes: dislikes.trim(), likes: likes.trim(), cookMin, budget, meals } })
+      close()
+    }}>{t('Save')}</Button>
+  </>
+}
+const prefsSheet = () => useUI.getState().openSheet(close => <PrefsSheet close={close} />)
