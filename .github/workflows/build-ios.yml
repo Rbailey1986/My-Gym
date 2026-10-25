@@ -1,0 +1,80 @@
+name: Build iOS App
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+
+jobs:
+  build-ios:
+    name: Build iOS IPA
+    runs-on: macos-14
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build mobile bundle
+        run: |
+          cd frontend
+          npm run build:mobile
+
+      - name: Install CocoaPods
+        run: |
+          cd frontend/ios/App
+          pod install
+
+      - name: Read version info
+        id: version
+        run: |
+          cd frontend
+          VER=$(node -p "require('./package.json').version")
+          echo "version=${VER}" >> $GITHUB_OUTPUT
+
+      - name: Build Xcode Archive
+        run: |
+          cd frontend/ios/App
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$PWD/build/App.xcarchive" \
+            MARKETING_VERSION="${{ steps.version.outputs.version }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            archive
+
+      - name: Package Unsigned IPA
+        run: |
+          cd frontend/ios/App/build
+          mkdir -p Payload
+          cp -r App.xcarchive/Products/Applications/App.app Payload/
+          zip -qr "openGym-${{ steps.version.outputs.version }}-unsigned.ipa" Payload
+          shasum -a 256 "openGym-${{ steps.version.outputs.version }}-unsigned.ipa" > "openGym-${{ steps.version.outputs.version }}-unsigned.ipa.sha256"
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openGym-iOS-${{ steps.version.outputs.version }}
+          path: |
+            frontend/ios/App/build/*.ipa
+            frontend/ios/App/build/*.sha256

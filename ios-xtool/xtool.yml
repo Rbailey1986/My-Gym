@@ -1,0 +1,3 @@
+version: 1
+bundleID: ch.duartesantos.opengym
+infoPath: Info.plist

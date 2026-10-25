@@ -38,3 +38,11 @@ desktop/src-tauri/target/
 desktop/src-tauri/gen/
 frontend/src/desktop/generated/
 desktop/media-staged/
+
+# xtool and generated iOS bundle
+xtool-x86_64.AppImage
+tools/xtool/bundle/
+tools/xtool/xtool
+tools/xtool/*.bundle/
+ios-xtool/Sources/Web/
+
