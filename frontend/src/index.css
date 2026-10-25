@@ -2379,3 +2379,276 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 .food-setup{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:12px}
 .linklike{background:none;border:0;padding:0;color:var(--acc);font:inherit;cursor:pointer}
 .ring-num.ring-num-sm{font-size:16px}
+
+/* --- Modern Wellness & Fitness Dashboard Preview additions --- */
+.coral-gradient {
+  background: linear-gradient(135deg, #FF6F59 0%, #FF8566 100%);
+}
+.coral-glow {
+  box-shadow: 0 8px 24px -4px rgba(255, 111, 89, 0.35);
+}
+.electric-blue-gradient {
+  background: linear-gradient(180deg, #2D7FF9 0%, #0055E6 100%);
+}
+.pulse-dot {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.85); }
+}
+
+.dash-kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--acc);
+}
+
+.dash-activity-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+  margin-top: 8px;
+}
+.dash-activity-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 0;
+  padding: 4px 2px;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: transform var(--fast);
+}
+.dash-activity-day:active {
+  transform: scale(0.95);
+}
+.dash-day-pill {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all var(--fast);
+}
+:root[data-theme="light"] .dash-day-pill.done {
+  background: #FFF0EB;
+  border: 1px solid rgba(255, 111, 89, 0.35);
+  color: #FF6F59;
+}
+:root[data-theme="dark"] .dash-day-pill.done {
+  background: rgba(255, 111, 89, 0.18);
+  border: 1px solid rgba(255, 111, 89, 0.45);
+  color: #FF7A66;
+}
+.dash-day-pill.today {
+  background: linear-gradient(135deg, #FF6F59 0%, #FF8566 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 111, 89, 0.35);
+}
+.dash-day-pill.rest {
+  border: 1px dashed var(--sep);
+  color: var(--label-3);
+  font-size: 10px;
+}
+.dash-day-pill.planned {
+  background: var(--surface-2);
+  color: var(--label-2);
+}
+
+/* Calories Card (Dual-Column Preview layout) */
+.calorie-preview-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.cal-preview-left {
+  flex: 1;
+  min-width: 0;
+}
+.cal-preview-hdr {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.cal-badge {
+  background: rgba(40, 184, 115, 0.14);
+  color: #28B873;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.cal-big-num {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--label);
+}
+.cal-target-num {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--label-3);
+  margin-inline-start: 4px;
+}
+.cal-subtext {
+  font-size: 12px;
+  color: var(--label-2);
+  margin-top: 4px;
+  font-weight: 500;
+}
+.cal-breakdown-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: var(--hair) solid var(--sep);
+  font-size: 12px;
+}
+.cal-breakdown-item span:first-child {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--label-3);
+}
+.cal-breakdown-item span:last-child {
+  font-weight: 700;
+  color: var(--label);
+}
+
+/* Motivational Streak Banner */
+.motivational-streak-card {
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: var(--r-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform var(--fast), box-shadow var(--fast);
+}
+:root[data-theme="light"] .motivational-streak-card {
+  background: linear-gradient(135deg, #FFF6F2 0%, #FFF0EB 100%);
+  border: 1px solid rgba(255, 111, 89, 0.25);
+  box-shadow: 0 4px 16px rgba(255, 111, 89, 0.08);
+}
+:root[data-theme="dark"] .motivational-streak-card {
+  background: linear-gradient(135deg, #261D1A 0%, #1F1918 100%);
+  border: 1px solid rgba(255, 111, 89, 0.20);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.40);
+}
+.motivational-streak-card:hover {
+  transform: translateY(-1px);
+}
+.motivational-streak-card:active {
+  transform: scale(0.99);
+}
+
+/* Volume Bar Chart Card */
+.weekly-volume-card {
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.bar-chart-container {
+  height: 125px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 16px;
+  padding-bottom: 6px;
+  border-bottom: var(--hair) solid var(--sep);
+}
+.bar-chart-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.bar-val-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--label-3);
+  transition: color var(--fast);
+}
+.bar-chart-col:hover .bar-val-label {
+  color: var(--blue);
+}
+.bar-fill {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  background: var(--blue);
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter var(--fast);
+}
+.bar-fill:hover {
+  filter: brightness(1.15);
+}
+.bar-fill.rest {
+  background: var(--surface-3);
+  opacity: 0.5;
+}
+.bar-fill.today-bar {
+  background: linear-gradient(180deg, #2D7FF9 0%, #0055E6 100%);
+  position: relative;
+  box-shadow: 0 2px 8px rgba(45, 127, 249, 0.35);
+}
+.bar-today-dot {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FF6F59;
+  border: 1.5px solid #ffffff;
+}
+
+/* Primary Workout CTA Button */
+.cta-workout-btn {
+  width: 100%;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #FF6F59 0%, #FF8566 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--r-card);
+  box-shadow: 0 8px 24px -4px rgba(255, 111, 89, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  border: 0;
+  transition: all var(--fast);
+}
+.cta-workout-btn:hover {
+  filter: brightness(1.05);
+}
+.cta-workout-btn:active {
+  transform: scale(0.99);
+}

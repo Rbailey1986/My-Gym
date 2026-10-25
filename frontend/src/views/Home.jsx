@@ -124,29 +124,67 @@ export default function Home() {
   const food = adjFood ? { ...baseFood, rest: adjFood.rest, training: adjFood.training, day: adjFood.day } : baseFood
   const eaten = dayTotals(S, todayISO())
 
-  return <div className="narrow home">
-    <div className="hdr">
-      <div><h1>{user ? t('Hi {0}', user.name) : 'openGym'}</h1><div className="sub">{today.toLocaleDateString(dateLocale(), { weekday: 'long', day: 'numeric', month: 'long' })}</div></div>
-      <button className="iconbtn" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
-    </div>
+  // Weekly volume bars & 7-day status from preview
+  const weekVolumeData = []
+  let totalWeekMinutes = 0
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(wkStart); d.setDate(wkStart.getDate() + i)
+    const iso = isoOf(d)
+    const dayWorkouts = S.workouts.filter(w => w.d === iso)
+    let minutes = 0
+    let kgVol = 0
+    for (const w of dayWorkouts) {
+      if (w.start && w.end && w.end > w.start) {
+        minutes += Math.round((w.end - w.start) / 60000)
+      } else {
+        minutes += 45
+      }
+      for (const entry of (w.entries || [])) {
+        for (const set of (entry.sets || [])) {
+          if (set.done && set.w && set.r) kgVol += set.w * set.r
+        }
+      }
+    }
+    totalWeekMinutes += minutes
+    const isToday = iso === todayISO()
+    const isDone = doneDays.has(iso)
+    const hasPlan = effectiveRoutineIds(S, iso).length > 0
+    weekVolumeData.push({
+      dayLetter: DAYS[d.getDay()],
+      dateNum: d.getDate(),
+      iso,
+      minutes,
+      kgVol,
+      isToday,
+      isDone,
+      hasPlan,
+    })
+  }
+  const maxMin = Math.max(...weekVolumeData.map(v => v.minutes), 60)
+  const calTarget = food?.day?.kcal || 2200
+  const calEaten = eaten.kcal || 0
+  const calRemaining = Math.max(0, calTarget - calEaten)
+  const calPercent = calTarget > 0 ? Math.min(100, Math.round((calEaten / calTarget) * 100)) : 0
 
-    
-    <div className="card streak-banner" style={{ background: 'var(--acc)', color: 'var(--on-acc)', borderRadius: 'var(--r-card)', padding: '14px 18px', marginBottom: 14, boxShadow: '0 4px 14px rgba(255, 111, 89, 0.28)' }}>
-      <div className="row between" style={{ alignItems: 'center' }}>
-        <div className="row" style={{ gap: 12, alignItems: 'center' }}>
-          <span style={{ fontSize: 26, lineHeight: 1 }}>🔥</span>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: 17, color: '#fff', letterSpacing: '-0.01em' }}>
-              {t('{0} week streak', streakWeeks(S))}
-            </div>
-            <div style={{ fontSize: 13, opacity: 0.95, color: '#fff', marginTop: 2 }}>
-              {doneThisWeek}{plannedPerWeek ? ' / ' + plannedPerWeek : ''} {t('this week')} · {tn('{0} workout total', '{0} workouts total', S.workouts.length)}
-            </div>
-          </div>
+  return <div className="narrow home">
+    {/* 1. Header with kicker & inspiring greeting */}
+    <div className="hdr" style={{ alignItems: 'flex-start', marginBottom: 12 }}>
+      <div>
+        <div className="dash-kicker">
+          <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--acc)', display: 'inline-block' }} />
+          {today.toLocaleDateString(dateLocale(), { weekday: 'long', month: 'short', day: 'numeric' })}
         </div>
-        <span className="chip-day" style={{ background: 'rgba(255, 255, 255, 0.24)', color: '#fff', fontWeight: 600, border: 'none' }}>
-          {t('Active')}
-        </span>
+        <h1 style={{ margin: '3px 0 0', fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--label)' }}>
+          {user ? t('Keep Moving, {0} ✨', user.name) : t('Keep Moving ✨')}
+        </h1>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <button className="iconbtn" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}>
+          <Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}
+        </button>
+        <div style={{ width: 36, height: 36, borderRadius: 12, background: 'var(--acc)', color: 'var(--on-acc)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, boxShadow: '0 4px 12px rgba(255,111,89,0.25)' }}>
+          {user?.name?.[0]?.toUpperCase() || 'R'}
+        </div>
       </div>
     </div>
 
@@ -154,7 +192,103 @@ export default function Home() {
         on the right. One column, in this order, everywhere else. */}
     <div className="home-cols">
     <div className="home-col">
-    {/* The three rings. Each one opens where its number comes from. */}
+
+    {/* 2. Compact Weekly Activity Summary Card (Top) */}
+    <div className="card" style={{ padding: '14px 16px', marginBottom: 14 }}>
+      <div className="row between" style={{ alignItems: 'center', marginBottom: 10 }}>
+        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--label-3)' }}>
+          {t('Weekly Target')}
+        </span>
+        <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 99, background: 'color-mix(in srgb, var(--blue) 12%, transparent)', color: 'var(--blue)' }}>
+          {doneThisWeek} / {plannedPerWeek || 4} {t('days done!')} 🎉
+        </span>
+      </div>
+      <div className="dash-activity-strip">
+        {weekVolumeData.map((d, i) => {
+          const pillClass = d.isToday ? 'today' : d.isDone ? 'done' : (!d.hasPlan ? 'rest' : 'planned')
+          return (
+            <button key={i} className="dash-activity-day" onClick={() => dayOverrideSheet(d.iso)} aria-label={t(d.dayLetter)}>
+              <span style={{ fontSize: 11, fontWeight: d.isToday ? 700 : 500, color: d.isToday ? 'var(--acc)' : 'var(--label-3)' }}>
+                {t(d.dayLetter)}
+              </span>
+              <div className={'dash-day-pill ' + pillClass}>
+                {d.isDone ? '✓' : d.isToday ? '•' : (!d.hasPlan ? t('Rest') : d.dateNum)}
+              </div>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+
+    {/* 3. Calories Burned & Nutrition Ring (Dual-Column Preview layout) */}
+    <div className="card calorie-preview-card" onClick={() => nav('/food')} style={{ cursor: 'pointer' }}>
+      <div className="cal-preview-left">
+        <div className="cal-preview-hdr">
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--label-3)' }}>
+            {t('Daily Nutrition')}
+          </span>
+          <span className="cal-badge">{calPercent}%</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+          <span className="cal-big-num">{fmtNum(calEaten)}</span>
+          <span className="cal-target-num">/ {fmtNum(calTarget)} kcal</span>
+        </div>
+        <div className="cal-subtext">
+          {calRemaining > 0
+            ? t('Only {0} kcal to hit your daily deficit target!', fmtNum(calRemaining))
+            : t('Daily nutrition target achieved! 🎉')}
+        </div>
+        <div className="cal-breakdown-row">
+          <div className="cal-breakdown-item">
+            <span>{t('Protein')}</span>
+            <span>{eaten.p ? Math.round(eaten.p) + 'g' : '–'}</span>
+          </div>
+          <div style={{ width: 1, height: 20, background: 'var(--sep)' }} />
+          <div className="cal-breakdown-item">
+            <span>{t('Carbs')}</span>
+            <span>{eaten.c ? Math.round(eaten.c) + 'g' : '–'}</span>
+          </div>
+          <div style={{ width: 1, height: 20, background: 'var(--sep)' }} />
+          <div className="cal-breakdown-item">
+            <span>{t('Fat')}</span>
+            <span>{eaten.f ? Math.round(eaten.f) + 'g' : '–'}</span>
+          </div>
+        </div>
+      </div>
+      <div style={{ flexShrink: 0, position: 'relative', width: 96, height: 96, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Ring value={calTarget > 0 ? calEaten / calTarget : null} color="var(--blue)" label={t('Calories')}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <span style={{ fontSize: 20, lineHeight: 1 }}>🔥</span>
+            <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--label)', marginTop: 2 }}>{calPercent}%</span>
+          </div>
+        </Ring>
+      </div>
+    </div>
+
+    {/* 4. Workout Streak Counter (Compact Motivational Banner) */}
+    <div className="motivational-streak-card" onClick={() => calendarSheet()}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, color: '#fff' }} className="coral-gradient coral-glow">
+          🔥
+        </div>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 16, fontWeight: 800, letterSpacing: '-0.01em', color: 'var(--label)' }}>
+              {t('{0} week streak', streakWeeks(S))}
+            </span>
+            <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 99, background: 'var(--acc)', color: 'var(--on-acc)' }}>
+              {streakWeeks(S) >= 4 ? t('Personal Best!') : t('Active')}
+            </span>
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--label-2)', marginTop: 2, fontWeight: 500 }}>
+            {t('Consistency is your superpower. {0} / {1} this week!', doneThisWeek, plannedPerWeek || 4)}
+          </div>
+        </div>
+      </div>
+      <span style={{ fontSize: 18, fontWeight: 800, color: 'var(--acc)' }}>→</span>
+    </div>
+
+    {/* 5. Existing Three Rings for calendar, weight goal & food quick access */}
     <div className="card dash-rings">
       <button className="dash-ring" onClick={() => calendarSheet()}>
         <Ring value={weekShare} color="var(--acc)" label={t('Workouts this week')}>
@@ -226,6 +360,14 @@ export default function Home() {
     </div>
 
     <div className="home-col">
+    {/* 6. Quick Action / Start Workout CTA Button */}
+    <button className="cta-workout-btn" onClick={onToday}>
+      <Icon name={S.active ? (editingSaved ? 'pencil' : 'play') : 'play'} style={{ fontSize: 18 }} />
+      {S.active ? (editingSaved ? t('Edit In-Progress Workout') : t('Resume {0}', S.active.name))
+        : routine ? t("Start Today's {0}", todayName)
+        : t("Start a Workout")}
+    </button>
+
     <h2 className="sec-title">{t('Today')}</h2>
     <div className="card">
       {/* A coach week runs by order, not by weekday, so its progress row stands in for the
@@ -288,6 +430,49 @@ export default function Home() {
           {t('Choose a different workout')}
         </Button>
       </div>}
+    </div>
+
+    {/* 7. Weekly Workout Bar Chart (Bottom Section) */}
+    <div className="card weekly-volume-card">
+      <div className="row between" style={{ alignItems: 'center', marginBottom: 8 }}>
+        <div>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--label-3)' }}>
+            {t('Weekly Training Volume')}
+          </span>
+          <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--label)', marginTop: 1 }}>
+            {totalWeekMinutes > 0 ? t('{0} min total', totalWeekMinutes) : t('Active Week')}
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--label-2)' }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--blue)' }} />
+          {t('Active Minutes')}
+        </div>
+      </div>
+
+      <div className="bar-chart-container">
+        {weekVolumeData.map((d, i) => {
+          const pct = Math.max(d.isDone ? 20 : 6, Math.min(100, Math.round((d.minutes / (maxMin || 60)) * 100)))
+          return (
+            <div key={i} className="bar-chart-col" onClick={() => dayOverrideSheet(d.iso)}>
+              <span className="bar-val-label">{d.minutes > 0 ? `${d.minutes}m` : (d.isDone ? '✓' : '0m')}</span>
+              <div
+                className={'bar-fill' + (d.isToday ? ' today-bar' : !d.isDone && !d.hasPlan ? ' rest' : '')}
+                style={{ height: `${pct}%` }}
+              >
+                {d.isToday && <div className="bar-today-dot" />}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'center', paddingTop: 8, fontSize: 11, fontWeight: 600, color: 'var(--label-3)' }}>
+        {weekVolumeData.map((d, i) => (
+          <span key={i} style={{ flex: 1, color: d.isToday ? 'var(--acc)' : undefined, fontWeight: d.isToday ? 800 : undefined }}>
+            {t(d.dayLetter)}
+          </span>
+        ))}
+      </div>
     </div>
 
     {!S.routines.length && !S.active && (
