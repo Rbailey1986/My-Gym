@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore.js'
 import { useUI } from '../store/useUI.js'
 import { t, tn } from '../lib/i18n.js'
-import { fmtDate, todayISO } from '../lib/format.js'
+import { fmtDate, fmtNum, todayISO } from '../lib/format.js'
 import { workoutMediaOf, WORKOUT_MEDIA_MAX } from '../lib/media-refs.js'
 import { addWorkoutMedia } from '../lib/workout-media.js'
 import { syncMedia } from '../lib/media-sync.js'
@@ -101,11 +101,19 @@ function ProgressCompare({ a, b, close }) {
   const endDrag = () => { dragging.current = false }
 
   const days = daysBetween(a.d, b.d)
+  const S = useStore(s => s.S)
+  const unit = S.unit || 'kg'
+  const bwA = S.bodyweight?.find(w => w.d === a.d)?.w
+  const bwB = S.bodyweight?.find(w => w.d === b.d)?.w
+  const delta = bwA != null && bwB != null ? bwB - bwA : null
 
   return <div className="mviewer" role="dialog" aria-modal="true" aria-label={t('Compare photos')}>
     <div className="mviewer-bar">
       <button type="button" className="iconbtn" aria-label={t('Close')} onClick={close}><Icon name="xmark" /></button>
-      <span className="mviewer-count">{days > 0 ? tn('{0} day apart', '{0} days apart', days) : t('Same day')}</span>
+      <span className="mviewer-count">
+        {days > 0 ? tn('{0} day apart', '{0} days apart', days) : t('Same day')}
+        {delta != null && ` · ${delta > 0 ? '+' : ''}${fmtNum(delta)} ${unit}`}
+      </span>
       <span style={{ width: 36 }} />
     </div>
     {/* A photo has no reading direction: before stays on the left and the finger drives the
@@ -116,8 +124,8 @@ function ProgressCompare({ a, b, close }) {
       {before.url && <img className="pp-img" src={before.url} alt="" draggable={false}
         style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }} />}
       <div className="pp-handle" style={{ insetInlineStart: pct + '%' }}><div className="pp-grip" /></div>
-      <div className="pp-label pp-label-before">{fmtDate(a.d, true)}</div>
-      <div className="pp-label pp-label-after">{fmtDate(b.d, true)}</div>
+      <div className="pp-label pp-label-before">{fmtDate(a.d, true)}{bwA ? ` (${fmtNum(bwA)} ${unit})` : ''}</div>
+      <div className="pp-label pp-label-after">{fmtDate(b.d, true)}{bwB ? ` (${fmtNum(bwB)} ${unit})` : ''}</div>
     </div>
   </div>
 }

@@ -2652,3 +2652,205 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 .cta-workout-btn:active {
   transform: scale(0.99);
 }
+
+/* --- Rest Mini-Player (Floating Bar above TabBar) --- */
+.rest-mini-player {
+  position: fixed;
+  inset-inline-start: 16px;
+  inset-inline-end: 16px;
+  bottom: calc(76px + var(--sab));
+  z-index: 65;
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  border-radius: 20px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--sep);
+  cursor: pointer;
+  animation: slideup var(--med) var(--ease);
+}
+.rest-mini-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.rest-mini-ring {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.rest-mini-time {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--label);
+  font-variant-numeric: tabular-nums;
+}
+.rest-mini-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rest-mini-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--blue);
+  letter-spacing: 0.03em;
+}
+.rest-mini-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--label);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+.rest-mini-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.rest-mini-btn {
+  background: var(--surface-2);
+  color: var(--label);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border: 0;
+  cursor: pointer;
+  transition: transform var(--fast), background var(--fast);
+}
+.rest-mini-btn:hover {
+  background: var(--surface-3);
+}
+.rest-mini-btn:active {
+  transform: scale(0.95);
+}
+.rest-mini-btn.skip {
+  color: var(--orange);
+}
+
+/* --- Readiness Widget --- */
+.readiness-card {
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: var(--r-card);
+  transition: all var(--fast);
+}
+.readiness-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.readiness-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.readiness-badge.optimal {
+  background: rgba(40, 184, 115, 0.15);
+  color: #28B873;
+}
+.readiness-badge.moderate {
+  background: rgba(45, 127, 249, 0.15);
+  color: #2D7FF9;
+}
+.readiness-badge.fatigued {
+  background: rgba(255, 111, 89, 0.15);
+  color: #FF6F59;
+}
+.readiness-advice {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--label);
+  line-height: 1.35;
+}
+.readiness-feel-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: var(--hair) solid var(--sep);
+}
+.readiness-feel-btn {
+  flex: 1;
+  padding: 6px 4px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--sep);
+  background: var(--surface-2);
+  color: var(--label-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all var(--fast);
+}
+.readiness-feel-btn.active {
+  background: var(--acc);
+  color: #ffffff;
+  border-color: var(--acc);
+  font-weight: 700;
+}
+
+/* --- Muscle Recovery Mini-Map Card --- */
+.muscle-recovery-card {
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.muscle-recovery-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.muscle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--fast);
+}
+.muscle-pill:active {
+  transform: scale(0.96);
+}
+.muscle-pill.ready {
+  background: rgba(40, 184, 115, 0.12);
+  color: #28B873;
+  border: 1px solid rgba(40, 184, 115, 0.25);
+}
+.muscle-pill.recovering {
+  background: rgba(45, 127, 249, 0.12);
+  color: #2D7FF9;
+  border: 1px solid rgba(45, 127, 249, 0.25);
+}
+.muscle-pill.fatigued {
+  background: rgba(255, 111, 89, 0.14);
+  color: #FF6F59;
+  border: 1px solid rgba(255, 111, 89, 0.30);
+}

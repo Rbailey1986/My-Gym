@@ -54,7 +54,8 @@ export default function TabBar({ onStart }) {
         { icon: 'play', accent: true, label: today.length ? t('Start {0}', today.map(r => r.name).join(' + ')) : t('Start a workout'), onClick: startWorkout },
         today.length && { icon: 'swap', label: t('Choose a different workout'), onClick: () => nav('/workout') },
         { icon: 'scale', label: t('Log body weight'), onClick: () => bwSheet() },
-        { icon: 'utensils', label: t('Log a meal'), sub: t('Arrives with the meal planner'), disabled: true },
+        { icon: 'utensils', label: t('Log food / meals'), onClick: () => nav('/food') },
+        { icon: 'image', label: t('Progress photos'), onClick: () => nav('/progress-photos') },
         S.checkIn !== false && { icon: 'qr', label: t('Check in at the gym'), onClick: () => nav('/checkin') },
       ],
     })

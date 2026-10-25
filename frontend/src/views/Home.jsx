@@ -10,6 +10,10 @@ import Icon from '../components/Icon.jsx'
 import QueueRow from '../components/QueueRow.jsx'
 import Ring from '../components/Ring.jsx'
 import { queueOf, queueView, weekTally, pinState } from '../lib/queue.js'
+import { fatigueOf } from '../lib/recovery.js'
+import { fatigueStateOf } from '../lib/recovery-view.js'
+import { MUSCLES, MUSCLE_NAME } from '../lib/muscles.js'
+import { progressPhotosOf } from './ProgressPhotos.jsx'
 import { scheduleModeOf } from '../lib/rotation.js'
 import { goalProgress } from '../lib/goal-eta.js'
 import { targetsForDay } from '../lib/nutrition-targets.js'
@@ -166,6 +170,51 @@ export default function Home() {
   const calRemaining = Math.max(0, calTarget - calEaten)
   const calPercent = calTarget > 0 ? Math.min(100, Math.round((calEaten / calTarget) * 100)) : 0
 
+  const [feel, setFeel] = useState(() => {
+    try {
+      return localStorage.getItem('opengym_readiness_feel_' + todayISO()) || 'balanced'
+    } catch {
+      return 'balanced'
+    }
+  })
+
+  const setReadinessFeel = f => {
+    setFeel(f)
+    try {
+      localStorage.setItem('opengym_readiness_feel_' + todayISO(), f)
+    } catch {}
+  }
+
+  const nowMs = Date.now()
+  const fatigueMap = fatigueOf(S.workouts, nowMs)
+  const keyMuscles = ['chest', 'upper-back', 'deltoids', 'biceps', 'triceps', 'quadriceps', 'hamstring', 'gluteal', 'abs', 'calves']
+  let sumFatigue = 0
+  let readyCount = 0
+  for (const m of keyMuscles) {
+    const fVal = fatigueMap[m] || 0
+    sumFatigue += fVal
+    if (fatigueStateOf(fVal) === 'ready') readyCount++
+  }
+  const avgFatigue = sumFatigue / (keyMuscles.length || 1)
+  let readinessScore = Math.max(30, Math.min(100, Math.round(96 - (avgFatigue * 50))))
+  if (feel === 'high') readinessScore = Math.min(100, readinessScore + 8)
+  else if (feel === 'fatigued') readinessScore = Math.max(35, readinessScore - 18)
+
+  const readinessState = readinessScore >= 85 ? 'optimal' : readinessScore >= 65 ? 'moderate' : 'fatigued'
+  const readinessBadgeLabel = readinessState === 'optimal'
+    ? `${readinessScore}% ${t('Optimal')}`
+    : readinessState === 'moderate'
+      ? `${readinessScore}% ${t('Balanced')}`
+      : `${readinessScore}% ${t('Fatigued')}`
+
+  const readinessAdvice = feel === 'fatigued' || readinessState === 'fatigued'
+    ? t('Elevated systemic fatigue. Prioritize recovery and form.')
+    : feel === 'high' || readinessState === 'optimal'
+      ? t('Prime condition for high-intensity or PR attempts today.')
+      : t('Good capacity for steady progressive overload.')
+
+  const photos = progressPhotosOf(S)
+
   return <div className="narrow home">
     {/* 1. Header with kicker & inspiring greeting */}
     <div className="hdr" style={{ alignItems: 'flex-start', marginBottom: 12 }}>
@@ -192,6 +241,45 @@ export default function Home() {
         on the right. One column, in this order, everywhere else. */}
     <div className="home-cols">
     <div className="home-col">
+
+    {/* Daily Readiness & Energy Widget */}
+    <div className="card readiness-card">
+      <div className="readiness-hdr">
+        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--label-3)' }}>
+          {t('Daily Readiness')}
+        </span>
+        <span className={'readiness-badge ' + readinessState}>
+          {readinessState === 'optimal' ? '⚡' : readinessState === 'moderate' ? '😌' : '🥱'} {readinessBadgeLabel}
+        </span>
+      </div>
+      <div className="readiness-advice">
+        {readinessAdvice}
+      </div>
+      <div className="readiness-feel-row">
+        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--label-3)' }}>{t('Energy')}:</span>
+        <button
+          type="button"
+          className={'readiness-feel-btn' + (feel === 'high' ? ' active' : '')}
+          onClick={() => setReadinessFeel('high')}
+        >
+          ⚡ {t('High')}
+        </button>
+        <button
+          type="button"
+          className={'readiness-feel-btn' + (feel === 'balanced' ? ' active' : '')}
+          onClick={() => setReadinessFeel('balanced')}
+        >
+          😌 {t('Balanced')}
+        </button>
+        <button
+          type="button"
+          className={'readiness-feel-btn' + (feel === 'fatigued' ? ' active' : '')}
+          onClick={() => setReadinessFeel('fatigued')}
+        >
+          🥱 {t('Fatigued')}
+        </button>
+      </div>
+    </div>
 
     {/* 2. Compact Weekly Activity Summary Card (Top) */}
     <div className="card" style={{ padding: '14px 16px', marginBottom: 14 }}>
@@ -430,6 +518,58 @@ export default function Home() {
           {t('Choose a different workout')}
         </Button>
       </div>}
+    </div>
+
+    {/* Muscle Recovery Mini-Map */}
+    <div className="card muscle-recovery-card">
+      <div className="row between" style={{ alignItems: 'center' }}>
+        <div>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--label-3)' }}>
+            {t('Muscle Recovery')}
+          </span>
+          <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--label)', marginTop: 2 }}>
+            {t('{0} of {1} muscles ready', readyCount, keyMuscles.length)}
+          </div>
+        </div>
+        <Button size="sm" variant="ghost" trailingIcon="chevronRight" onClick={() => nav('/stats')}>
+          {t('Details')}
+        </Button>
+      </div>
+      <div className="muscle-recovery-pills">
+        {keyMuscles.map(slug => {
+          const state = fatigueStateOf(fatigueMap[slug] || 0)
+          return (
+            <button
+              key={slug}
+              type="button"
+              className={'muscle-pill ' + state}
+              onClick={() => nav('/stats')}
+              title={t(MUSCLE_NAME[slug])}
+            >
+              <span style={{ fontSize: 8 }}>●</span>
+              <span>{t(MUSCLE_NAME[slug])}</span>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+
+    {/* Progress Photos Quick Card */}
+    <div className="card tappable" style={{ padding: '12px 16px', marginBottom: 14, cursor: 'pointer' }} onClick={() => nav('/progress-photos')}>
+      <div className="row between" style={{ alignItems: 'center' }}>
+        <div className="row" style={{ gap: 10 }}>
+          <span className="lrow-i" style={{ background: 'color-mix(in srgb, var(--acc) 18%, transparent)', color: 'var(--acc)' }}>
+            <Icon name="image" />
+          </span>
+          <div>
+            <div className="ttl" style={{ fontSize: 15, fontWeight: 700 }}>{t('Progress Photos')}</div>
+            <div className="muted small">
+              {photos.length ? tn('{0} photo logged', '{0} photos logged', photos.length) + ' · ' + t('Compare side-by-side') : t('Capture photos to track visual changes over time')}
+            </div>
+          </div>
+        </div>
+        <Icon name="chevronRight" className="chev" />
+      </div>
     </div>
 
     {/* 7. Weekly Workout Bar Chart (Bottom Section) */}
