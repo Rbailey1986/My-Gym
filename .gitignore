@@ -44,5 +44,12 @@ xtool-x86_64.AppImage
 tools/xtool/bundle/
 tools/xtool/xtool
 tools/xtool/*.bundle/
+tools/xtool/data/
 ios-xtool/Sources/Web/
+ios-xtool/.bsp/
+ios-xtool/.build/
+ios-xtool/xtool/
+scratch/
+*.ipa
+
 

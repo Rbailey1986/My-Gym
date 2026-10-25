@@ -7,11 +7,11 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
-        .executable(name: "OpenGym", targets: ["OpenGym"])
+        .library(name: "OpenGym", targets: ["OpenGym"])
     ],
     dependencies: [],
     targets: [
-        .executableTarget(
+        .target(
             name: "OpenGym",
             dependencies: [],
             path: "Sources",
