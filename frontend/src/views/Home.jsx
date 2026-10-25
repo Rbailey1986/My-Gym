@@ -170,48 +170,14 @@ export default function Home() {
   const calRemaining = Math.max(0, calTarget - calEaten)
   const calPercent = calTarget > 0 ? Math.min(100, Math.round((calEaten / calTarget) * 100)) : 0
 
-  const [feel, setFeel] = useState(() => {
-    try {
-      return localStorage.getItem('opengym_readiness_feel_' + todayISO()) || 'balanced'
-    } catch {
-      return 'balanced'
-    }
-  })
-
-  const setReadinessFeel = f => {
-    setFeel(f)
-    try {
-      localStorage.setItem('opengym_readiness_feel_' + todayISO(), f)
-    } catch {}
-  }
-
   const nowMs = Date.now()
   const fatigueMap = fatigueOf(S.workouts, nowMs)
   const keyMuscles = ['chest', 'upper-back', 'deltoids', 'biceps', 'triceps', 'quadriceps', 'hamstring', 'gluteal', 'abs', 'calves']
-  let sumFatigue = 0
   let readyCount = 0
   for (const m of keyMuscles) {
     const fVal = fatigueMap[m] || 0
-    sumFatigue += fVal
     if (fatigueStateOf(fVal) === 'ready') readyCount++
   }
-  const avgFatigue = sumFatigue / (keyMuscles.length || 1)
-  let readinessScore = Math.max(30, Math.min(100, Math.round(96 - (avgFatigue * 50))))
-  if (feel === 'high') readinessScore = Math.min(100, readinessScore + 8)
-  else if (feel === 'fatigued') readinessScore = Math.max(35, readinessScore - 18)
-
-  const readinessState = readinessScore >= 85 ? 'optimal' : readinessScore >= 65 ? 'moderate' : 'fatigued'
-  const readinessBadgeLabel = readinessState === 'optimal'
-    ? `${readinessScore}% ${t('Optimal')}`
-    : readinessState === 'moderate'
-      ? `${readinessScore}% ${t('Balanced')}`
-      : `${readinessScore}% ${t('Fatigued')}`
-
-  const readinessAdvice = feel === 'fatigued' || readinessState === 'fatigued'
-    ? t('Elevated systemic fatigue. Prioritize recovery and form.')
-    : feel === 'high' || readinessState === 'optimal'
-      ? t('Prime condition for high-intensity or PR attempts today.')
-      : t('Good capacity for steady progressive overload.')
 
   const photos = progressPhotosOf(S)
 
@@ -241,45 +207,6 @@ export default function Home() {
         on the right. One column, in this order, everywhere else. */}
     <div className="home-cols">
     <div className="home-col">
-
-    {/* Daily Readiness & Energy Widget */}
-    <div className="card readiness-card">
-      <div className="readiness-hdr">
-        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--label-3)' }}>
-          {t('Daily Readiness')}
-        </span>
-        <span className={'readiness-badge ' + readinessState}>
-          {readinessState === 'optimal' ? '⚡' : readinessState === 'moderate' ? '😌' : '🥱'} {readinessBadgeLabel}
-        </span>
-      </div>
-      <div className="readiness-advice">
-        {readinessAdvice}
-      </div>
-      <div className="readiness-feel-row">
-        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--label-3)' }}>{t('Energy')}:</span>
-        <button
-          type="button"
-          className={'readiness-feel-btn' + (feel === 'high' ? ' active' : '')}
-          onClick={() => setReadinessFeel('high')}
-        >
-          ⚡ {t('High')}
-        </button>
-        <button
-          type="button"
-          className={'readiness-feel-btn' + (feel === 'balanced' ? ' active' : '')}
-          onClick={() => setReadinessFeel('balanced')}
-        >
-          😌 {t('Balanced')}
-        </button>
-        <button
-          type="button"
-          className={'readiness-feel-btn' + (feel === 'fatigued' ? ' active' : '')}
-          onClick={() => setReadinessFeel('fatigued')}
-        >
-          🥱 {t('Fatigued')}
-        </button>
-      </div>
-    </div>
 
     {/* 2. Compact Weekly Activity Summary Card (Top) */}
     <div className="card" style={{ padding: '14px 16px', marginBottom: 14 }}>
